@@ -1,0 +1,30 @@
+.left_bottom {
+    background-color: rgb(203, 236, 255);
+    border-top: 1px solid rgb(137, 188, 209);
+    height: 100%;
+    margin-top: 4px;
+    min-height: 182px;
+    width: 179px;
+}
+
+#left li a {
+    background: url("../../public/images/left_bottom.gif") no-repeat scroll 30px -71px rgba(0, 0, 0, 0);
+    color: rgb(74, 78, 79);
+    display: block;
+    font-size: 12px;
+    line-height: 25px;
+    padding-left: 42px;
+}
+li {
+    list-style-type: none;
+}
+
+.nav_2 {
+    height: 35px;
+    background: url(../images/left/left_bottom.gif) 0 0 repeat-x;
+    line-height: 35px;
+    padding-left: 42px;
+    font-size: 12px;
+    color: #006198;
+    clear:both;
+}

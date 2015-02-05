@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="pmp-web">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+        <dependent-module archiveName="pmp-common-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pmp-common/pmp-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pmp-database-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pmp-database/pmp-database">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pmp-pms-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pmp-pms/pmp-pms">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="pmp-web"/>
+        <property name="java-output-path" value="/pmp-web/target/classes"/>
+    </wb-module>
+</project-modules>

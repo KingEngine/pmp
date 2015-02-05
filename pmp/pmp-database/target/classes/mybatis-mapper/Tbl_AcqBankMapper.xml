@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 acq_bank操作方法-->
+<mapper namespace="AcqBankManager">
+	<resultMap type="AcqBank" id="AcqBankMap">
+		 	<id property="acqBankId" column="acq_bank_id" />
+		 	<result property="acpBankName" column="acp_bank_name" />
+		 	<result property="remark" column="remark" />
+		 	<result property="createTime" column="create_time" />
+		 	<result property="xpeSystemNum" column="xpe_system_num" />
+		 	<result property="status" column="status" />
+		 	<result property="institutionCode" column="institution_code" />
+	</resultMap>
+    <!--分页查询 记录-->
+	<select id="queryPage" parameterType="AcqBank" resultMap="AcqBankMap">
+		select * from acq_bank t
+		where 1=1 
+    		<if test="acqBankId != null and acqBankId != ''">
+    			 and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="acpBankName != null and acpBankName != ''">
+    			 and t.acp_bank_name = #{acpBankName}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			 and t.create_time = #{createTime}
+    		</if>
+    		<if test="xpeSystemNum != null and xpeSystemNum != ''">
+    			 and t.xpe_system_num = #{xpeSystemNum}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+    		<if test="institutionCode != null and institutionCode != ''">
+    			 and t.institution_code = #{institutionCode}
+    		</if>
+        limit #{startRow},#{limit}
+	</select>
+	<!--分页查询  计数-->
+	<select id="queryPageCount" parameterType="AcqBank" resultType="int">
+		select count(*) from acq_bank t
+		where 1=1 
+    		<if test="acqBankId != null and acqBankId != ''">
+    			 and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="acpBankName != null and acpBankName != ''">
+    			 and t.acp_bank_name = #{acpBankName}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			 and t.create_time = #{createTime}
+    		</if>
+    		<if test="xpeSystemNum != null and xpeSystemNum != ''">
+    			 and t.xpe_system_num = #{xpeSystemNum}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+    		<if test="institutionCode != null and institutionCode != ''">
+    			 and t.institution_code = #{institutionCode}
+    		</if>
+	</select>
+	<!--查询方法-->
+	<select id="select" parameterType="AcqBank" resultMap="AcqBankMap">
+		select * from acq_bank t
+		where 1=1 
+    		<if test="acqBankId != null and acqBankId != ''">
+    			 and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="acpBankName != null and acpBankName != ''">
+    			 and t.acp_bank_name = #{acpBankName}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			 and t.create_time = #{createTime}
+    		</if>
+    		<if test="xpeSystemNum != null and xpeSystemNum != ''">
+    			 and t.xpe_system_num = #{xpeSystemNum}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+    		<if test="institutionCode != null and institutionCode != ''">
+    			 and t.institution_code = #{institutionCode}
+    		</if>
+	</select>
+	<!--添加方法-->
+	<insert id="insert" parameterType="AcqBank">
+		insert into acq_bank(
+				acq_bank_id,
+				acp_bank_name,
+				remark,
+				create_time,
+				xpe_system_num,
+				status,
+				institution_code,
+		) values(
+				#{acqBankId},
+			
+				#{acpBankName},
+			
+				#{remark},
+			
+				#{createTime},
+			
+				#{xpeSystemNum},
+			
+				#{status},
+			
+				#{institutionCode},
+			)
+	</insert>
+	<!--更新方法-->
+	<update id="update" parameterType="AcqBank">
+		update acq_bank 
+		<set> 
+	    		<if test="acqBankId != null and acqBankId != ''">
+	    			 t.acq_bank_id = #{acqBankId},
+	    		</if>
+	    		<if test="acpBankName != null and acpBankName != ''">
+	    			 t.acp_bank_name = #{acpBankName},
+	    		</if>
+	    		<if test="remark != null and remark != ''">
+	    			 t.remark = #{remark},
+	    		</if>
+	    		<if test="createTime != null and createTime != ''">
+	    			 t.create_time = #{createTime},
+	    		</if>
+	    		<if test="xpeSystemNum != null and xpeSystemNum != ''">
+	    			 t.xpe_system_num = #{xpeSystemNum},
+	    		</if>
+	    		<if test="status != null and status != ''">
+	    			 t.status = #{status},
+	    		</if>
+	    		<if test="institutionCode != null and institutionCode != ''">
+	    			 t.institution_code = #{institutionCode},
+	    		</if>
+        </set> 
+		where
+		1=1
+    		<if test="acqBankId != null and acqBankId != ''">
+    			and  t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="acpBankName != null and acpBankName != ''">
+    			and  t.acp_bank_name = #{acpBankName}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			and  t.remark = #{remark}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			and  t.create_time = #{createTime}
+    		</if>
+    		<if test="xpeSystemNum != null and xpeSystemNum != ''">
+    			and  t.xpe_system_num = #{xpeSystemNum}
+    		</if>
+    		<if test="status != null and status != ''">
+    			and  t.status = #{status}
+    		</if>
+    		<if test="institutionCode != null and institutionCode != ''">
+    			and  t.institution_code = #{institutionCode}
+    		</if>
+	</update>
+	<!--删除方法-->
+	<delete id="delete" parameterType="AcqBank">
+		delete from acq_bank where 1=1
+    		<if test="acqBankId != null and acqBankId != ''">
+    			and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="acpBankName != null and acpBankName != ''">
+    			and t.acp_bank_name = #{acpBankName}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			and t.remark = #{remark}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			and t.create_time = #{createTime}
+    		</if>
+    		<if test="xpeSystemNum != null and xpeSystemNum != ''">
+    			and t.xpe_system_num = #{xpeSystemNum}
+    		</if>
+    		<if test="status != null and status != ''">
+    			and t.status = #{status}
+    		</if>
+    		<if test="institutionCode != null and institutionCode != ''">
+    			and t.institution_code = #{institutionCode}
+    		</if>
+	</delete>
+</mapper>
+
+
+

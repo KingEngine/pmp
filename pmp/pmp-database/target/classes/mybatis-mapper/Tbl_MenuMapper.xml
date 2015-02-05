@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 menu操作方法-->
+<mapper namespace="MenuManager">
+	<resultMap type="Menu" id="MenuMap">
+		 	<id property="id" column="id" />
+		 	<result property="menuId" column="menu_id" />
+		 	<result property="menuName" column="menu_name" />
+		 	<result property="requestUrl" column="request_url" />
+		 	<result property="parentId" column="parent_id" />
+		 	<result property="menuLevel" column="menu_level" />
+	</resultMap>
+	<!--查询方法-->
+	<select id="selectFirstMenuList" resultMap="MenuMap">
+		select * from menu t
+		where menu_level=1
+	</select>
+	<!--查询方法-->
+	<select id="selectSecondMenuList"  parameterType="int" resultMap="MenuMap">
+		select * from menu t
+		where menu_level=2 and parent_id=#{parentId}
+	</select>
+	<!--查询方法-->
+	<select id="selectThirdMenuList"  parameterType="int" resultMap="MenuMap">
+		select * from menu t
+		where menu_level=3 and parent_id=#{parentId}
+	</select>
+</mapper>
+
+
+

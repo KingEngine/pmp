@@ -1,0 +1,39 @@
+a,li{list-style:none;text-decoration: none;}
+.head {
+	width: 100%;
+    position: relative;
+    background: url("../images/main/head_1.jpg") repeat-x 0 0;
+}
+
+.nav {margin: 0px; padding: 0px;
+    background: url("../images/top/nav_bj.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    height: 32px;
+    width: 100%;
+}
+.nav li {
+    background: url("../images/top/nav_bj.gif") no-repeat scroll 0 -32px rgba(0, 0, 0, 0);
+    float: left;
+    height: 32px;
+    padding-left: 4px;
+    width: 125px;
+}
+.nav li a {
+    color: rgb(255, 255, 255);
+    display: block;
+    font-size: 14px;
+    height: 29px;
+    line-height: 29px;
+    margin: 1px auto 0;
+    text-align: center;
+    width: 92px;
+}
+.nav li a:hover {
+    background: url("../images/top/ahover.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: rgb(34, 34, 34);
+    font-weight: bold;
+}
+.nav li .upa {
+    background: url("../images/top/ahover.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: rgb(34, 34, 34);
+    font-weight: bold;
+}

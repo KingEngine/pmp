@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 oper_info操作方法-->
+<mapper namespace="OperInfoManager">
+	<!--更新方法-->
+	<update id="update" parameterType="OperInfo">
+		update oper_info 
+		<set>
+    		<if test="mid != null and mid != ''">
+    			 mid = #{mid},
+    		</if>
+    		<if test="operId != null and operId != ''">
+    			 oper_id = #{operId},
+    		</if>
+    		<if test="operPass != null and operPass != ''">
+    			 oper_pass = #{operPass},
+    		</if>
+    		<if test="operName != null and operName != ''">
+    			 oper_name = #{operName},
+    		</if>
+    		<if test="operTel != null and operTel != ''">
+    			 oper_tel = #{operTel},
+    		</if>
+    		<if test="operEmail != null and operEmail != ''">
+    			 oper_email = #{operEmail},
+    		</if>
+    		<if test="regDate != null and regDate != ''">
+    			 reg_date = #{regDate},
+    		</if>
+    		<if test="state != null and state != ''">
+    			 state = #{state},
+    		</if>
+    		<if test="logined != null and logined != ''">
+    			 logined = #{logined},
+    		</if>
+    		<if test="mtype != null and mtype != ''">
+    			 mtype = #{mtype},
+    		</if>
+    		<if test="auth != null and auth != ''">
+    			 auth = #{auth},
+    		</if>
+    		<if test="role != null and role != ''">
+    			 role = #{role},
+    		</if>
+    		<if test="errCount != null and errCount != ''">
+    			 err_count = #{errCount},
+    		</if>
+    		<if test="lastUpdat != null and lastUpdat != ''">
+    			 last_updat = #{lastUpdat},
+    		</if>
+    		<if test="errTime != null and errTime != ''">
+    			 err_time = #{errTime},
+    		</if>
+    		<if test="innerMercode != null and innerMercode != ''">
+    			 inner_mercode = #{innerMercode},
+    		</if>
+    	</set>
+		where
+		1=1
+    		<if test="mid != null and mid != ''">
+    			and  mid = #{mid}
+    		</if>
+    		<if test="operId != null and operId != ''">
+    			and  oper_id = #{operId}
+    		</if>
+    		<if test="operPass != null and operPass != ''">
+    			and  oper_pass = #{operPass}
+    		</if>
+    		<if test="operName != null and operName != ''">
+    			and  oper_name = #{operName}
+    		</if>
+    		<if test="operTel != null and operTel != ''">
+    			and  oper_tel = #{operTel}
+    		</if>
+    		<if test="operEmail != null and operEmail != ''">
+    			and  oper_email = #{operEmail}
+    		</if>
+    		<if test="regDate != null and regDate != ''">
+    			and  reg_date = #{regDate}
+    		</if>
+    		<if test="state != null and state != ''">
+    			and  state = #{state}
+    		</if>
+    		<if test="logined != null and logined != ''">
+    			and  logined = #{logined}
+    		</if>
+    		<if test="mtype != null and mtype != ''">
+    			and  mtype = #{mtype}
+    		</if>
+    		<if test="auth != null and auth != ''">
+    			and  auth = #{auth}
+    		</if>
+    		<if test="role != null and role != ''">
+    			and  role = #{role}
+    		</if>
+    		<if test="lastUpdat != null and lastUpdat != ''">
+    			and  last_updat = #{lastUpdat}
+    		</if>
+    		<if test="errTime != null and errTime != ''">
+    			and  err_time = #{errTime}
+    		</if>
+    		<if test="innerMercode != null and innerMercode != ''">
+    			and  inner_mercode = #{innerMercode}
+    		</if>
+	</update>
+	<!--删除方法-->
+	<delete id="delete" parameterType="OperInfo">
+		delete from oper_info where 1=1
+    		<if test="mid != null and mid != ''">
+    			and mid = #{mid}
+    		</if>
+    		<if test="operId != null and operId != ''">
+    			and oper_id = #{operId}
+    		</if>
+    		<if test="operPass != null and operPass != ''">
+    			and oper_pass = #{operPass}
+    		</if>
+    		<if test="operName != null and operName != ''">
+    			and oper_name = #{operName}
+    		</if>
+    		<if test="operTel != null and operTel != ''">
+    			and oper_tel = #{operTel}
+    		</if>
+    		<if test="operEmail != null and operEmail != ''">
+    			and oper_email = #{operEmail}
+    		</if>
+    		<if test="regDate != null and regDate != ''">
+    			and reg_date = #{regDate}
+    		</if>
+    		<if test="state != null and state != ''">
+    			and state = #{state}
+    		</if>
+    		<if test="logined != null and logined != ''">
+    			and logined = #{logined}
+    		</if>
+    		<if test="mtype != null and mtype != ''">
+    			and mtype = #{mtype}
+    		</if>
+    		<if test="auth != null and auth != ''">
+    			and auth = #{auth}
+    		</if>
+    		<if test="role != null and role != ''">
+    			and role = #{role}
+    		</if>
+    		<if test="errCount != null and errCount != ''">
+    			and err_count = #{errCount}
+    		</if>
+    		<if test="lastUpdat != null and lastUpdat != ''">
+    			and last_updat = #{lastUpdat}
+    		</if>
+    		<if test="errTime != null and errTime != ''">
+    			and err_time = #{errTime}
+    		</if>
+    		<if test="innerMercode != null and innerMercode != ''">
+    			and inner_mercode = #{innerMercode}
+    		</if>
+	</delete>
+</mapper>
+
+
+

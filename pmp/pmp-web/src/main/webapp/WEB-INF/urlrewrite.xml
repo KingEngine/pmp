@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN" "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+<urlrewrite> 
+    <rule>
+        <name>admin</name>
+        <note>登录页面</note>
+        <from>admin</from>
+        <to type="forward">POSLogin.do</to>
+    </rule>
+    <rule>
+        <name>admin</name>
+        <note>登录页面</note>
+        <from>admin/$</from>
+        <to type="forward">POSLogin.do</to>
+    </rule>
+    <rule>
+        <name>login</name>
+        <note>登录页面</note>
+        <from>^/$</from>
+        <to type="forward">/POSLogin.do</to>
+    </rule>
+</urlrewrite>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--多表关联操作方法-->
+<mapper namespace="MultiTableManager">
+	<resultMap type="LoginUser" id="LoginUserMap">
+		<result property="abbrev" column="abbrev"></result>
+		<result property="state" column="state"></result>
+		<result property="mid" column="mid"></result>
+		<result property="operName" column="oper_name"></result>
+		<result property="operId" column="oper_id"></result>
+		<result property="mtype" column="mtype"></result>
+		<result property="logined" column="logined"></result>
+		<result property="md5Pwd" column="md5Pwd"></result>
+		<result property="errCount" column="err_count"></result>
+		<result property="lastUpdat" column="last_updat"></result>
+		<result property="role" column="role"></result>
+		<result property="innerMercode" column="inner_mercode"></result>
+		<result property="operState" column="oper_state"></result>
+	</resultMap>
+    <!--分页查询 记录-->
+	<select id="queryLoginUser" parameterType="map" resultMap="LoginUserMap">
+		select m.abbrev as abbrev,m.exp_date as exp_date, m.mstate as state ,o.mid as mid ,
+		o.oper_name as oper_name,o.oper_id as oper_id,o.mtype as mtype, o.logined as logined ,
+		o.oper_pass as md5Pwd ,o.err_count as err_count,o.last_updat as last_updat,
+		o.role as role,o.auth as auth ,o.inner_mercode as innerMercode,o.state as oper_state 
+		from oper_info o 
+		left join mer_info m on m.mid = o.mid where
+		o.mid = #{mid} and o.oper_id=#{uid} and o.mtype=#{mtype}
+	</select>
+	
+	 <!--分页查询 记录-->
+	<select id="selectTradeType" parameterType="int" resultType="map">
+		SELECT t.trade_code as tradeCode,
+		t.trade_name as tradeName
+		from channel_trade_relation c join trade_type t on c.trade_code = t.trade_code where c.cid = #{channelId}
+	</select>
+</mapper>
+
+
+

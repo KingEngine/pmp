@@ -1,0 +1,5 @@
+.tableBorder td {
+    border: 1px solid rgb(242,246,254);
+    border-collapse: collapse;
+    line-height: 170%;
+}

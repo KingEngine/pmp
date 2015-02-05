@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 commercial_tenant_unionpay操作方法-->
+<mapper namespace="CommercialTenantUnionpayManager">
+	<resultMap type="CommercialTenantUnionpay" id="CommercialTenantUnionpayMap">
+		 	<result property="commercialTenantUnionpayId" column="commercial_tenant_unionpay_id" />
+		 	<result property="unionpayMerId" column="unionpay_mer_id" />
+		 	<result property="unionpayTermId" column="unionpay_term_id" />
+		 	<result property="mccCode" column="mcc_code" />
+		 	<result property="acqBankId" column="acq_bank_id" />
+		 	<result property="gateRouteId" column="gate_route_id" />
+		 	<result property="className" column="class_name" />
+		 	<result property="keyValue" column="key_value" />
+		 	<result property="keyIndex" column="key_index" />
+		 	<result property="deductNo" column="deduct_no" />
+		 	<result property="sign" column="sign" />
+		 	<result property="remark" column="remark" />
+		 	<result property="channelCode" column="channel_code" />
+		 	<result property="unionpayMerName" column="unionpay_mer_name" />
+		 	<result property="status" column="status" />
+	</resultMap>
+    <!--分页查询 记录-->
+	<select id="queryPage" parameterType="CommercialTenantUnionpay" resultMap="CommercialTenantUnionpayMap">
+		select * from commercial_tenant_unionpay t
+		where 1=1 
+    		<if test="commercialTenantUnionpayId != null and commercialTenantUnionpayId != ''">
+    			 and t.commercial_tenant_unionpay_id = #{commercialTenantUnionpayId}
+    		</if>
+    		<if test="unionpayMerId != null and unionpayMerId != ''">
+    			 and t.unionpay_mer_id = #{unionpayMerId}
+    		</if>
+    		<if test="unionpayTermId != null and unionpayTermId != ''">
+    			 and t.unionpay_term_id = #{unionpayTermId}
+    		</if>
+    		<if test="mccCode != null and mccCode != ''">
+    			 and t.mcc_code = #{mccCode}
+    		</if>
+    		<if test="acqBankId != null and acqBankId != ''">
+    			 and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="gateRouteId != null and gateRouteId != ''">
+    			 and t.gate_route_id = #{gateRouteId}
+    		</if>
+    		<if test="className != null and className != ''">
+    			 and t.class_name = #{className}
+    		</if>
+    		<if test="keyValue != null and keyValue != ''">
+    			 and t.key_value = #{keyValue}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			 and t.key_index = #{keyIndex}
+    		</if>
+    		<if test="deductNo != null and deductNo != ''">
+    			 and t.deduct_no = #{deductNo}
+    		</if>
+    		<if test="sign != null and sign != ''">
+    			 and t.sign = #{sign}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="channelCode != null and channelCode != ''">
+    			 and t.channel_code = #{channelCode}
+    		</if>
+    		<if test="unionpayMerName != null and unionpayMerName != ''">
+    			 and t.unionpay_mer_name = #{unionpayMerName}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+        limit #{startRow},#{limit}
+	</select>
+	<!--分页查询  计数-->
+	<select id="queryPageCount" parameterType="CommercialTenantUnionpay" resultType="int">
+		select count(*) from commercial_tenant_unionpay t
+		where 1=1 
+    		<if test="commercialTenantUnionpayId != null and commercialTenantUnionpayId != ''">
+    			 and t.commercial_tenant_unionpay_id = #{commercialTenantUnionpayId}
+    		</if>
+    		<if test="unionpayMerId != null and unionpayMerId != ''">
+    			 and t.unionpay_mer_id = #{unionpayMerId}
+    		</if>
+    		<if test="unionpayTermId != null and unionpayTermId != ''">
+    			 and t.unionpay_term_id = #{unionpayTermId}
+    		</if>
+    		<if test="mccCode != null and mccCode != ''">
+    			 and t.mcc_code = #{mccCode}
+    		</if>
+    		<if test="acqBankId != null and acqBankId != ''">
+    			 and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="gateRouteId != null and gateRouteId != ''">
+    			 and t.gate_route_id = #{gateRouteId}
+    		</if>
+    		<if test="className != null and className != ''">
+    			 and t.class_name = #{className}
+    		</if>
+    		<if test="keyValue != null and keyValue != ''">
+    			 and t.key_value = #{keyValue}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			 and t.key_index = #{keyIndex}
+    		</if>
+    		<if test="deductNo != null and deductNo != ''">
+    			 and t.deduct_no = #{deductNo}
+    		</if>
+    		<if test="sign != null and sign != ''">
+    			 and t.sign = #{sign}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="channelCode != null and channelCode != ''">
+    			 and t.channel_code = #{channelCode}
+    		</if>
+    		<if test="unionpayMerName != null and unionpayMerName != ''">
+    			 and t.unionpay_mer_name = #{unionpayMerName}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+	</select>
+	<!--查询方法-->
+	<select id="select" parameterType="CommercialTenantUnionpay" resultMap="CommercialTenantUnionpayMap">
+		select * from commercial_tenant_unionpay t
+		where 1=1 
+    		<if test="commercialTenantUnionpayId != null and commercialTenantUnionpayId != ''">
+    			 and t.commercial_tenant_unionpay_id = #{commercialTenantUnionpayId}
+    		</if>
+    		<if test="unionpayMerId != null and unionpayMerId != ''">
+    			 and t.unionpay_mer_id = #{unionpayMerId}
+    		</if>
+    		<if test="unionpayTermId != null and unionpayTermId != ''">
+    			 and t.unionpay_term_id = #{unionpayTermId}
+    		</if>
+    		<if test="mccCode != null and mccCode != ''">
+    			 and t.mcc_code = #{mccCode}
+    		</if>
+    		<if test="acqBankId != null and acqBankId != ''">
+    			 and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="gateRouteId != null and gateRouteId != ''">
+    			 and t.gate_route_id = #{gateRouteId}
+    		</if>
+    		<if test="className != null and className != ''">
+    			 and t.class_name = #{className}
+    		</if>
+    		<if test="keyValue != null and keyValue != ''">
+    			 and t.key_value = #{keyValue}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			 and t.key_index = #{keyIndex}
+    		</if>
+    		<if test="deductNo != null and deductNo != ''">
+    			 and t.deduct_no = #{deductNo}
+    		</if>
+    		<if test="sign != null and sign != ''">
+    			 and t.sign = #{sign}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="channelCode != null and channelCode != ''">
+    			 and t.channel_code = #{channelCode}
+    		</if>
+    		<if test="unionpayMerName != null and unionpayMerName != ''">
+    			 and t.unionpay_mer_name = #{unionpayMerName}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+	</select>
+	<!--添加方法-->
+	<insert id="insert" parameterType="CommercialTenantUnionpay">
+		insert into commercial_tenant_unionpay(
+				commercial_tenant_unionpay_id,
+				unionpay_mer_id,
+				unionpay_term_id,
+				mcc_code,
+				acq_bank_id,
+				gate_route_id,
+				class_name,
+				key_value,
+				key_index,
+				deduct_no,
+				sign,
+				remark,
+				channel_code,
+				unionpay_mer_name,
+				status,
+		) values(
+				#{commercialTenantUnionpayId},
+			
+				#{unionpayMerId},
+			
+				#{unionpayTermId},
+			
+				#{mccCode},
+			
+				#{acqBankId},
+			
+				#{gateRouteId},
+			
+				#{className},
+			
+				#{keyValue},
+			
+				#{keyIndex},
+			
+				#{deductNo},
+			
+				#{sign},
+			
+				#{remark},
+			
+				#{channelCode},
+			
+				#{unionpayMerName},
+			
+				#{status},
+			)
+	</insert>
+	<!--更新方法-->
+	<update id="update" parameterType="CommercialTenantUnionpay">
+		update commercial_tenant_unionpay 
+		<set> 
+	    		<if test="commercialTenantUnionpayId != null and commercialTenantUnionpayId != ''">
+	    			 t.commercial_tenant_unionpay_id = #{commercialTenantUnionpayId},
+	    		</if>
+	    		<if test="unionpayMerId != null and unionpayMerId != ''">
+	    			 t.unionpay_mer_id = #{unionpayMerId},
+	    		</if>
+	    		<if test="unionpayTermId != null and unionpayTermId != ''">
+	    			 t.unionpay_term_id = #{unionpayTermId},
+	    		</if>
+	    		<if test="mccCode != null and mccCode != ''">
+	    			 t.mcc_code = #{mccCode},
+	    		</if>
+	    		<if test="acqBankId != null and acqBankId != ''">
+	    			 t.acq_bank_id = #{acqBankId},
+	    		</if>
+	    		<if test="gateRouteId != null and gateRouteId != ''">
+	    			 t.gate_route_id = #{gateRouteId},
+	    		</if>
+	    		<if test="className != null and className != ''">
+	    			 t.class_name = #{className},
+	    		</if>
+	    		<if test="keyValue != null and keyValue != ''">
+	    			 t.key_value = #{keyValue},
+	    		</if>
+	    		<if test="keyIndex != null and keyIndex != ''">
+	    			 t.key_index = #{keyIndex},
+	    		</if>
+	    		<if test="deductNo != null and deductNo != ''">
+	    			 t.deduct_no = #{deductNo},
+	    		</if>
+	    		<if test="sign != null and sign != ''">
+	    			 t.sign = #{sign},
+	    		</if>
+	    		<if test="remark != null and remark != ''">
+	    			 t.remark = #{remark},
+	    		</if>
+	    		<if test="channelCode != null and channelCode != ''">
+	    			 t.channel_code = #{channelCode},
+	    		</if>
+	    		<if test="unionpayMerName != null and unionpayMerName != ''">
+	    			 t.unionpay_mer_name = #{unionpayMerName},
+	    		</if>
+	    		<if test="status != null and status != ''">
+	    			 t.status = #{status},
+	    		</if>
+        </set> 
+		where
+		1=1
+    		<if test="commercialTenantUnionpayId != null and commercialTenantUnionpayId != ''">
+    			and  t.commercial_tenant_unionpay_id = #{commercialTenantUnionpayId}
+    		</if>
+    		<if test="unionpayMerId != null and unionpayMerId != ''">
+    			and  t.unionpay_mer_id = #{unionpayMerId}
+    		</if>
+    		<if test="unionpayTermId != null and unionpayTermId != ''">
+    			and  t.unionpay_term_id = #{unionpayTermId}
+    		</if>
+    		<if test="mccCode != null and mccCode != ''">
+    			and  t.mcc_code = #{mccCode}
+    		</if>
+    		<if test="acqBankId != null and acqBankId != ''">
+    			and  t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="gateRouteId != null and gateRouteId != ''">
+    			and  t.gate_route_id = #{gateRouteId}
+    		</if>
+    		<if test="className != null and className != ''">
+    			and  t.class_name = #{className}
+    		</if>
+    		<if test="keyValue != null and keyValue != ''">
+    			and  t.key_value = #{keyValue}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			and  t.key_index = #{keyIndex}
+    		</if>
+    		<if test="deductNo != null and deductNo != ''">
+    			and  t.deduct_no = #{deductNo}
+    		</if>
+    		<if test="sign != null and sign != ''">
+    			and  t.sign = #{sign}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			and  t.remark = #{remark}
+    		</if>
+    		<if test="channelCode != null and channelCode != ''">
+    			and  t.channel_code = #{channelCode}
+    		</if>
+    		<if test="unionpayMerName != null and unionpayMerName != ''">
+    			and  t.unionpay_mer_name = #{unionpayMerName}
+    		</if>
+    		<if test="status != null and status != ''">
+    			and  t.status = #{status}
+    		</if>
+	</update>
+	<!--删除方法-->
+	<delete id="delete" parameterType="CommercialTenantUnionpay">
+		delete from commercial_tenant_unionpay where 1=1
+    		<if test="commercialTenantUnionpayId != null and commercialTenantUnionpayId != ''">
+    			and t.commercial_tenant_unionpay_id = #{commercialTenantUnionpayId}
+    		</if>
+    		<if test="unionpayMerId != null and unionpayMerId != ''">
+    			and t.unionpay_mer_id = #{unionpayMerId}
+    		</if>
+    		<if test="unionpayTermId != null and unionpayTermId != ''">
+    			and t.unionpay_term_id = #{unionpayTermId}
+    		</if>
+    		<if test="mccCode != null and mccCode != ''">
+    			and t.mcc_code = #{mccCode}
+    		</if>
+    		<if test="acqBankId != null and acqBankId != ''">
+    			and t.acq_bank_id = #{acqBankId}
+    		</if>
+    		<if test="gateRouteId != null and gateRouteId != ''">
+    			and t.gate_route_id = #{gateRouteId}
+    		</if>
+    		<if test="className != null and className != ''">
+    			and t.class_name = #{className}
+    		</if>
+    		<if test="keyValue != null and keyValue != ''">
+    			and t.key_value = #{keyValue}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			and t.key_index = #{keyIndex}
+    		</if>
+    		<if test="deductNo != null and deductNo != ''">
+    			and t.deduct_no = #{deductNo}
+    		</if>
+    		<if test="sign != null and sign != ''">
+    			and t.sign = #{sign}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			and t.remark = #{remark}
+    		</if>
+    		<if test="channelCode != null and channelCode != ''">
+    			and t.channel_code = #{channelCode}
+    		</if>
+    		<if test="unionpayMerName != null and unionpayMerName != ''">
+    			and t.unionpay_mer_name = #{unionpayMerName}
+    		</if>
+    		<if test="status != null and status != ''">
+    			and t.status = #{status}
+    		</if>
+	</delete>
+</mapper>
+
+
+
