@@ -5,17 +5,33 @@
     xmlns="http://www.springframework.org/schema/security"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
-    <http auto-config="true">
-		<form-login login-page="/login" default-target-url="/welcome"
-			authentication-failure-url="/login?error" username-parameter="userName"
-			password-parameter="password" />
-		<logout logout-success-url="/login?logout" />
+    <!-- 开启spring表达式 -->
+    <http use-expressions="true" entry-point-ref="authenticationProcessingFilterEntryPoint">
+	    <custom-filter ref="formLoginFilter" position="FORM_LOGIN_FILTER"/>
+	    <session-management>
+	    	<concurrency-control error-if-maximum-exceeded="true" max-sessions="1"/>
+	    </session-management>
 	</http>
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="1" password="1" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
+	<!-- 自定义过滤器 -->
+	<bean:bean id="formLoginFilter" name="formLoginFilter" class="com.chinaebi.pmp.pms.service.impl.LoginServiceFilter">
+		<bean:property name="filterProcessesUrl" value="/j_spring_security_check"></bean:property>  
+		<bean:property name="authenticationSuccessHandler" ref="loginAuthenticationSuccessHandler"></bean:property> 
+		<bean:property name="authenticationManager" ref="authenticationManager"></bean:property>  
+	</bean:bean>
+	<!-- 登陆成功后的处理逻辑 -->
+	<bean:bean id="loginAuthenticationSuccessHandler"  
+        class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">  
+        <bean:property name="defaultTargetUrl" value="/welcome.do"></bean:property>  
+    </bean:bean>
+	<!-- 未登录的切入点 -->  
+    <bean:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
+        <bean:property name="loginFormUrl" value="/loginzz.do" />
+    </bean:bean>
+    <authentication-manager alias="authenticationManager">
+    	<authentication-provider>
+    		<user-service>
+    			<user name="1" password="1" authorities="ROLE_USER"/>
+    		</user-service>
+    	</authentication-provider>
+    </authentication-manager>
 </bean:beans>
