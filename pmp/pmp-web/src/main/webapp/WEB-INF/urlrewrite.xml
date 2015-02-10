@@ -5,18 +5,18 @@
         <name>admin</name>
         <note>登录页面</note>
         <from>admin</from>
-        <to type="forward">POSLogin.do</to>
+        <to type="forward">login.do</to>
     </rule>
     <rule>
         <name>admin</name>
         <note>登录页面</note>
         <from>admin/$</from>
-        <to type="forward">POSLogin.do</to>
+        <to type="forward">login.do</to>
     </rule>
     <rule>
         <name>login</name>
         <note>登录页面</note>
         <from>^/$</from>
-        <to type="forward">/POSLogin.do</to>
+        <to type="forward">/login.do</to>
     </rule>
 </urlrewrite>

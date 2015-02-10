@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 users操作方法-->
+<mapper namespace="UsersManager">
+	<resultMap type="Users" id="UsersMap">
+		 	<id property="id" column="id" />
+		 	<result property="userName" column="user_name" />
+		 	<result property="userPassword" column="user_password" />
+		 	<result property="roleType" column="role_type" />
+		 	<result property="status" column="status" />
+		 	<result property="lastLoginTime" column="last_login_time" />
+	</resultMap>
+    <!--分页查询 记录-->
+	<select id="queryPage" parameterType="Users" resultMap="UsersMap">
+		select * from users t
+		where 1=1 
+    		<if test="id != null and id != ''">
+    			 and t.id = #{id}
+    		</if>
+    		<if test="userName != null and userName != ''">
+    			 and t.user_name = #{userName}
+    		</if>
+    		<if test="userPassword != null and userPassword != ''">
+    			 and t.user_password = #{userPassword}
+    		</if>
+    		<if test="roleType != null and roleType != ''">
+    			 and t.role_type = #{roleType}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+    		<if test="lastLoginTime != null and lastLoginTime != ''">
+    			 and t.last_login_time = #{lastLoginTime}
+    		</if>
+        limit #{startRow},#{limit}
+	</select>
+	<!--分页查询  计数-->
+	<select id="queryPageCount" parameterType="Users" resultType="int">
+		select count(*) from users t
+		where 1=1 
+    		<if test="id != null and id != ''">
+    			 and t.id = #{id}
+    		</if>
+    		<if test="userName != null and userName != ''">
+    			 and t.user_name = #{userName}
+    		</if>
+    		<if test="userPassword != null and userPassword != ''">
+    			 and t.user_password = #{userPassword}
+    		</if>
+    		<if test="roleType != null and roleType != ''">
+    			 and t.role_type = #{roleType}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+    		<if test="lastLoginTime != null and lastLoginTime != ''">
+    			 and t.last_login_time = #{lastLoginTime}
+    		</if>
+	</select>
+	<!--查询方法-->
+	<select id="select" parameterType="Users" resultMap="UsersMap">
+		select * from users t
+		where 1=1 
+    		<if test="id != null and id != ''">
+    			 and t.id = #{id}
+    		</if>
+    		<if test="userName != null and userName != ''">
+    			 and t.user_name = #{userName}
+    		</if>
+    		<if test="userPassword != null and userPassword != ''">
+    			 and t.user_password = #{userPassword}
+    		</if>
+    		<if test="roleType != null and roleType != ''">
+    			 and t.role_type = #{roleType}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+    		<if test="lastLoginTime != null and lastLoginTime != ''">
+    			 and t.last_login_time = #{lastLoginTime}
+    		</if>
+	</select>
+	<!--添加方法-->
+	<insert id="insert" parameterType="Users">
+		insert into users(
+				id,
+				user_name,
+				user_password,
+				role_type,
+				status,
+				last_login_time,
+		) values(
+				#{id},
+			
+				#{userName},
+			
+				#{userPassword},
+			
+				#{roleType},
+			
+				#{status},
+			
+				#{lastLoginTime},
+			)
+	</insert>
+	<!--更新方法-->
+	<update id="update" parameterType="Users">
+		update users 
+		<set> 
+	    		<if test="id != null and id != ''">
+	    			 t.id = #{id},
+	    		</if>
+	    		<if test="userName != null and userName != ''">
+	    			 t.user_name = #{userName},
+	    		</if>
+	    		<if test="userPassword != null and userPassword != ''">
+	    			 t.user_password = #{userPassword},
+	    		</if>
+	    		<if test="roleType != null and roleType != ''">
+	    			 t.role_type = #{roleType},
+	    		</if>
+	    		<if test="status != null and status != ''">
+	    			 t.status = #{status},
+	    		</if>
+	    		<if test="lastLoginTime != null and lastLoginTime != ''">
+	    			 t.last_login_time = #{lastLoginTime},
+	    		</if>
+        </set> 
+		where
+		1=1
+    		<if test="id != null and id != ''">
+    			and  t.id = #{id}
+    		</if>
+    		<if test="userName != null and userName != ''">
+    			and  t.user_name = #{userName}
+    		</if>
+    		<if test="userPassword != null and userPassword != ''">
+    			and  t.user_password = #{userPassword}
+    		</if>
+    		<if test="roleType != null and roleType != ''">
+    			and  t.role_type = #{roleType}
+    		</if>
+    		<if test="status != null and status != ''">
+    			and  t.status = #{status}
+    		</if>
+    		<if test="lastLoginTime != null and lastLoginTime != ''">
+    			and  t.last_login_time = #{lastLoginTime}
+    		</if>
+	</update>
+	<!--删除方法-->
+	<delete id="delete" parameterType="Users">
+		delete from users where 1=1
+    		<if test="id != null and id != ''">
+    			and t.id = #{id}
+    		</if>
+    		<if test="userName != null and userName != ''">
+    			and t.user_name = #{userName}
+    		</if>
+    		<if test="userPassword != null and userPassword != ''">
+    			and t.user_password = #{userPassword}
+    		</if>
+    		<if test="roleType != null and roleType != ''">
+    			and t.role_type = #{roleType}
+    		</if>
+    		<if test="status != null and status != ''">
+    			and t.status = #{status}
+    		</if>
+    		<if test="lastLoginTime != null and lastLoginTime != ''">
+    			and t.last_login_time = #{lastLoginTime}
+    		</if>
+	</delete>
+</mapper>
+
+
+

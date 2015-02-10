@@ -10,10 +10,10 @@
 </head>
 <body>
 	<h3>用户登录</h3>
-	<form action="j_spring_security_check" method="post">
+	<form action="login.do" method="post">
 		用户名:<input type="text" name="j_username"/>
 		密码:<input type="password" name="j_password"/>
-		验证码：<img src="" id="j_randcode" name="j_randcode"/>
+		验证码：<img src="" id="randCode" name="j_randcode"/>
 		<input type="submit" value="登录"/>
 	</form>
 </body>
