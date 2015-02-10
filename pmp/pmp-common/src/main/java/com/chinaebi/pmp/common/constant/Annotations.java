@@ -20,7 +20,7 @@ public class Annotations {
 	/**
 	 * operInfoDao 多表操作
 	 */
-	public final static String DAO_OPERINFO="operInfoDao";
+	public final static String DAO_USERS="usersDao";
 	/**
 	 * menuDao 多表操作
 	 */

@@ -6,7 +6,7 @@
     String context = request.getContextPath();
 %>
 <head>
-	 <%@include file="../resource.tag" %> 
+	 <%@include file="resource.tag" %> 
 </head>
 <body >
 	<div class="easyui-panel" style="padding:5px;border: 0px;">

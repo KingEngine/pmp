@@ -4,21 +4,9 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias alias="LoginUser" type="com.chinaebi.pmp.database.entity.LoginUser" />
-		<typeAlias alias="OperInfo" type="com.chinaebi.pmp.database.entity.OperInfo" />
-		<typeAlias alias="Menu" type="com.chinaebi.pmp.database.entity.Menu" />
-		<typeAlias alias="Channel" type="com.chinaebi.pmp.database.entity.Channel" />
-		<typeAlias alias="Tlog" type="com.chinaebi.pmp.database.entity.Tlog" />
-		<typeAlias alias="AcqBank" type="com.chinaebi.pmp.database.entity.AcqBank" />
-		<typeAlias alias="CommercialTenantUnionpay" type="com.chinaebi.pmp.database.entity.CommercialTenantUnionpay" />
+		<typeAlias alias="Users" type="com.chinaebi.pmp.database.entity.Users" />
 	</typeAliases>
 	<mappers>
-		<mapper resource="mybatis-mapper/Tbl_MultiTableMapper.xml"/>
-		<mapper resource="mybatis-mapper/Tbl_OperInfoMapper.xml"/>
-		<mapper resource="mybatis-mapper/Tbl_MenuMapper.xml"/>
-		<mapper resource="mybatis-mapper/Tbl_ChannelMapper.xml"/>
-		<mapper resource="mybatis-mapper/Tbl_TlogMapper.xml"/>
-		<mapper resource="mybatis-mapper/Tbl_AcqBankMapper.xml"/>
-		<mapper resource="mybatis-mapper/Tbl_CommercialTenantUnionpayMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_UsersMapper.xml"/>
 	</mappers>
 </configuration>

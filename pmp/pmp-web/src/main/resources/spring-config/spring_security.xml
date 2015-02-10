@@ -6,13 +6,13 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <!-- 开启spring表达式 -->
-    <http pattern="/POSLogin.do" security="none"/>  
+    <http pattern="login" security="none"/>  
     <http use-expressions="true" entry-point-ref="authenticationProcessingFilterEntryPoint">
 	    <custom-filter ref="formLoginFilter" position="FORM_LOGIN_FILTER"/>
 	    <session-management>
 	    	<concurrency-control error-if-maximum-exceeded="true" max-sessions="1"/>
 	    </session-management>
-	    <intercept-url pattern="/mainFrame.do" access="hasRole('ROLE_USER')"/>
+	    <intercept-url pattern="getMainFrame.do" access="hasRole('ROLE_USER')"/>
 	</http>
 	<!-- 自定义过滤器 -->
 	<bean:bean id="formLoginFilter" name="formLoginFilter" class="com.chinaebi.pmp.service.LoginServiceFilter">
@@ -24,7 +24,7 @@
 	<!-- 登陆成功后的处理逻辑 -->
 	<bean:bean id="loginAuthenticationSuccessHandler"  
         class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">  
-        <bean:property name="defaultTargetUrl" value="/mainFrame.do"></bean:property>  
+        <bean:property name="defaultTargetUrl" value="/getMainFrame.do"></bean:property>  
     </bean:bean>
 	<!-- 未登录的切入点 -->  
     <bean:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
