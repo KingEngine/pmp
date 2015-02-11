@@ -15,7 +15,7 @@
 	    <intercept-url pattern="getMainFrame.do" access="hasRole('ROLE_USER')"/>
 	</http>
 	<!-- 自定义过滤器 -->
-	<bean:bean id="formLoginFilter" name="formLoginFilter" class="com.chinaebi.pmp.service.LoginServiceFilter">
+	<bean:bean id="formLoginFilter" name="formLoginFilter" class="com.chinaebi.pmp.service.impl.LoginServiceFilter">
 		<bean:property name="filterProcessesUrl" value="/login.do"></bean:property>  
 		<bean:property name="authenticationSuccessHandler" ref="loginAuthenticationSuccessHandler"></bean:property> 
 		<bean:property name="authenticationManager" ref="authenticationManager"></bean:property>
@@ -23,17 +23,17 @@
 	</bean:bean>
 	<!-- 登陆成功后的处理逻辑 -->
 	<bean:bean id="loginAuthenticationSuccessHandler"  
-        class="com.chinaebi.pmp.service.LoginAuthenticationSuccessHandler">  
+        class="com.chinaebi.pmp.service.impl.LoginAuthenticationSuccessHandler">  
         <bean:property name="defaultTargetUrl" value="/getMainFrame.do"></bean:property>  
     </bean:bean>
 	<!-- 未登录的切入点 -->  
     <bean:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
         <bean:property name="loginFormUrl" value="/login.do" />
     </bean:bean>
-    <bean:bean id="loginAuthenticationManager" class="com.chinaebi.pmp.service.LoginAuthenticationManager">
+    <bean:bean id="loginAuthenticationManager" class="com.chinaebi.pmp.service.impl.LoginAuthenticationManager">
     	<bean:property name="userDetailsService" ref="userDetailManager"></bean:property>
     </bean:bean>
-    <bean:bean id="userDetailManager" class="com.chinaebi.pmp.service.LoginDetailsService" />  
+    <bean:bean id="userDetailManager" class="com.chinaebi.pmp.service.impl.LoginDetailsService" />  
     <authentication-manager alias="authenticationManager">
     	<authentication-provider ref="loginAuthenticationManager"></authentication-provider>
     </authentication-manager>
