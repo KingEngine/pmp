@@ -1,4 +1,4 @@
-package com.chinaebi.pmp.service;
+package com.chinaebi.pmp.service.impl;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class LoginAuthenticationSuccessHandler extends
 			HttpServletResponse response, Authentication authentication)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		SecurityContextHolder.getContext();
 		//保存
 		super.onAuthenticationSuccess(request, response, authentication);
 	}

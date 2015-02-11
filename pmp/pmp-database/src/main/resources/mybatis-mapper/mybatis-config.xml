@@ -5,8 +5,10 @@
 
 	<typeAliases>
 		<typeAlias alias="Users" type="com.chinaebi.pmp.database.entity.Users" />
+		<typeAlias alias="Menu" type="com.chinaebi.pmp.database.entity.Menu" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis-mapper/Tbl_UsersMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_MenuMapper.xml"/>
 	</mappers>
 </configuration>

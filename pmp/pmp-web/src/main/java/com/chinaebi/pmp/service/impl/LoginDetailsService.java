@@ -1,4 +1,4 @@
-package com.chinaebi.pmp.service;
+package com.chinaebi.pmp.service.impl;
 
 
 import java.util.ArrayList;
@@ -49,7 +49,6 @@ public class LoginDetailsService implements UserDetailsService{
 			throw new BadCredentialsException("用户名或者密码错误!");
 		} else {
 			userDetails = new User(existUser.getUserName(),existUser.getUserPassword(),new ArrayList<GrantedAuthority>());
-			//获取用户权限
 			return userDetails;
 		}
 	}

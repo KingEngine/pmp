@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 menu操作方法-->
+<mapper namespace="MenuManager">
+	<resultMap type="Menu" id="MenuMap">
+		 	<id property="id" column="id" />
+		 	<result property="menuId" column="menu_id" />
+		 	<result property="menuName" column="menu_name" />
+		 	<result property="menuUrl" column="menu_url" />
+		 	<result property="menuLevel" column="menu_level" />
+		 	<result property="parentMenuId" column="parent_menu_id" />
+		 	<result property="menuStatus" column="menu_status" />
+	</resultMap>
+   
+	<!--查询方法-->
+	<select id="select" parameterType="string" resultMap="MenuMap">
+		select * from menu t
+		left join users_authorities on t.menu_id = users_authorities.menu_id
+		left join users ON users.id = users_authorities.user_id
+		where users.user_name=#{_parameter}
+	</select>
+</mapper>
+
+
+

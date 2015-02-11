@@ -22,7 +22,7 @@ public class Annotations {
 	 */
 	public final static String DAO_USERS="usersDao";
 	/**
-	 * menuDao 多表操作
+	 * menuDao 表操作
 	 */
 	public final static String DAO_MENU="menuDao";
 	/**
@@ -44,7 +44,7 @@ public class Annotations {
 	/**
 	 * posAdminLoginService 管理员登录
 	 */
-	public final static String SERVICE_POSADMINLOGIN="posAdminLoginService";
+	public final static String SERVICE_LOGIN="loginService";
 	/**
 	 * tradeManagerService 交易管理
 	 */
