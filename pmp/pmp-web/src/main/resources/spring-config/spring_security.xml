@@ -23,18 +23,19 @@
 	</bean:bean>
 	<!-- 登陆成功后的处理逻辑 -->
 	<bean:bean id="loginAuthenticationSuccessHandler"  
-        class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">  
+        class="com.chinaebi.pmp.service.LoginAuthenticationSuccessHandler">  
         <bean:property name="defaultTargetUrl" value="/getMainFrame.do"></bean:property>  
     </bean:bean>
 	<!-- 未登录的切入点 -->  
     <bean:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
         <bean:property name="loginFormUrl" value="/login.do" />
     </bean:bean>
+    <bean:bean id="loginAuthenticationManager" class="com.chinaebi.pmp.service.LoginAuthenticationManager">
+    	<bean:property name="userDetailsService" ref="userDetailManager"></bean:property>
+    </bean:bean>
+    <bean:bean id="userDetailManager" class="com.chinaebi.pmp.service.LoginDetailsService" />  
     <authentication-manager alias="authenticationManager">
-    	<authentication-provider>
-    		<user-service>
-    			<user name="1" password="1" authorities="ROLE_USER"/>
-    		</user-service>
-    	</authentication-provider>
+    	<authentication-provider ref="loginAuthenticationManager"></authentication-provider>
     </authentication-manager>
+    
 </bean:beans>

@@ -7,6 +7,7 @@
  *********************************************************************/
 package com.chinaebi.pmp.database.dao;
 
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.Users;
 
 /**
@@ -21,7 +22,7 @@ public interface IUsersDao {
 	 * @return
 	 * @throws Exception
 	 */
-	 public Users selectOne(Users param) throws Exception;
+	 public Users selectOne(Users param) throws DaoException;
 }
     
 

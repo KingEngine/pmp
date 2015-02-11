@@ -1,6 +1,8 @@
 package com.chinaebi.pmp.service;
 
 
+import org.apache.commons.lang.StringUtils;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -13,15 +15,15 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 2015年2月10日
  */
 public class LoginAuthenticationManager extends DaoAuthenticationProvider{
-	
-	
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
-		authentication.getName();
-		System.out.println(authentication.getPrincipal());
-		System.out.println(authentication.getCredentials());
+		//校验登陆密码
+		if (!StringUtils.equals(userDetails.getPassword(), authentication
+				.getCredentials().toString())) {
+			throw new BadCredentialsException("用户名或者密码错误!");
+		}
 		
 	}
 }

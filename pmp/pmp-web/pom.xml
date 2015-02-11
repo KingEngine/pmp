@@ -5,13 +5,10 @@
   <parent>
     <artifactId>pmp</artifactId>
     <groupId>com.chinaebi.pmp</groupId>
-    <version>1.0.0</version>
+    <version>${pmp.version}</version>
   </parent>
-  <groupId>pmp-web</groupId>
   <artifactId>pmp-web</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>pmp-web Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
 	<dependency>

@@ -13,4 +13,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <dependencies>
+	<dependency>
+		<groupId>com.chinaebi.pmp</groupId>
+		<artifactId>pmp-common</artifactId>
+		<version>${pmp.version}</version>
+	</dependency>
+   </dependencies>
 </project>

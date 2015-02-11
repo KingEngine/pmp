@@ -5,7 +5,7 @@
   <parent>
     <artifactId>pmp</artifactId>
     <groupId>com.chinaebi.pmp</groupId>
-    <version>1.0.0</version>
+     <version>${pmp.version}</version>
   </parent>
   <artifactId>pmp-common</artifactId>
   <name>pmp-common</name>

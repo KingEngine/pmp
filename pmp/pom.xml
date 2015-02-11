@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- 项目编码 -->
-        <pmp.version>1.0.0</pmp.version><!-- 项目版本号  -->
+        <pmp.version>1.0.0</pmp.version><!-- 项目版本�? -->
         <spring.version>3.1.2.RELEASE</spring.version><!--  -->
         <spring.security.version>3.1.2.RELEASE</spring.security.version><!--  -->
         <mybatis.version>3.0.6</mybatis.version><!--  -->
@@ -25,6 +25,7 @@
         <module>pmp-database</module>
         <module>pmp-common</module>
     	<module>pmp-pms</module>
+    <module>pmp-workflow</module>
   </modules>
     <dependencies>
 		<!-- spring begin -->

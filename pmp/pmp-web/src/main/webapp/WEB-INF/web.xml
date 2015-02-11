@@ -57,11 +57,11 @@
   
   <!-- 登陆页面验证码 -->
   <servlet>
-		<servlet-name>CheckCode</servlet-name>
-		<servlet-class>com.chinaebi.pmp.web.servlet.CheckCode</servlet-class>
+		<servlet-name>RandCode</servlet-name>
+		<servlet-class>com.chinaebi.pmp.web.servlet.RandCode</servlet-class>
   </servlet>
   <servlet-mapping>
-		<servlet-name>CheckCode</servlet-name>
-		<url-pattern>/CheckCode</url-pattern>
+		<servlet-name>RandCode</servlet-name>
+		<url-pattern>/getRandCode</url-pattern>
   </servlet-mapping>
 </web-app>

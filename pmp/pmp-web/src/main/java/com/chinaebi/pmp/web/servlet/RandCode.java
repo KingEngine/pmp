@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import com.chinaebi.pmp.common.constant.WebConstants;
 
 @SuppressWarnings("serial")
-public class CheckCode extends HttpServlet{
+public class RandCode extends HttpServlet{
 	  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	        response.setContentType("image/jpeg");
