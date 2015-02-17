@@ -22,7 +22,7 @@ public interface IUsersDao {
 	 * @return
 	 * @throws Exception
 	 */
-	 public Users selectOne(Users param) throws DaoException;
+	 public Users selectOne(Users param) throws Exception;
 }
     
 

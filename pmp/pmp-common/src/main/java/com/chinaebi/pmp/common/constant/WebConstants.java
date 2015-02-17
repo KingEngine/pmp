@@ -21,4 +21,12 @@ public class WebConstants {
 	public static final int USER_PWD_PERIOD = 90;
 	
 	public static final String RAND="rand";
+	/**
+	 * 分页请求页号
+	 */
+	public final static String PAGE_OFFET="pageOffset";
+	/**
+	 * 一页返回行数
+	 */
+	public final static String ROWS="rows";
 }

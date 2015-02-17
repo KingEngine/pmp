@@ -25,7 +25,7 @@ public class UsersDaoImpl extends CommonDaoImpl<Users> implements IUsersDao{
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	public Users selectOne(Users param) throws DaoException {
+	public Users selectOne(Users param) throws Exception {
 	
 		 try {
 			return super.selectOne("UsersManager.select", param);

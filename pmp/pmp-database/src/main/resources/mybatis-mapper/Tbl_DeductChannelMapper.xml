@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 deduct_channel操作方法-->
+<mapper namespace="DeductChannelManager">
+	<resultMap type="DeductChannel" id="DeductChannelMap">
+		 	<id property="deductChannelId" column="deduct_channel_id" />
+		 	<result property="deductChannelName" column="deduct_channel_name" />
+	</resultMap>
+	<!--查询方法-->
+	<select id="select" resultMap="DeductChannelMap">
+		select * from deduct_channel t
+		where 1=1 
+	</select>
+</mapper>
+
+
+

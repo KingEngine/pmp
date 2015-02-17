@@ -16,15 +16,29 @@
 	<script type="text/javascript"  src="<%=request.getContextPath()%>/js/views/login.js?<%=rand%>" ></script>
 </head>
 <body>
-	<h3>用户登录</h3>
+ <center>
 	<form action="login.do" method="post">
-		用户名:<input type="text" name="j_username"/></br>
-		密码:<input type="password" name="j_password"/></br>
+		<table>
+		  <tr><td colspan="2" align="left"><h3>用户登录</h3></td></tr>
+		  <tr>
+		  	<td align="left">用户名:</td><td><input type="text" name="j_username"/></td>
+		  </tr>
+		  <tr>
+		  	<td align="left">密码:</td><td><input type="password" name="j_password"/></td>
+		  </tr>
+		  <tr>
+		  	<td align="left">验证码：</td><td><input type="text" id="j_randcode" name="j_randcode" maxlength="4"></input>
+			  	<img id="imgRandcode" name="imgRandcode" src="<%=request.getContextPath()%>/getRandCode" />
+			  	<a href="#" onclick="flushRandcode('<%=request.getContextPath()%>/getRandCode');">刷新</a>
+		  	</td>
+		  </tr>
+		  <tr>
+		    <td colspan="2" align="center"><input type="submit" value="登录"/></td>
+		  </tr>
+		</table>
 		
-		验证码：
-		<input type="text" id="j_randcode" name="j_randcode" maxlength="4"></input>
-		<img id="imgRandcode" name="imgRandcode" src="<%=request.getContextPath()%>/getRandCode" /><a href="#" onclick="flushRandcode('<%=request.getContextPath()%>/getRandCode');">刷新</a>
-		<input type="submit" value="登录"/>
+		
 	</form>
+  </center>
 </body>
 </html>

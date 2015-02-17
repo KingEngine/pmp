@@ -40,7 +40,7 @@ public class LoginDetailsService implements UserDetailsService{
 		Users existUser = null;
 		try {
 			existUser = usersDao.selectOne(user);
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			logger.error("数据库操作异常:",e);
 		}
 		if (null == existUser

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.chinaebi.pmp.common.constant.Annotations;
@@ -57,12 +58,28 @@ public class LoginController {
 		//查找用户的菜单权限
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		try {
-			List<Menu> firstMenus = loginServie.getUsersFirstMenuList(userName);
+			List<Menu> firstMenus = loginServie.getUsersFirstMenus(userName);
 			session.setAttribute(WebConstants.FIRST_MENUS, firstMenus);;
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
 		return prefix+"main";
+	}
+	/**
+	 * 获取主页面
+	 * @return
+	 */
+	@RequestMapping(value="/getLeftMenus.do",method={RequestMethod.GET,RequestMethod.POST})
+	public String getLeftMenus(HttpSession session,@RequestParam("firstMenuId")Integer firstMenuId){
+		//查找用户的菜单权限
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		try {
+			List<Menu> menuTrees = loginServie.getUsersChildMenus(userName, firstMenuId);
+			session.setAttribute(WebConstants.LEFT_MENU_LIST, menuTrees);;
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return prefix+"left";
 	}
 	/**
 	 * 获取顶部页面

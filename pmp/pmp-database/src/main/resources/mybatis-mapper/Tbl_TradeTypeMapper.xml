@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 trade_type操作方法-->
+<mapper namespace="TradeTypeManager">
+	<resultMap type="TradeType" id="TradeTypeMap">
+		 	<id property="tradeCode" column="trade_code" />
+		 	<result property="tradeName" column="trade_name" />
+		 	<result property="tradeTypeCategoryId" column="trade_type_category_id" />
+	</resultMap>
+	<!--查询方法-->
+	<select id="selectByChannelId" parameterType="string" resultMap="TradeTypeMap">
+		SELECT t.trade_code,t.trade_name from channel_trade_relation c 
+		join trade_type t on c.trade_code = t.trade_code 
+		where c.cid = #{parameter}
+	</select>
+	<select id="select" resultMap="TradeTypeMap">
+		SELECT * from trade_type
+	</select>
+</mapper>
+
+
+

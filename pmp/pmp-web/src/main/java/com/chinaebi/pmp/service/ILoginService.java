@@ -7,6 +7,8 @@ import com.chinaebi.pmp.database.entity.Menu;
 
 public interface ILoginService {
 	
-	public List<Menu> getUsersFirstMenuList(String userName) throws BusinessException;
+	public List<Menu> getUsersFirstMenus(String userName) throws BusinessException;
+	
+	public List<Menu> getUsersChildMenus(String userName,Integer firstMenuId) throws BusinessException;
 
 }

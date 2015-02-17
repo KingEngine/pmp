@@ -7,15 +7,13 @@
  *********************************************************************/
 package com.chinaebi.pmp.database.dao.impl;
 
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.dao.IMenuDao;
-import com.chinaebi.pmp.database.dao.IUsersDao;
 import com.chinaebi.pmp.database.entity.Menu;
 import com.chinaebi.pmp.database.entity.Users;
 
@@ -28,13 +26,37 @@ public class MenuDaoImpl extends CommonDaoImpl<Users> implements IMenuDao{
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	public List<Menu> selectList(String userName) throws DaoException {
+	public List<Menu> selectFirstMenuList(String userName) throws DaoException {
 		try {
-			return this.getSqlSession().selectList("MenuManager.select", userName);
+			return this.getSqlSession().selectList("MenuManager.selectFirsetMenus", userName);
 		} catch (Exception e) {
 			logger.error("MenuManager.select查询异常:",e);
 			throw new DaoException("");
 		}
+	}
+
+	public List<Menu> selectSecondMenuList(String userName,Integer firstMenuId) throws DaoException {
+		 try {
+			return this.getSqlSession().selectList("MenuManager.selectSecondsMenus",generateParameters(userName, firstMenuId));
+		} catch (Exception e) {
+			logger.error("MenuManager.selectSecondsMenus查询异常:",e);
+			throw new DaoException("");
+		}
+	}
+
+	public List<Menu> selectThirdMenuList(String userName,Integer secondMenuId) throws DaoException {
+		 try {
+			return this.getSqlSession().selectList("MenuManager.selectThirdMenus",generateParameters(userName, secondMenuId));
+		} catch (Exception e) {
+			logger.error("MenuManager.selectSecondsMenus查询异常:",e);
+			throw new DaoException("");
+		}
+	}
+	private Map<String,Object> generateParameters(String userName,Integer menuId){
+		Map<String,Object> parameters = new HashMap<String, Object>();
+		parameters.put("userName", userName);
+		parameters.put("parentMenuId", menuId);
+		return parameters;
 	}
 }
 

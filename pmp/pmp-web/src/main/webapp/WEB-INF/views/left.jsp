@@ -12,14 +12,21 @@
 	<div class="easyui-panel" style="padding:5px;border: 0px;">
 		<ul class="easyui-tree" id="menuTree">
 		<c:forEach items="${left_menu_list}" var="secondMenu">
-		     <c:if test="${secondMenu.menuLevel == 2}">
+		     <c:if test="${secondMenu.menuLevel == 2 && secondMenu.menuUrl=='#'}">
 		       <li data-options="id:'${secondMenu.id}'"><span><strong>${secondMenu.menuName}</strong></span>
 		           <ul>
 		              <c:forEach items="${left_menu_list}" var="thirdMenu">
-		                  <c:if test="${thirdMenu.menuLevel == 3 && thirdMenu.parentId == secondMenu.menuId}">
-		                    <li data-options="id:'${thirdMenu.id}'"><span><a id="MainTitle_${thirdMenu.menuId}" href="${thirdMenu.requestUrl}" target="rightFrame">${thirdMenu.menuName}</a></span></li>
+		                  <c:if test="${thirdMenu.menuLevel == 3 && thirdMenu.parentMenuId == secondMenu.menuId}">
+		                    <li data-options="id:'${thirdMenu.id}'"><span><a id="MainTitle_${thirdMenu.menuId}" href="${thirdMenu.menuUrl}" target="rightFrame">${thirdMenu.menuName}</a></span></li>
 		                  </c:if>
 		              </c:forEach>
+		           </ul>
+		       </li>
+		     </c:if>
+		     <c:if test="${secondMenu.menuLevel == 2 && secondMenu.menuUrl!='#'}">
+		       <li data-options="id:'${secondMenu.id}'"><span><strong>${secondMenu.menuName}</strong></span>
+		           <ul>
+		                 <li data-options="id:'${secondMenu.id}'"><span><a id="MainTitle_${secondMenu.menuId}" href="${secondMenu.menuUrl}" target="rightFrame">${secondMenu.menuName}</a></span></li>
 		           </ul>
 		       </li>
 		     </c:if>

@@ -18,11 +18,11 @@ public class Annotations {
 	 */
 	public final static String DAO_MULTITABLE="multiTableDao";
 	/**
-	 * operInfoDao 多表操作
+	 * users 表操作
 	 */
 	public final static String DAO_USERS="usersDao";
 	/**
-	 * menuDao 表操作
+	 * menu表操作
 	 */
 	public final static String DAO_MENU="menuDao";
 	/**
@@ -34,15 +34,27 @@ public class Annotations {
 	 */
 	public final static String DAO_TLOG="tlogDao";
 	/**
-	 * tlog 表操作
+	 * tradeType 表操作
+	 */
+	public final static String DAO_TRADETYPE="tradeTypeDao";
+	/**
+	 * acqBankDao 表操作
 	 */
 	public final static String DAO_ACQBANK="acqBankDao";
+	/**
+	 * deductChannelDao 表操作
+	 */
+	public final static String DAO_DEDUCTCHANNEL="deductChannelDao";
 	/**
 	 * tlog 表操作
 	 */
 	public final static String DAO_COMMERCIALTENANTUNIONPAY="commercialTenantUnionpayDao";
 	/**
-	 * posAdminLoginService 管理员登录
+	 * unionpay_area_code表操作
+	 */
+	public final static String DAO_UNIONPAYAREACODE="unionpayAreaCodeDao";
+	/**
+	 * loginService 管理员登录
 	 */
 	public final static String SERVICE_LOGIN="loginService";
 	/**
@@ -53,5 +65,8 @@ public class Annotations {
 	 * tradeManagerService 交易管理
 	 */
 	public final static String SERVICE_COMMON="commonService";
-	
+	/**
+	 * cacheManagerService 内存管理
+	 */
+	public final static String SERVICE_CACHEMANAGER="cacheManagerService";
 }

@@ -12,8 +12,13 @@ import com.chinaebi.pmp.database.entity.Menu;
  */
 public interface IMenuDao{
 	
-	 public List<Menu> selectList(String userName) throws DaoException;
-    
+	 public List<Menu> selectFirstMenuList(String userName) throws Exception;
+	 
+	 
+	 public List<Menu> selectSecondMenuList(String userName,Integer firstMenuId) throws Exception;
+	 
+	 
+	 public List<Menu> selectThirdMenuList(String userName,Integer secondMenuId) throws Exception;
 }
 
 

@@ -9,23 +9,25 @@
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- 项目编码 -->
-        <pmp.version>1.0.0</pmp.version><!-- 项目版本�? -->
-        <spring.version>3.1.2.RELEASE</spring.version><!--  -->
-        <spring.security.version>3.1.2.RELEASE</spring.security.version><!--  -->
-        <mybatis.version>3.0.6</mybatis.version><!--  -->
-        <mybatis-spring.version>1.0.2</mybatis-spring.version><!--  -->
-        <mysql-connector-java.version>5.1.12</mysql-connector-java.version><!--  -->
-        <jackson.version>1.8.5</jackson.version><!--  -->
-        <urlrewritefilter.version>3.2.0</urlrewritefilter.version><!--  -->
-        <commons-beanutils.version>1.8.3</commons-beanutils.version><!--  -->
-        <org.aspectj>1.8.3</org.aspectj><!--  -->
+        <pmp.version>1.0.0</pmp.version><!-- 项目版本 -->
+        <spring.version>3.1.2.RELEASE</spring.version><!-- spring 版本 -->
+        <spring.security.version>3.1.2.RELEASE</spring.security.version><!-- spring security 版本 -->
+        <mybatis.version>3.2.5</mybatis.version><!--mybatis 版本-->
+        <mybatis-spring.version>1.1.1</mybatis-spring.version><!--mybatis spring 版本 -->
+        <mysql-connector-java.version>5.1.12</mysql-connector-java.version><!--mybatis connector 版本  -->
+        <jackson.version>1.8.5</jackson.version><!--jackson 版本 -->
+        <urlrewritefilter.version>3.2.0</urlrewritefilter.version><!--urlrewritefilter版本 -->
+        <commons-beanutils.version>1.8.3</commons-beanutils.version><!--commons-beanutils版本 -->
+        <org.aspectj>1.8.3</org.aspectj><!--aspectj 版本-->
+        <activiti.version>5.16</activiti.version><!--activiti 版本-->
+        <activiti.engine.version>5.16</activiti.engine.version><!--activiti 版本-->
     </properties>
     <modules>
         <module>pmp-web</module>
         <module>pmp-database</module>
         <module>pmp-common</module>
     	<module>pmp-pms</module>
-    <module>pmp-workflow</module>
+    	<module>pmp-workflow</module>
   </modules>
     <dependencies>
 		<!-- spring begin -->
@@ -245,16 +247,84 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 		</dependency>
+		<!-- activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.engine.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-json-converter</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-explorer</artifactId>
+            <version>${activiti.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>vaadin</artifactId>
+					<groupId>com.vaadin</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>dcharts-widget</artifactId>
+					<groupId>org.vaadin.addons</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>activiti-simple-workflow</artifactId>
+					<groupId>org.activiti</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-modeler</artifactId>
+            <version>${activiti.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-rest</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-diagram-rest</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-cxf</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        
     </dependencies>
     <build>
         <finalName>mms</finalName>
     </build>
     <repositories>
+       <!--  <repository>
+			<id>Activiti</id>
+			<url>https://maven.alfresco.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>Codehaus</id>
+			<url>http://repository.codehaus.org</url>
+		</repository> -->
+		<repository>
+			<id>Center</id>
+			<url>http://search.maven.org</url>
+		</repository>
         <repository>
-            <id>nexus</id>
-            <name>nexus</name>
-            <url>http://192.168.20.139:8081/nexus/content/groups/public/</url>
-            <layout>default</layout>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://maven.restlet.org</url>
         </repository>
     </repositories>
 </project>

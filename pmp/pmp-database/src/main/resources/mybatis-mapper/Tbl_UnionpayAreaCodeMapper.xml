@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 unionpay_area_code操作方法-->
+<mapper namespace="UnionpayAreaCodeManager">
+	<resultMap type="UnionpayAreaCode" id="UnionpayAreaCodeMap">
+		 	<id property="areaCode" column="area_code" />
+		 	<result property="parentAreaCode" column="parent_area_code" />
+		 	<result property="areaName" column="area_name" />
+	</resultMap>
+	<!--查询方法-->
+	<select id="select" parameterType="UnionpayAreaCode" resultMap="UnionpayAreaCodeMap">
+		select * from unionpay_area_code t
+		where 1=1 
+		<choose>
+			<when test="parentAreaCode != 0 and parentAreaCode != ''">
+				and t.parent_area_code = #{parentAreaCode}
+			</when>
+			<otherwise>
+				and t.parent_area_code =0
+			</otherwise>
+		</choose>
+	</select>
+</mapper>
+
+
+

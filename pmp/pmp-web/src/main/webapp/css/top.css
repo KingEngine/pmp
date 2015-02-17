@@ -5,15 +5,17 @@ a,li{list-style:none;text-decoration: none;}
     background: url("../images/main/head_1.jpg") repeat-x 0 0;
 }
 
-.nav {margin: 0px; padding: 0px;
-    background: url("../images/top/nav_bj.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+.nav {
+	margin: 1px 0 0 0 ; padding: 0px;
+    /*background: url("../images/top/nav_bj.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);*/
+    background:green;
     height: 32px;
     width: 100%;
 }
 .nav li {
-    background: url("../images/top/nav_bj.gif") no-repeat scroll 0 -32px rgba(0, 0, 0, 0);
+    /*background: url("../images/top/nav_bj.gif") no-repeat scroll 0 -32px rgba(0, 0, 0, 0);*/
     float: left;
-    height: 32px;
+    height: 20%;
     padding-left: 4px;
     width: 125px;
 }

@@ -52,8 +52,11 @@
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 	
-	
+	<!-- 内存管理器 -->
+	<bean name="cacheManagerService" class="com.chinaebi.pmp.pms.service.cache.CacheManagerService" init-method="initialize" lazy-init="false" scope="singleton">
+	</bean>
 	<!-- 加载其它配置文件 -->
 	<import resource="applicationContext_database.xml"/>
 	<import resource="spring_security.xml"/>
+	<import resource="applicationContext_activiti.xml"/>
 </beans>

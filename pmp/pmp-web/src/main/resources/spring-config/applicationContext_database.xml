@@ -6,4 +6,10 @@
 	default-lazy-init="true">
 	<bean id="usersDao" name="usersDao" class="com.chinaebi.pmp.database.dao.impl.UsersDaoImpl"/>
 	<bean id="menuDao" name="menuDao" class="com.chinaebi.pmp.database.dao.impl.MenuDaoImpl"/>
+	<bean id="channelDao" name="channelDao" class="com.chinaebi.pmp.database.dao.impl.ChannelDaoImpl"/>
+	<bean id="tlogDao" name="tlogDao" class="com.chinaebi.pmp.database.dao.impl.TlogDaoImpl"/>
+	<bean id="tradeTypeDao" name="tradeTypeDao" class="com.chinaebi.pmp.database.dao.impl.TradeTypeDaoImpl"/>
+	<bean id="acqBankDao" name="acqBankDao" class="com.chinaebi.pmp.database.dao.impl.AcqBankDaoImpl"/>
+	<bean id="deductChannelDao" name="deductChannelDao" class="com.chinaebi.pmp.database.dao.impl.DeductChannelDaoImpl"/>
+	<bean id="unionpayAreaCodeDao" name="unionpayAreaCodeDao" class="com.chinaebi.pmp.database.dao.impl.UnionpayAreaCodeDaoImpl"/>
 </beans>

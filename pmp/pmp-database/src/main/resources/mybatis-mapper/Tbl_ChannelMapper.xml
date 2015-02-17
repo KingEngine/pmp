@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 channel操作方法-->
+<mapper namespace="ChannelManager">
+	<resultMap type="Channel" id="ChannelMap">
+		 	<id property="cid" column="cid" />
+		 	<result property="chanName" column="chan_name" />
+		 	<result property="chanAbbrev" column="chan_abbrev" />
+		 	<result property="industry" column="industry" />
+		 	<result property="chanStatus" column="chan_status" />
+		 	<result property="chanSign" column="chan_sign" />
+		 	<result property="keyIndex" column="key_index" />
+	</resultMap>
+    <!--分页查询 记录-->
+	<select id="queryPage" parameterType="Channel" resultMap="ChannelMap">
+		select * from channel t
+		where 1=1 
+    		<if test="cid != null and cid != ''">
+    			 and t.cid = #{cid}
+    		</if>
+    		<if test="chanName != null and chanName != ''">
+    			 and t.chan_name = #{chanName}
+    		</if>
+    		<if test="chanAbbrev != null and chanAbbrev != ''">
+    			 and t.chan_abbrev = #{chanAbbrev}
+    		</if>
+    		<if test="industry != null and industry != ''">
+    			 and t.industry = #{industry}
+    		</if>
+    		<if test="chanStatus != null and chanStatus != ''">
+    			 and t.chan_status = #{chanStatus}
+    		</if>
+    		<if test="chanSign != null and chanSign != ''">
+    			 and t.chan_sign = #{chanSign}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			 and t.key_index = #{keyIndex}
+    		</if>
+        limit #{startRow},#{limit}
+	</select>
+	<!--分页查询  计数-->
+	<select id="queryPageCount" parameterType="Channel" resultType="int">
+		select count(*) from channel t
+		where 1=1 
+    		<if test="cid != null and cid != ''">
+    			 and t.cid = #{cid}
+    		</if>
+    		<if test="chanName != null and chanName != ''">
+    			 and t.chan_name = #{chanName}
+    		</if>
+    		<if test="chanAbbrev != null and chanAbbrev != ''">
+    			 and t.chan_abbrev = #{chanAbbrev}
+    		</if>
+    		<if test="industry != null and industry != ''">
+    			 and t.industry = #{industry}
+    		</if>
+    		<if test="chanStatus != null and chanStatus != ''">
+    			 and t.chan_status = #{chanStatus}
+    		</if>
+    		<if test="chanSign != null and chanSign != ''">
+    			 and t.chan_sign = #{chanSign}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			 and t.key_index = #{keyIndex}
+    		</if>
+	</select>
+	<!--查询方法-->
+	<select id="select" parameterType="Channel" resultMap="ChannelMap">
+		select * from channel t
+		where 1=1 
+    		<if test="cid != null and cid != ''">
+    			 and t.cid = #{cid}
+    		</if>
+    		<if test="chanName != null and chanName != ''">
+    			 and t.chan_name = #{chanName}
+    		</if>
+    		<if test="chanAbbrev != null and chanAbbrev != ''">
+    			 and t.chan_abbrev = #{chanAbbrev}
+    		</if>
+    		<if test="industry != null and industry != ''">
+    			 and t.industry = #{industry}
+    		</if>
+    		<if test="chanStatus != null and chanStatus != ''">
+    			 and t.chan_status = #{chanStatus}
+    		</if>
+    		<if test="chanSign != null and chanSign != ''">
+    			 and t.chan_sign = #{chanSign}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			 and t.key_index = #{keyIndex}
+    		</if>
+	</select>
+	<!--添加方法-->
+	<insert id="insert" parameterType="Channel">
+		insert into channel(
+				cid,
+				chan_name,
+				chan_abbrev,
+				industry,
+				chan_status,
+				chan_sign,
+				key_index,
+		) values(
+				#{cid},
+			
+				#{chanName},
+			
+				#{chanAbbrev},
+			
+				#{industry},
+			
+				#{chanStatus},
+			
+				#{chanSign},
+			
+				#{keyIndex},
+			)
+	</insert>
+	<!--更新方法-->
+	<update id="update" parameterType="Channel">
+		update channel 
+		<set> 
+	    		<if test="cid != null and cid != ''">
+	    			 t.cid = #{cid},
+	    		</if>
+	    		<if test="chanName != null and chanName != ''">
+	    			 t.chan_name = #{chanName},
+	    		</if>
+	    		<if test="chanAbbrev != null and chanAbbrev != ''">
+	    			 t.chan_abbrev = #{chanAbbrev},
+	    		</if>
+	    		<if test="industry != null and industry != ''">
+	    			 t.industry = #{industry},
+	    		</if>
+	    		<if test="chanStatus != null and chanStatus != ''">
+	    			 t.chan_status = #{chanStatus},
+	    		</if>
+	    		<if test="chanSign != null and chanSign != ''">
+	    			 t.chan_sign = #{chanSign},
+	    		</if>
+	    		<if test="keyIndex != null and keyIndex != ''">
+	    			 t.key_index = #{keyIndex},
+	    		</if>
+        </set> 
+		where
+		1=1
+    		<if test="cid != null and cid != ''">
+    			and  t.cid = #{cid}
+    		</if>
+    		<if test="chanName != null and chanName != ''">
+    			and  t.chan_name = #{chanName}
+    		</if>
+    		<if test="chanAbbrev != null and chanAbbrev != ''">
+    			and  t.chan_abbrev = #{chanAbbrev}
+    		</if>
+    		<if test="industry != null and industry != ''">
+    			and  t.industry = #{industry}
+    		</if>
+    		<if test="chanStatus != null and chanStatus != ''">
+    			and  t.chan_status = #{chanStatus}
+    		</if>
+    		<if test="chanSign != null and chanSign != ''">
+    			and  t.chan_sign = #{chanSign}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			and  t.key_index = #{keyIndex}
+    		</if>
+	</update>
+	<!--删除方法-->
+	<delete id="delete" parameterType="Channel">
+		delete from channel where 1=1
+    		<if test="cid != null and cid != ''">
+    			and t.cid = #{cid}
+    		</if>
+    		<if test="chanName != null and chanName != ''">
+    			and t.chan_name = #{chanName}
+    		</if>
+    		<if test="chanAbbrev != null and chanAbbrev != ''">
+    			and t.chan_abbrev = #{chanAbbrev}
+    		</if>
+    		<if test="industry != null and industry != ''">
+    			and t.industry = #{industry}
+    		</if>
+    		<if test="chanStatus != null and chanStatus != ''">
+    			and t.chan_status = #{chanStatus}
+    		</if>
+    		<if test="chanSign != null and chanSign != ''">
+    			and t.chan_sign = #{chanSign}
+    		</if>
+    		<if test="keyIndex != null and keyIndex != ''">
+    			and t.key_index = #{keyIndex}
+    		</if>
+	</delete>
+</mapper>
+
+
+

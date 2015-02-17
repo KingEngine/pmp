@@ -2,8 +2,6 @@ package com.chinaebi.pmp.service.impl;
 
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,11 +9,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.chinaebi.pmp.common.constant.Annotations;
-import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.dao.IUsersDao;
-import com.chinaebi.pmp.database.entity.Users;
 
 /**
  * 校验用户名和密码

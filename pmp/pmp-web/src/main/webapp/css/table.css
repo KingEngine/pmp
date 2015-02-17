@@ -1,5 +1,76 @@
-.tableBorder td {
-    border: 1px solid rgb(242,246,254);
+.searchTable {
+    border: 1px solid rgb(242, 246, 254);
     border-collapse: collapse;
     line-height: 170%;
+}
+.searchTable .title {
+	/*font-weight:bold;*/
+    background: none repeat scroll 0 0 rgb(233, 247, 255);
+    border-color: rgb(153, 153, 153);
+    box-shadow: 0 1px 0 rgb(255, 255, 255) inset;
+}
+.searchTable td {
+	padding:1px 0;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    border-color: rgb(153, 153, 153) rgb(153, 153, 153) rgb(153, 153, 153);
+    border-right: 1px solid rgb(153, 153, 153);
+    box-shadow:0px 0px 0px rgb(239, 238, 238);
+}
+.searchTable input {
+    border-radius: 1px;
+    width:195px;
+}
+.searchTable select {
+    width:195px;
+}
+
+.showTable {
+    border: 1px solid #0080c0242246254;
+    border-collapse: collapse;
+}
+.showTable .title {
+	/*font-weight:bold;*/
+    background: none repeat scroll 0 0 rgb(233, 247, 255);
+    border-color: rgb(153, 153, 153);
+    box-shadow: 0 1px 0 rgb(255, 255, 255) inset;
+}
+.showTable td {
+	padding:1px 0;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    border-color: rgb(153, 153, 153) rgb(153, 153, 153) rgb(153, 153, 153);
+    border-right: 1px solid rgb(153, 153, 153);
+    box-shadow:0px 0px 0px rgb(239, 238, 238);
+}
+
+.addTable {
+    border: 1px solid rgb(242, 246, 254);
+    border-collapse: collapse;
+    line-height: 170%;
+}
+.addTable .title {
+	/*font-weight:bold;*/
+    background: none repeat scroll 0 0 rgb(233, 247, 255);
+    border-color: rgb(153, 153, 153);
+    box-shadow: 0 1px 0 rgb(255, 255, 255) inset;
+}
+.addTable .title_weight {
+	font-weight:bold;
+    background: none repeat scroll 0 0 rgb(233, 247, 255);
+    border-color: rgb(153, 153, 153);
+    box-shadow: 0 1px 0 rgb(255, 255, 255) inset;
+}
+.addTable td {
+	padding:1px 0;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    border-color: rgb(153, 153, 153) rgb(153, 153, 153) rgb(153, 153, 153);
+    border-right: 1px solid rgb(153, 153, 153);
+    box-shadow:0px 0px 0px rgb(239, 238, 238);
+    margin: 0 1px 0 1px;
+}
+.addTable input {
+    border-radius: 1px;
+    width:195px;
+}
+.addTable select {
+    width:195px;
 }

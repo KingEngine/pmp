@@ -14,11 +14,23 @@
 	</resultMap>
    
 	<!--查询方法-->
-	<select id="select" parameterType="string" resultMap="MenuMap">
+	<select id="selectFirsetMenus" parameterType="string" resultMap="MenuMap">
 		select * from menu t
 		left join users_authorities on t.menu_id = users_authorities.menu_id
 		left join users ON users.id = users_authorities.user_id
-		where users.user_name=#{_parameter}
+		where users.user_name=#{_parameter} and t.menu_level=1 and t.menu_status=0
+	</select>
+	<select id="selectSecondsMenus" parameterType="map" resultMap="MenuMap">
+		select * from menu t
+		left join users_authorities on t.menu_id = users_authorities.menu_id
+		left join users ON users.id = users_authorities.user_id
+		where users.user_name=#{userName} and t.menu_level=2 and t.menu_status=0 and t.parent_menu_id =#{parentMenuId}
+	</select>
+	<select id="selectThirdMenus" parameterType="map" resultMap="MenuMap">
+		select * from menu t
+		left join users_authorities on t.menu_id = users_authorities.menu_id
+		left join users ON users.id = users_authorities.user_id
+		where users.user_name=#{userName} and t.menu_level=3 and t.menu_status=0 and t.parent_menu_id =#{parentMenuId}
 	</select>
 </mapper>
 

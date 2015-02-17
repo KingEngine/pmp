@@ -1,5 +1,6 @@
 package com.chinaebi.pmp.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,30 @@ public class LoginServiceImpl implements ILoginService{
 	@Autowired
 	@Qualifier(Annotations.DAO_MENU)
 	private IMenuDao menuDao;
-	public List<Menu> getUsersFirstMenuList(String userName) throws BusinessException {
+	public List<Menu> getUsersFirstMenus(String userName) throws BusinessException {
 		 try {
-			return menuDao.selectList(userName);
-		} catch (DaoException e) {
+			return menuDao.selectFirstMenuList(userName);
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinessException();
 		}
+	}
+	public List<Menu> getUsersChildMenus(String userName,Integer firstMenuId) throws BusinessException {
+		//查询二级菜单
+		List<Menu> treeMenus = new ArrayList<Menu>();
+		try {
+			List<Menu> secondMenus = menuDao.selectSecondMenuList(userName, firstMenuId);
+			for(Menu secondMenu: secondMenus){
+				treeMenus.add(secondMenu);
+				//得到三级菜单
+				List<Menu> thirdMenus = menuDao.selectThirdMenuList(userName,secondMenu.getMenuId());
+				for(Menu thirdMenu :thirdMenus){
+					treeMenus.add(thirdMenu);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return treeMenus;
 	}
 }
