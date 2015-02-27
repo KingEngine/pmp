@@ -1,9 +1,6 @@
 package com.chinaebi.pmp.database.dao;
 
-import java.sql.SQLException;
 import java.util.List;
-
-import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.Page;
 /**
  * 通用数据库操作方法

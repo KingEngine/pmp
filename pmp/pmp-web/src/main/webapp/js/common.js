@@ -6,15 +6,17 @@
  * @param errorDiv
  * @param pageNum
  */
-function ajaxFormQueryForPage(formId,requestURL,showDiv,tableList,errorDiv,pageNum){
+function ajaxFormQueryForPage(formId,requestURL,showDiv,tableList,errorDiv,pageNumber){
+	$('#'+showDiv).panel('open');
 	var options = $('#' + tableList).datagrid('getPager').data("pagination").options;
-	var pageOffset = 1;
-	if (pageNum)
-		pageOffset = pageNum;
+	var pageNum = 1;
+	if (pageNumber){
+		pageNum = pageNumber;
+	}
 	var rows = options.pageSize;
 	$('#'+formId).form('submit', {
 		url:requestURL,
-		queryParams:{"rows":rows,"pageOffset":pageOffset},
+		queryParams:{"rows":rows,"pageNumber":pageNum},
 		//校验form表单数据
 		onSubmit: function(){ 
 			var isValid = $(this).form('validate');
@@ -25,7 +27,6 @@ function ajaxFormQueryForPage(formId,requestURL,showDiv,tableList,errorDiv,pageN
  			return true;
 	    },  
 	    success: function(data){
-	    	$('#'+showDiv).attr("display","");
 	    	try{
 	    	    var data = eval("("+data+")");
 				//加载数据
@@ -50,8 +51,9 @@ function ajaxFormQueryForPage(formId,requestURL,showDiv,tableList,errorDiv,pageN
 	 			$($('#'+tableList).datagrid('getPager')).pagination({ 
 	 				total:data.total,
 	 				pageSize:rows,
+	 				pageNumber:pageNumber,
 	 				onSelectPage:function(pageNumber, pageSize){
-	 					ajaxFormQueryForPage(formId,requetURL,showDiv,tableList,errorDiv,pageNumber);
+	 					ajaxFormQueryForPage(formId,requestURL,showDiv,tableList,errorDiv,pageNumber);
 	 				}
 	 			}); 
 	    	}catch(e){
@@ -142,7 +144,81 @@ function formatterDeductChannel(value,row,index){
 	});
 	return content;
 }
+/**
+ * 商户类别
+ * @param value
+ * @param row
+ * @param index
+ * @returns {String}
+ */
+function formatterMerchantType(value,row,index){
+	var content = '';
+	$.ajax({
+		 url:"getMerchantTypeSelectList.do",
+         type:'post',
+         async:false,
+         success: function(msg){
+        	 $.each(msg,function(i,n){
+        		 if(value == n.typeCode){
+        			 content = n.typeDesc;
+        			 return;
+        	     }
+        	 });
+         },
+		 error: function(){
+				$.messager.alert('错误','系统异常!','error');
+	     }
+		
+	});
+	return content;
+}
+/**
+ * 显示dialog 不需要传入参数
+ * @param url
+ * @param title
+ * @param width
+ */
+function showDialogWithOutParameter(url,title,width,dialogId){
+	$('#'+dialogId).dialog({    
+	    title: title,    
+	    width: width,    
+	    href:url,
+	    shadow:true,
+		modal: true,
+	}); 
+}
+function ajaxSubmitDialogForm(url,formId,dialogId){
+	$('#'+formId).form('submit', {
+		url:url,
+		//校验form表单数据
+		onSubmit: function(){ 
+			var isValid = $(this).form('validate');
+ 			if (!isValid){
+ 				return false;
+ 			}
+ 			showProcess(true,"进度","正在提交");
+ 			return true;
+	    },  
+	    success: function(data){
+	    	showProcess(false);
+	    	try{
+		    	var data = eval("("+data+")");
+		    	$.messager.alert('消息',data.respCodeDesc,'info');
+		    	$('#'+dialogId).dialog("close");
+	    	}catch(e){
+	    		$.messager.alert('错误',data,'error');
+	    	}
+	    }
+	});
+	
+}
 
+/**
+ * 提交表单
+ * @param submitFormId
+ * @param requestURL
+ * @param isValidate
+ */
 function ajaxSubmitForm(submitFormId,requestURL,isValidate){
 	$('#'+submitFormId).form('submit', {
 		url:requestURL,
@@ -160,6 +236,39 @@ function ajaxSubmitForm(submitFormId,requestURL,isValidate){
 	    },  
 	    success: function(data){
 	    	closeLoading();
+	    	try{
+		    	var data = eval("("+data+")");
+		    	$.messager.alert('消息',data.respCodeDesc,'info');
+	    	}catch(e){
+	    		$("#"+errorDiv).text(e);
+	    	}
+	    }
+	});
+}
+function ajaxSubmitFormWithParameter(submitFormId,requestURL,isValidate,paramter){
+	$('#'+submitFormId).form('submit', {
+		url:requestURL,
+		queryParams:{"suggestion":paramter},
+		//校验form表单数据
+		onSubmit: function(){ 
+			//判断是否需要校验
+			if(isValidate){
+				var isValid = $(this).form('validate');
+	 			if (!isValid){
+	 				return false;
+	 			}
+			}
+ 			showLoading();//显示遮罩
+ 			return true;
+	    },  
+	    success: function(data){
+	    	closeLoading();
+	    	try{
+		    	var data = eval("("+data+")");
+		    	$.messager.alert('消息',data.respCodeDesc,'info');
+	    	}catch(e){
+	    		$("#"+errorDiv).text(e);
+	    	}
 	    }
 	});
 }
@@ -174,5 +283,4 @@ function showDiscountFeeDetailDialog(divId){
 	    shadow:true,
 		modal: true,
 	});   
-	
 }

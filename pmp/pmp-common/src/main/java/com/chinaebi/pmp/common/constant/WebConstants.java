@@ -24,7 +24,7 @@ public class WebConstants {
 	/**
 	 * 分页请求页号
 	 */
-	public final static String PAGE_OFFET="pageOffset";
+	public final static String PAGE_NUMBER="pageNumber";
 	/**
 	 * 一页返回行数
 	 */

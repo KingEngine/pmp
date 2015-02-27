@@ -17,6 +17,8 @@ import com.chinaebi.pmp.common.entity.CertificateType;
 import com.chinaebi.pmp.common.entity.CompanyType;
 import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
+import com.chinaebi.pmp.common.entity.OperatorRoleType;
+import com.chinaebi.pmp.common.entity.OperatorStatus;
 import com.chinaebi.pmp.common.entity.TradeStatus;
 import com.chinaebi.pmp.common.exception.BusinessException;
 import com.chinaebi.pmp.database.entity.AcqBank;
@@ -127,13 +129,35 @@ public class CommonServiceController {
 	public List<BalanceAccountType> getBalanceAccountTypeList() throws BusinessException {
 		return Constants.BALANCEACCOUNT_TYPE;
 	}
+	/**
+	 * 商户行业类型
+	 */
 	@RequestMapping(value = "/**/getMerchantTradeTypeList.do", method = { RequestMethod.GET,RequestMethod.POST })
 	@ResponseBody
 	public List<MerchantTradeType> getMerchantTradeTypeList() throws BusinessException {
 		return Constants.MERCHANTTRADE_TYPE;
 	}
+	/**
+	 * 扣款费率公式页面
+	 */
 	@RequestMapping(value = "/**/getDiscountFeeDetailPage.do", method = { RequestMethod.GET,RequestMethod.POST })
 	public String showDiscountFeeDetailPage() throws BusinessException {
 		return "feemodel_details";
+	}
+	/**
+	 * 操作员角色类型下拉选择框
+	 */
+	@RequestMapping(value = "/**/getOperatorRoleTypeSelectList.do", method = { RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public List<OperatorRoleType> showOperatorRoleTypes() throws BusinessException {
+		return Constants.OPERATOR_ROLE_TYPE;
+	}
+	/**
+	 * 操作员角色类型下拉选择框
+	 */
+	@RequestMapping(value = "/**/getOperatorStatusSelectList.do", method = { RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public List<OperatorStatus> showOperatorStatus() throws BusinessException {
+		return Constants.OPERATOR_STATUS;
 	}
 }

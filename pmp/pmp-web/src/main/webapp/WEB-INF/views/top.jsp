@@ -4,10 +4,11 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/top.css"/>
 <body style="margin: 0px; padding: 0px;">
 <div style="width:100%;">
-   <img  src="<%=request.getContextPath()%>/images/top/head.jpg" width="100%" height="40%"/>
+    <img src="<%=request.getContextPath()%>/images/top/head.jpg" style="width: 100%;height: 50%;"/>
  	<ul class="nav">
 		<c:forEach items="${firstMenus}" var="menu" varStatus="status">
 			<li><a style="cursor:pointer;" href="<%=request.getContextPath()%>/getLeftMenus.do?firstMenuId=${menu.menuId}" target="left">${menu.menuName}</a></li>
 		</c:forEach>
 	</ul> 
 </div>
+</body>

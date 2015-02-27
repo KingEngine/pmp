@@ -10,7 +10,6 @@
        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css"/>
        <%@include file="../../resource.tag" %> 
        <script type='text/javascript' src='<%=request.getContextPath()%>/js/common.js'></script>
-       <script type='text/javascript' src='<%=request.getContextPath()%>/js/views/mms/TradeManager/TradeQuery.js'></script>
 </head>
 <body style="overflow-x:hidden;">
 <div class="easyui-panel" style="width: 100%;" title="">

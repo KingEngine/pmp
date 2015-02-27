@@ -15,6 +15,8 @@ import com.chinaebi.pmp.common.entity.CertificateType;
 import com.chinaebi.pmp.common.entity.CompanyType;
 import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
+import com.chinaebi.pmp.common.entity.OperatorRoleType;
+import com.chinaebi.pmp.common.entity.OperatorStatus;
 import com.chinaebi.pmp.common.entity.TradeStatus;
 
 /**
@@ -47,6 +49,11 @@ public class Constants {
 	 * 商户行业类型
 	 */
 	public final static List<MerchantTradeType> MERCHANTTRADE_TYPE = new ArrayList<MerchantTradeType>();
+	/**
+	 * 操作员角色类型
+	 */
+	public final static List<OperatorRoleType> OPERATOR_ROLE_TYPE = new ArrayList<OperatorRoleType>();
+	public final static List<OperatorStatus> OPERATOR_STATUS = new ArrayList<OperatorStatus>();
 	
 	static{
 		//交易状态
@@ -103,6 +110,13 @@ public class Constants {
 		MERCHANTTRADE_TYPE.add(new MerchantTradeType("107", "教育/招生"));
 		MERCHANTTRADE_TYPE.add(new MerchantTradeType("108", "交友/咨询"));
 		MERCHANTTRADE_TYPE.add(new MerchantTradeType("109", "其他"));
+		//操作员角色类型
+		OPERATOR_ROLE_TYPE.add(new OperatorRoleType("1","POS后台操作员"));
+		OPERATOR_ROLE_TYPE.add(new OperatorRoleType("2","代理商操作员"));
+		OPERATOR_ROLE_TYPE.add(new OperatorRoleType("3","工作流操作员"));
+		//状态类型
+		OPERATOR_STATUS.add(new OperatorStatus("0","正常"));
+		OPERATOR_STATUS.add(new OperatorStatus("1","关闭"));
 	}
 	
 	public final static String ADDMERCHANT_WORKFLOW_INSTANCE="addMerchant";//增机实例

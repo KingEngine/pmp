@@ -17,8 +17,8 @@
 </style>
 <title>Welcome</title>
 </head>
-<body background="<%= path%>/images/main/welcome-bg.jpg">
-	<div style="margin-top: 30px;" class="welcome-font">
+<body background="<%= path%>/images/main/welcome-bg.jpg" >
+	<div class="welcome-font" style="width: 100%;height: 100%;">
 		欢迎您!
 	</div>
 </body>

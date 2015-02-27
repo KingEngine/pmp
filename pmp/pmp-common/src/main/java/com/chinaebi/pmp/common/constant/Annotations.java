@@ -13,6 +13,7 @@ package com.chinaebi.pmp.common.constant;
  * 2014-10-15
  */
 public class Annotations {
+	/*---------------------DAO操作-----------------------------------*/
 	/**
 	 * multiTableDao 多表操作
 	 */
@@ -53,6 +54,12 @@ public class Annotations {
 	 * unionpay_area_code表操作
 	 */
 	public final static String DAO_UNIONPAYAREACODE="unionpayAreaCodeDao";
+	/**
+	 * merInfo表操作
+	 */
+	public final static String DAO_MERINFO="merInfoDao";
+	
+	
 	/**
 	 * loginService 管理员登录
 	 */

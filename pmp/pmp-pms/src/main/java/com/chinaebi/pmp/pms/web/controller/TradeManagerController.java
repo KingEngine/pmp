@@ -2,10 +2,8 @@ package com.chinaebi.pmp.pms.web.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.chinaebi.pmp.common.constant.Annotations;
-import com.chinaebi.pmp.common.constant.Constants;
 import com.chinaebi.pmp.common.constant.WebConstants;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.pms.service.ITradeManagerService;
@@ -59,7 +55,7 @@ public class TradeManagerController {
 			@RequestParam(value="xpeDeductResp",required=false)String xpeDeductResp
 			) throws Exception {
 		
-		String curPage = request.getParameter(WebConstants.PAGE_OFFET);
+		String curPage = request.getParameter(WebConstants.PAGE_NUMBER);
 		String pageSize = request.getParameter(WebConstants.ROWS);
 		Page<Map<String,Object>> page = new Page<Map<String,Object>>();
 		if(StringUtils.isNotBlank(curPage))

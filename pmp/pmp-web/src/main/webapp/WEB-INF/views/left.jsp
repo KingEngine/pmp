@@ -17,7 +17,7 @@
 		           <ul>
 		              <c:forEach items="${left_menu_list}" var="thirdMenu">
 		                  <c:if test="${thirdMenu.menuLevel == 3 && thirdMenu.parentMenuId == secondMenu.menuId}">
-		                    <li data-options="id:'${thirdMenu.id}'"><span><a id="MainTitle_${thirdMenu.menuId}" href="${thirdMenu.menuUrl}" target="rightFrame">${thirdMenu.menuName}</a></span></li>
+		                    <li data-options="id:'${thirdMenu.id}'"><span><a id="MainTitle_${thirdMenu.menuId}" onclick="showTab('${thirdMenu.menuUrl}','${thirdMenu.menuName}')">${thirdMenu.menuName}</a></span></li>
 		                  </c:if>
 		              </c:forEach>
 		           </ul>
@@ -40,22 +40,29 @@ $(function(){
 		animate:true,
 	 	//点击一个节点的时候触发              
 		onClick:function(node){
-			//是否是叶子节点
-		 	var isLeaf = $('#menuTree').tree('isLeaf', node.target);
-			//叶子节点 
-            if(isLeaf){ 
-				var parentName = $("a[id=MainTitle_"+node.id+"]").parent().parent().parent().parent().parent().prev().find(".tree-title").text();
-				var mainTitle = parent.window.$("#rightMain");
-            	//动态设置title属性值
-            	var title = "当前位置："+parentName+">>"+ node.text;
-            	mainTitle.panel("setTitle",title);
-           }
+			$(this).tree(node.state === 'closed' ? 'expand' : 'collapse', node.target); 
 		},//双击一个节点的时候触发
        	onDblClick:function(node){  
        		$(this).tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);  
        	}
 	});
 });
+
+function showTab(url,tabName){
+	try{
+		var tabIsExist = parent.window.$('#rightMain').tabs('exists',tabName);
+		if(!tabIsExist){
+			var content ="<iframe src="+url+" frameborder=\"0\" height=\"100%\" width=\"100%\" style=\"overflow:auto;\" />";
+			parent.window.$('#rightMain').tabs('add',{    
+			    title:tabName,    
+			    content:content,    
+			    closable:true,    
+			});  
+		}
+	}catch(e){
+		$.messager.alert('警告',e);
+	}
+}
 </script>
 </html>
 
