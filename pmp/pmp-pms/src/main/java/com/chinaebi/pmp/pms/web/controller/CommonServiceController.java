@@ -15,6 +15,7 @@ import com.chinaebi.pmp.common.constant.Constants;
 import com.chinaebi.pmp.common.entity.BalanceAccountType;
 import com.chinaebi.pmp.common.entity.CertificateType;
 import com.chinaebi.pmp.common.entity.CompanyType;
+import com.chinaebi.pmp.common.entity.MerchantStatus;
 import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
 import com.chinaebi.pmp.common.entity.OperatorRoleType;
@@ -159,5 +160,13 @@ public class CommonServiceController {
 	@ResponseBody
 	public List<OperatorStatus> showOperatorStatus() throws BusinessException {
 		return Constants.OPERATOR_STATUS;
+	}
+	/**
+	 * 商户状态下拉列表
+	 */
+	@RequestMapping(value = "/**/getMerchantStatus.do", method = { RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public List<MerchantStatus> showMerchantStatus() throws BusinessException {
+		return Constants.MERCHANT_STATUS;
 	}
 }

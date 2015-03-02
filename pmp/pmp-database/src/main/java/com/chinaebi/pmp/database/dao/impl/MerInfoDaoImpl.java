@@ -16,5 +16,7 @@ public class MerInfoDaoImpl extends CommonDaoImpl<MerInfo> implements IMerInfoDa
 			Map<String, Object> param) {
 		return super.selectPage(page, "MerInfoManager.queryPage", "MerInfoManager.queryPageCount",param);
 	}
-
+	public Page<Map<String, Object>> selectPage(Page<Map<String, Object>> page, MerInfo param) {
+		return super.selectPage(page,"MerInfoManager.queryPageFuzzy", "MerInfoManager.queryPageFuzzyCount",param);
+	}
 }

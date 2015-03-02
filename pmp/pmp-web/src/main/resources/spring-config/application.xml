@@ -56,7 +56,7 @@
 	<bean name="cacheManagerService" class="com.chinaebi.pmp.pms.service.cache.CacheManagerService" init-method="initialize" lazy-init="false" scope="singleton">
 	</bean>
 	<!-- 加载其它配置文件 -->
-	<import resource="applicationContext_database.xml"/>
-	<import resource="spring_security.xml"/>
-	<import resource="applicationContext_activiti.xml"/>
+	<import resource="application_database.xml"/>
+	<import resource="application_security.xml"/>
+	<import resource="application_activiti.xml"/>
 </beans>

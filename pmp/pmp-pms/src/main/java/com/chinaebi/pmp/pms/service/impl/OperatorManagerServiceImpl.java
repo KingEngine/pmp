@@ -10,11 +10,12 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.activiti.engine.IdentityService;
+import org.activiti.engine.identity.User;
+import org.activiti.engine.impl.persistence.entity.UserEntity;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.chinaebi.pmp.common.constant.Annotations;
 import com.chinaebi.pmp.common.constant.Constants;
@@ -187,6 +188,12 @@ public class OperatorManagerServiceImpl implements IOperatorManagerService{
 			for (Menu menu : workFlowMenus) {
 				if(StringUtils.isNotBlank(menu.getMenuDepartment())){
 					if(Constants.ACTIVITI_ROLE.contains(menu.getMenuDepartment())){
+						//判断用户是否存在
+						List<User> activitiUser = identityService.createUserQuery().userId(userName).list();
+						if(null==activitiUser || activitiUser.size()<1){
+							//添加用户
+							identityService.saveUser(new UserEntity(userName));
+						}
 						identityService.createMembership(userName, menu.getMenuDepartment());;
 					}
 				}

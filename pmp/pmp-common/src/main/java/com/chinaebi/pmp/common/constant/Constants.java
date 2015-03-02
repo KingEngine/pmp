@@ -13,6 +13,7 @@ import java.util.List;
 import com.chinaebi.pmp.common.entity.BalanceAccountType;
 import com.chinaebi.pmp.common.entity.CertificateType;
 import com.chinaebi.pmp.common.entity.CompanyType;
+import com.chinaebi.pmp.common.entity.MerchantStatus;
 import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
 import com.chinaebi.pmp.common.entity.OperatorRoleType;
@@ -61,6 +62,10 @@ public class Constants {
 	 * 工作流角色
 	 */
 	public final static List<String> ACTIVITI_ROLE = new ArrayList<String>();
+	/**
+	 * 商户状态
+	 */
+	public final static List<MerchantStatus> MERCHANT_STATUS = new ArrayList<MerchantStatus>();
 	
 	static{
 		//交易状态
@@ -128,6 +133,9 @@ public class Constants {
 		ACTIVITI_ROLE.add("RISK_DEPARTMENT");
 		ACTIVITI_ROLE.add("BUSINESS_DEAPARTMENT");
 		ACTIVITI_ROLE.add("OPERATION_DEPARTMENT");
+		//商户状态
+		MERCHANT_STATUS.add(new MerchantStatus("5","开通"));
+		MERCHANT_STATUS.add(new MerchantStatus("6","关闭"));
 	}
 	
 	public final static String ADDMERCHANT_WORKFLOW_INSTANCE="addMerchant";//增机实例

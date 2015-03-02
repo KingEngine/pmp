@@ -28,6 +28,8 @@ public interface IMerInfoDao{
 	  * @return
 	  */
 	 public Page<Map<String,Object>> selectPage(Page<Map<String,Object>> page,Map<String,Object> param);
+	 
+	 public Page<Map<String, Object>> selectPage(Page<Map<String, Object>> page,MerInfo param);
 }
 
 

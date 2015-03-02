@@ -685,6 +685,19 @@
 				#{merManagerName}
 			)
 	</insert>
+	<select id="queryPageFuzzy" parameterType="MerInfo" resultType="map">
+		select mc.inner_mercode,t.name,t.abbrev from mer_info t
+		left join mer_config mc
+		on t.mid=mc.mid
+		where t.name like '%${name}%'
+		limit #{startRow},#{limit}
+	</select>
+	<select id="queryPageFuzzyCount" parameterType="MerInfo" resultType="int">
+		select count(*) from mer_info t
+		left join mer_config mc
+		on t.mid=mc.mid
+		where t.name like '%${name}%'
+	</select>
 </mapper>
 
 

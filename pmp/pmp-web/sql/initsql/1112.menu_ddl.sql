@@ -24,7 +24,7 @@ insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_statu
 -- 三级菜单
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(6,"当天交易查询","getCurrentTradePagePre.do",3,199,0);
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(2,"历史明细查询","getHistoryTradePagePre.do",3,199,0);
-insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(321,"商户申请","fillMerchantInfoPre.do",3,221,0);
+insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(321,"商户申请","operationMerInfoQueryPre.do",3,221,0);
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(322,"商户查询","merInfoQueryPre.do",3,221,0);
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(323,"任务查看","workFlowTaskQueryPre.do",3,221,0);
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(331,"操作员管理","managerOperationPre.do",3,231,0);

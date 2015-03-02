@@ -12,4 +12,6 @@
 	<bean id="acqBankDao" name="acqBankDao" class="com.chinaebi.pmp.database.dao.impl.AcqBankDaoImpl"/>
 	<bean id="deductChannelDao" name="deductChannelDao" class="com.chinaebi.pmp.database.dao.impl.DeductChannelDaoImpl"/>
 	<bean id="unionpayAreaCodeDao" name="unionpayAreaCodeDao" class="com.chinaebi.pmp.database.dao.impl.UnionpayAreaCodeDaoImpl"/>
+	<bean id="merInfoDao" name="merInfoDao" class="com.chinaebi.pmp.database.dao.impl.MerInfoDaoImpl"/>
+	<bean id="usersAuthoritiesDao" name="usersAuthoritiesDao" class="com.chinaebi.pmp.database.dao.impl.UsersAuthoritiesDaoImpl"/>
 </beans>

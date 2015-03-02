@@ -260,3 +260,6 @@ function showDiscountFeeDetailDialog(divId){
 		modal: true,
 	});   
 }
+function locationWithParameter(url){
+	window.location = url;
+}

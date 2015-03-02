@@ -1,7 +1,8 @@
 .searchTable {
-    border: 1px solid rgb(242, 246, 254);
+    /* border: 1px solid rgb(242, 246, 254); */
     border-collapse: collapse;
-    line-height: 170%;
+    /* line-height: 170%; */
+    width: 100%;
 }
 .searchTable .title {
 	/*font-weight:bold;*/
@@ -10,7 +11,7 @@
     box-shadow: 0 1px 0 rgb(255, 255, 255) inset;
 }
 .searchTable td {
-	padding:1px 0;
+	padding:1px 6px;
     border-bottom: 1px solid rgb(153, 153, 153);
     border-color: rgb(153, 153, 153) rgb(153, 153, 153) rgb(153, 153, 153);
     border-right: 1px solid rgb(153, 153, 153);
@@ -46,21 +47,21 @@
     border: 1px solid rgb(242, 246, 254);
     border-collapse: collapse;
     line-height: 170%;
+    width: 100%;
 }
 .addTable .title {
-	/*font-weight:bold;*/
     background: none repeat scroll 0 0 rgb(233, 247, 255);
     border-color: rgb(153, 153, 153);
     box-shadow: 0 1px 0 rgb(255, 255, 255) inset;
 }
-.addTable .title_weight {
+.addTable .title_bold {
 	font-weight:bold;
     background: none repeat scroll 0 0 rgb(233, 247, 255);
     border-color: rgb(153, 153, 153);
     box-shadow: 0 1px 0 rgb(255, 255, 255) inset;
 }
 .addTable td {
-	padding:1px 0;
+	padding:1px 6px;
     border-bottom: 1px solid rgb(153, 153, 153);
     border-color: rgb(153, 153, 153) rgb(153, 153, 153) rgb(153, 153, 153);
     border-right: 1px solid rgb(153, 153, 153);

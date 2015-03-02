@@ -8,7 +8,7 @@
        <meta http-equiv="Expires" content="0"/>  
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css"/>
-       <%@include file="../resource.tag" %> 
+       <%@include file="../../resource.tag" %> 
        <script type='text/javascript' src='<%=request.getContextPath()%>/js/common.js'></script>
 	   <script type='text/javascript' src='<%=request.getContextPath()%>/js/views/workflow/workflow_task_query_pre.js'></script>	
 </head>
@@ -43,6 +43,7 @@
         	<td align="center" style="height: 30px" colspan="6">
         		<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-search'" onclick="ajaxFormQueryForPage('searchForm','workFlowTaskQueryList.do','AAA','dataList','EEE',1);">查询</a>
 				<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-undo'" onclick="$('#searchForm').form('reset');">重置</a>
+				<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-undo'" onclick="$('#searchForm').form('reset');">新增</a>
         	</td>
         </tr>
       </table>
