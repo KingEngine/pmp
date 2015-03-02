@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 mer_info操作方法-->
+<mapper namespace="MerInfoManager">
+	<resultMap type="MerInfo" id="MerInfoMap">
+		 	<id property="mid" column="mid" />
+		 	<result property="name" column="name" />
+		 	<result property="abbrev" column="abbrev" />
+		 	<result property="provId" column="prov_id" />
+		 	<result property="beginDate" column="begin_date" />
+		 	<result property="expDate" column="exp_date" />
+		 	<result property="merType" column="mer_type" />
+		 	<result property="posType" column="pos_type" />
+		 	<result property="channelId" column="channel_id" />
+		 	<result property="termCount" column="term_count" />
+		 	<result property="beginFee" column="begin_fee" />
+		 	<result property="annualFee" column="annual_fee" />
+		 	<result property="cautionMoney" column="caution_money" />
+		 	<result property="faxNo" column="fax_no" />
+		 	<result property="signagory" column="signagory" />
+		 	<result property="corpCode" column="corp_code" />
+		 	<result property="codeExpDate" column="code_exp_date" />
+		 	<result property="regCode" column="reg_code" />
+		 	<result property="address" column="address" />
+		 	<result property="zip" column="zip" />
+		 	<result property="mdesc" column="mdesc" />
+		 	<result property="mstate" column="mstate" />
+		 	<result property="openDate" column="open_date" />
+		 	<result property="lastUpdate" column="last_update" />
+		 	<result property="bankName" column="bank_name" />
+		 	<result property="bankAcct" column="bank_acct" />
+		 	<result property="bankProvId" column="bank_prov_id" />
+		 	<result property="bankBranch" column="bank_branch" />
+		 	<result property="bankAcctName" column="bank_acct_name" />
+		 	<result property="contact0" column="contact0" />
+		 	<result property="tel0" column="tel0" />
+		 	<result property="cell0" column="cell0" />
+		 	<result property="email0" column="email0" />
+		 	<result property="contact1" column="contact1" />
+		 	<result property="tel1" column="tel1" />
+		 	<result property="cell1" column="cell1" />
+		 	<result property="email1" column="email1" />
+		 	<result property="contact2" column="contact2" />
+		 	<result property="tel2" column="tel2" />
+		 	<result property="cell2" column="cell2" />
+		 	<result property="email2" column="email2" />
+		 	<result property="contact3" column="contact3" />
+		 	<result property="tel3" column="tel3" />
+		 	<result property="cell3" column="cell3" />
+		 	<result property="email3" column="email3" />
+		 	<result property="contact4" column="contact4" />
+		 	<result property="tel4" column="tel4" />
+		 	<result property="cell4" column="cell4" />
+		 	<result property="email4" column="email4" />
+		 	<result property="contact5" column="contact5" />
+		 	<result property="tel5" column="tel5" />
+		 	<result property="cell5" column="cell5" />
+		 	<result property="email5" column="email5" />
+		 	<result property="balance" column="balance" />
+		 	<result property="lastBatch" column="last_batch" />
+		 	<result property="lastLiqDate" column="last_liq_date" />
+		 	<result property="category" column="category" />
+		 	<result property="merTradeType" column="mer_trade_type" />
+		 	<result property="idType" column="id_type" />
+		 	<result property="idNo" column="id_no" />
+		 	<result property="corpName" column="corp_name" />
+		 	<result property="openBkNo" column="open_bk_no" />
+		 	<result property="openTime" column="open_time" />
+		 	<result property="regAddress" column="reg_address" />
+		 	<result property="regCapital" column="reg_capital" />
+		 	<result property="credentialsStartDate" column="credentials_start_date" />
+		 	<result property="credentialsEndDate" column="credentials_end_date" />
+		 	<result property="operateScope" column="operate_scope" />
+		 	<result property="companyTel" column="company_tel" />
+		 	<result property="companyWeb" column="company_web" />
+		 	<result property="companyType" column="company_type" />
+		 	<result property="remark" column="remark" />
+		 	<result property="terminalFactory" column="terminal_factory" />
+		 	<result property="publicAccount" column="public_account" />
+		 	<result property="manufacturersModel" column="manufacturers_model" />
+		 	<result property="merProlongation" column="mer_prolongation" />
+		 	<result property="merMaintenance" column="mer_maintenance" />
+		 	<result property="rejectRemark" column="reject_remark" />
+		 	<result property="auditingState" column="auditing_state" />
+		 	<result property="termTypeNum" column="term_type_num" />
+		 	<result property="createTime" column="create_time" />
+		 	<result property="updateTime" column="update_time" />
+		 	<result property="identify" column="identify" />
+		 	<result property="operId" column="oper_id" />
+		 	<result property="updOperName" column="upd_oper_name" />
+		 	<result property="settlementBankCode" column="settlement_bank_code" />
+		 	<result property="settlementBankName" column="settlement_bank_name" />
+		 	<result property="withdrawalFee" column="withdrawal_fee" />
+		 	<result property="workflowNode" column="workflow_node" />
+		 	<result property="businessLicense" column="business_license" />
+		 	<result property="busStartDate" column="bus_start_date" />
+		 	<result property="busEndDate" column="bus_end_date" />
+		 	<result property="merRiskType" column="mer_risk_type" />
+		 	<result property="askType" column="ask_type" />
+		 	<result property="askTypeState" column="ask_type_state" />
+		 	<result property="merManagerName" column="mer_manager_name" />
+	</resultMap>
+	<select id="queryPage" parameterType="map" resultType="map">
+		SELECT c.inner_mercode as inner_mercode,m.mid,m.name,m.mer_type,m.ask_type,m.ask_type_state,
+		m.mer_prolongation,m.mer_maintenance,
+		m.channel_id,date_format(m.create_time,'%Y-%m-%d'),m.term_count,m.mstate,
+		c.id,m.identify,c.net_model 
+		from mer_info as m
+		LEFT JOIN mer_config as c on m.mid=c.mid
+		left join mer_expand_organization meo on m.mer_prolongation=meo.id
+		where 1=1
+	</select>
+	<select id="queryPageCount" parameterType="map" resultType="int">
+		SELECT count(*)
+		from mer_info as m
+		LEFT JOIN mer_config as c on m.mid=c.mid
+		left join mer_expand_organization meo on m.mer_prolongation=meo.id
+		where 1=1
+	</select>
+	<!--查询方法-->
+	<select id="select" parameterType="MerInfo" resultMap="MerInfoMap">
+		select * from mer_info t
+		where 1=1 
+    		<if test="mid != null and mid != ''">
+    			 and t.mid = #{mid}
+    		</if>
+    		<if test="name != null and name != ''">
+    			 and t.name = #{name}
+    		</if>
+    		<if test="abbrev != null and abbrev != ''">
+    			 and t.abbrev = #{abbrev}
+    		</if>
+    		<if test="provId != null and provId != ''">
+    			 and t.prov_id = #{provId}
+    		</if>
+    		<if test="beginDate != null and beginDate != ''">
+    			 and t.begin_date = #{beginDate}
+    		</if>
+    		<if test="expDate != null and expDate != ''">
+    			 and t.exp_date = #{expDate}
+    		</if>
+    		<if test="merType != null and merType != ''">
+    			 and t.mer_type = #{merType}
+    		</if>
+    		<if test="posType != null and posType != ''">
+    			 and t.pos_type = #{posType}
+    		</if>
+    		<if test="channelId != null and channelId != ''">
+    			 and t.channel_id = #{channelId}
+    		</if>
+    		<if test="termCount != null and termCount != ''">
+    			 and t.term_count = #{termCount}
+    		</if>
+    		<if test="beginFee != null and beginFee != ''">
+    			 and t.begin_fee = #{beginFee}
+    		</if>
+    		<if test="annualFee != null and annualFee != ''">
+    			 and t.annual_fee = #{annualFee}
+    		</if>
+    		<if test="cautionMoney != null and cautionMoney != ''">
+    			 and t.caution_money = #{cautionMoney}
+    		</if>
+    		<if test="faxNo != null and faxNo != ''">
+    			 and t.fax_no = #{faxNo}
+    		</if>
+    		<if test="signagory != null and signagory != ''">
+    			 and t.signagory = #{signagory}
+    		</if>
+    		<if test="corpCode != null and corpCode != ''">
+    			 and t.corp_code = #{corpCode}
+    		</if>
+    		<if test="codeExpDate != null and codeExpDate != ''">
+    			 and t.code_exp_date = #{codeExpDate}
+    		</if>
+    		<if test="regCode != null and regCode != ''">
+    			 and t.reg_code = #{regCode}
+    		</if>
+    		<if test="address != null and address != ''">
+    			 and t.address = #{address}
+    		</if>
+    		<if test="zip != null and zip != ''">
+    			 and t.zip = #{zip}
+    		</if>
+    		<if test="mdesc != null and mdesc != ''">
+    			 and t.mdesc = #{mdesc}
+    		</if>
+    		<if test="mstate != null and mstate != ''">
+    			 and t.mstate = #{mstate}
+    		</if>
+    		<if test="openDate != null and openDate != ''">
+    			 and t.open_date = #{openDate}
+    		</if>
+    		<if test="lastUpdate != null and lastUpdate != ''">
+    			 and t.last_update = #{lastUpdate}
+    		</if>
+    		<if test="bankName != null and bankName != ''">
+    			 and t.bank_name = #{bankName}
+    		</if>
+    		<if test="bankAcct != null and bankAcct != ''">
+    			 and t.bank_acct = #{bankAcct}
+    		</if>
+    		<if test="bankProvId != null and bankProvId != ''">
+    			 and t.bank_prov_id = #{bankProvId}
+    		</if>
+    		<if test="bankBranch != null and bankBranch != ''">
+    			 and t.bank_branch = #{bankBranch}
+    		</if>
+    		<if test="bankAcctName != null and bankAcctName != ''">
+    			 and t.bank_acct_name = #{bankAcctName}
+    		</if>
+    		<if test="contact0 != null and contact0 != ''">
+    			 and t.contact0 = #{contact0}
+    		</if>
+    		<if test="tel0 != null and tel0 != ''">
+    			 and t.tel0 = #{tel0}
+    		</if>
+    		<if test="cell0 != null and cell0 != ''">
+    			 and t.cell0 = #{cell0}
+    		</if>
+    		<if test="email0 != null and email0 != ''">
+    			 and t.email0 = #{email0}
+    		</if>
+    		<if test="contact1 != null and contact1 != ''">
+    			 and t.contact1 = #{contact1}
+    		</if>
+    		<if test="tel1 != null and tel1 != ''">
+    			 and t.tel1 = #{tel1}
+    		</if>
+    		<if test="cell1 != null and cell1 != ''">
+    			 and t.cell1 = #{cell1}
+    		</if>
+    		<if test="email1 != null and email1 != ''">
+    			 and t.email1 = #{email1}
+    		</if>
+    		<if test="contact2 != null and contact2 != ''">
+    			 and t.contact2 = #{contact2}
+    		</if>
+    		<if test="tel2 != null and tel2 != ''">
+    			 and t.tel2 = #{tel2}
+    		</if>
+    		<if test="cell2 != null and cell2 != ''">
+    			 and t.cell2 = #{cell2}
+    		</if>
+    		<if test="email2 != null and email2 != ''">
+    			 and t.email2 = #{email2}
+    		</if>
+    		<if test="contact3 != null and contact3 != ''">
+    			 and t.contact3 = #{contact3}
+    		</if>
+    		<if test="tel3 != null and tel3 != ''">
+    			 and t.tel3 = #{tel3}
+    		</if>
+    		<if test="cell3 != null and cell3 != ''">
+    			 and t.cell3 = #{cell3}
+    		</if>
+    		<if test="email3 != null and email3 != ''">
+    			 and t.email3 = #{email3}
+    		</if>
+    		<if test="contact4 != null and contact4 != ''">
+    			 and t.contact4 = #{contact4}
+    		</if>
+    		<if test="tel4 != null and tel4 != ''">
+    			 and t.tel4 = #{tel4}
+    		</if>
+    		<if test="cell4 != null and cell4 != ''">
+    			 and t.cell4 = #{cell4}
+    		</if>
+    		<if test="email4 != null and email4 != ''">
+    			 and t.email4 = #{email4}
+    		</if>
+    		<if test="contact5 != null and contact5 != ''">
+    			 and t.contact5 = #{contact5}
+    		</if>
+    		<if test="tel5 != null and tel5 != ''">
+    			 and t.tel5 = #{tel5}
+    		</if>
+    		<if test="cell5 != null and cell5 != ''">
+    			 and t.cell5 = #{cell5}
+    		</if>
+    		<if test="email5 != null and email5 != ''">
+    			 and t.email5 = #{email5}
+    		</if>
+    		<if test="balance != null and balance != ''">
+    			 and t.balance = #{balance}
+    		</if>
+    		<if test="lastBatch != null and lastBatch != ''">
+    			 and t.last_batch = #{lastBatch}
+    		</if>
+    		<if test="lastLiqDate != null and lastLiqDate != ''">
+    			 and t.last_liq_date = #{lastLiqDate}
+    		</if>
+    		<if test="category != null and category != ''">
+    			 and t.category = #{category}
+    		</if>
+    		<if test="merTradeType != null and merTradeType != ''">
+    			 and t.mer_trade_type = #{merTradeType}
+    		</if>
+    		<if test="idType != null and idType != ''">
+    			 and t.id_type = #{idType}
+    		</if>
+    		<if test="idNo != null and idNo != ''">
+    			 and t.id_no = #{idNo}
+    		</if>
+    		<if test="corpName != null and corpName != ''">
+    			 and t.corp_name = #{corpName}
+    		</if>
+    		<if test="openBkNo != null and openBkNo != ''">
+    			 and t.open_bk_no = #{openBkNo}
+    		</if>
+    		<if test="openTime != null and openTime != ''">
+    			 and t.open_time = #{openTime}
+    		</if>
+    		<if test="regAddress != null and regAddress != ''">
+    			 and t.reg_address = #{regAddress}
+    		</if>
+    		<if test="regCapital != null and regCapital != ''">
+    			 and t.reg_capital = #{regCapital}
+    		</if>
+    		<if test="credentialsStartDate != null and credentialsStartDate != ''">
+    			 and t.credentials_start_date = #{credentialsStartDate}
+    		</if>
+    		<if test="credentialsEndDate != null and credentialsEndDate != ''">
+    			 and t.credentials_end_date = #{credentialsEndDate}
+    		</if>
+    		<if test="operateScope != null and operateScope != ''">
+    			 and t.operate_scope = #{operateScope}
+    		</if>
+    		<if test="companyTel != null and companyTel != ''">
+    			 and t.company_tel = #{companyTel}
+    		</if>
+    		<if test="companyWeb != null and companyWeb != ''">
+    			 and t.company_web = #{companyWeb}
+    		</if>
+    		<if test="companyType != null and companyType != ''">
+    			 and t.company_type = #{companyType}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="terminalFactory != null and terminalFactory != ''">
+    			 and t.terminal_factory = #{terminalFactory}
+    		</if>
+    		<if test="publicAccount != null and publicAccount != ''">
+    			 and t.public_account = #{publicAccount}
+    		</if>
+    		<if test="manufacturersModel != null and manufacturersModel != ''">
+    			 and t.manufacturers_model = #{manufacturersModel}
+    		</if>
+    		<if test="merProlongation != null and merProlongation != ''">
+    			 and t.mer_prolongation = #{merProlongation}
+    		</if>
+    		<if test="merMaintenance != null and merMaintenance != ''">
+    			 and t.mer_maintenance = #{merMaintenance}
+    		</if>
+    		<if test="rejectRemark != null and rejectRemark != ''">
+    			 and t.reject_remark = #{rejectRemark}
+    		</if>
+    		<if test="auditingState != null and auditingState != ''">
+    			 and t.auditing_state = #{auditingState}
+    		</if>
+    		<if test="termTypeNum != null and termTypeNum != ''">
+    			 and t.term_type_num = #{termTypeNum}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			 and t.create_time = #{createTime}
+    		</if>
+    		<if test="updateTime != null and updateTime != ''">
+    			 and t.update_time = #{updateTime}
+    		</if>
+    		<if test="identify != null and identify != ''">
+    			 and t.identify = #{identify}
+    		</if>
+    		<if test="operId != null and operId != ''">
+    			 and t.oper_id = #{operId}
+    		</if>
+    		<if test="updOperName != null and updOperName != ''">
+    			 and t.upd_oper_name = #{updOperName}
+    		</if>
+    		<if test="settlementBankCode != null and settlementBankCode != ''">
+    			 and t.settlement_bank_code = #{settlementBankCode}
+    		</if>
+    		<if test="settlementBankName != null and settlementBankName != ''">
+    			 and t.settlement_bank_name = #{settlementBankName}
+    		</if>
+    		<if test="withdrawalFee != null and withdrawalFee != ''">
+    			 and t.withdrawal_fee = #{withdrawalFee}
+    		</if>
+    		<if test="workflowNode != null and workflowNode != ''">
+    			 and t.workflow_node = #{workflowNode}
+    		</if>
+    		<if test="businessLicense != null and businessLicense != ''">
+    			 and t.business_license = #{businessLicense}
+    		</if>
+    		<if test="busStartDate != null and busStartDate != ''">
+    			 and t.bus_start_date = #{busStartDate}
+    		</if>
+    		<if test="busEndDate != null and busEndDate != ''">
+    			 and t.bus_end_date = #{busEndDate}
+    		</if>
+    		<if test="merRiskType != null and merRiskType != ''">
+    			 and t.mer_risk_type = #{merRiskType}
+    		</if>
+    		<if test="askType != null and askType != ''">
+    			 and t.ask_type = #{askType}
+    		</if>
+    		<if test="askTypeState != null and askTypeState != ''">
+    			 and t.ask_type_state = #{askTypeState}
+    		</if>
+    		<if test="merManagerName != null and merManagerName != ''">
+    			 and t.mer_manager_name = #{merManagerName}
+    		</if>
+	</select>
+	<!--添加方法-->
+	<insert id="insert" parameterType="MerInfo" useGeneratedKeys="true" keyProperty="mid">
+		insert into mer_info(
+				name,
+				abbrev,
+				prov_id,
+				begin_date,
+				exp_date,
+				mer_type,
+				pos_type,
+				channel_id,
+				term_count,
+				begin_fee,
+				annual_fee,
+				caution_money,
+				fax_no,
+				signagory,
+				corp_code,
+				code_exp_date,
+				reg_code,
+				address,
+				zip,
+				mdesc,
+				mstate,
+				open_date,
+				last_update,
+				bank_name,
+				bank_acct,
+				bank_prov_id,
+				bank_branch,
+				bank_acct_name,
+				contact0,
+				tel0,
+				cell0,
+				email0,
+				contact1,
+				tel1,
+				cell1,
+				email1,
+				contact2,
+				tel2,
+				cell2,
+				email2,
+				contact3,
+				tel3,
+				cell3,
+				email3,
+				contact4,
+				tel4,
+				cell4,
+				email4,
+				contact5,
+				tel5,
+				cell5,
+				email5,
+				balance,
+				last_batch,
+				last_liq_date,
+				category,
+				mer_trade_type,
+				id_type,
+				id_no,
+				corp_name,
+				open_bk_no,
+				open_time,
+				reg_address,
+				reg_capital,
+				credentials_start_date,
+				credentials_end_date,
+				operate_scope,
+				company_tel,
+				company_web,
+				company_type,
+				remark,
+				terminal_factory,
+				public_account,
+				manufacturers_model,
+				mer_prolongation,
+				mer_maintenance,
+				reject_remark,
+				auditing_state,
+				term_type_num,
+				create_time,
+				update_time,
+				identify,
+				oper_id,
+				upd_oper_name,
+				settlement_bank_code,
+				settlement_bank_name,
+				withdrawal_fee,
+				workflow_node,
+				business_license,
+				bus_start_date,
+				bus_end_date,
+				mer_risk_type,
+				ask_type,
+				ask_type_state,
+				mer_manager_name
+		) values(
+				#{name},
+				#{abbrev},
+				#{provId},
+				#{beginDate},
+				#{expDate},
+				#{merType},
+				#{posType},
+				#{channelId},
+				#{termCount},
+				#{beginFee},
+				#{annualFee},
+				#{cautionMoney},
+				#{faxNo},
+				#{signagory},
+				#{corpCode},
+				#{codeExpDate},
+			
+				#{regCode},
+			
+				#{address},
+			
+				#{zip},
+			
+				#{mdesc},
+			
+				#{mstate},
+			
+				#{openDate},
+			
+				#{lastUpdate},
+			
+				#{bankName},
+			
+				#{bankAcct},
+			
+				#{bankProvId},
+			
+				#{bankBranch},
+			
+				#{bankAcctName},
+			
+				#{contact0},
+			
+				#{tel0},
+			
+				#{cell0},
+			
+				#{email0},
+			
+				#{contact1},
+			
+				#{tel1},
+			
+				#{cell1},
+			
+				#{email1},
+			
+				#{contact2},
+			
+				#{tel2},
+			
+				#{cell2},
+			
+				#{email2},
+			
+				#{contact3},
+			
+				#{tel3},
+			
+				#{cell3},
+			
+				#{email3},
+			
+				#{contact4},
+			
+				#{tel4},
+			
+				#{cell4},
+			
+				#{email4},
+			
+				#{contact5},
+			
+				#{tel5},
+			
+				#{cell5},
+			
+				#{email5},
+			
+				#{balance},
+			
+				#{lastBatch},
+			
+				#{lastLiqDate},
+			
+				#{category},
+			
+				#{merTradeType},
+			
+				#{idType},
+			
+				#{idNo},
+			
+				#{corpName},
+			
+				#{openBkNo},
+			
+				#{openTime},
+			
+				#{regAddress},
+			
+				#{regCapital},
+			
+				#{credentialsStartDate},
+			
+				#{credentialsEndDate},
+			
+				#{operateScope},
+			
+				#{companyTel},
+			
+				#{companyWeb},
+			
+				#{companyType},
+			
+				#{remark},
+			
+				#{terminalFactory},
+			
+				#{publicAccount},
+			
+				#{manufacturersModel},
+			
+				#{merProlongation},
+			
+				#{merMaintenance},
+			
+				#{rejectRemark},
+			
+				#{auditingState},
+			
+				#{termTypeNum},
+			
+				#{createTime},
+			
+				#{updateTime},
+			
+				#{identify},
+			
+				#{operId},
+			
+				#{updOperName},
+			
+				#{settlementBankCode},
+			
+				#{settlementBankName},
+			
+				#{withdrawalFee},
+			
+				#{workflowNode},
+			
+				#{businessLicense},
+			
+				#{busStartDate},
+			
+				#{busEndDate},
+			
+				#{merRiskType},
+			
+				#{askType},
+			
+				#{askTypeState},
+				#{merManagerName}
+			)
+	</insert>
+</mapper>
+
+
+

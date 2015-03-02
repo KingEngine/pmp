@@ -15,14 +15,13 @@ import org.slf4j.LoggerFactory;
 import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.dao.IMenuDao;
 import com.chinaebi.pmp.database.entity.Menu;
-import com.chinaebi.pmp.database.entity.Users;
 
 /**
  * users表实现类
  *
  * @author king
  */
-public class MenuDaoImpl extends CommonDaoImpl<Users> implements IMenuDao{
+public class MenuDaoImpl extends CommonDaoImpl<Menu> implements IMenuDao{
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -50,6 +49,14 @@ public class MenuDaoImpl extends CommonDaoImpl<Users> implements IMenuDao{
 		} catch (Exception e) {
 			logger.error("MenuManager.selectSecondsMenus查询异常:",e);
 			throw new DaoException("");
+		}
+	}
+	public List<Menu> selectList(Menu param) {
+		try {
+			return super.selectList("MenuManager.select", param);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	private Map<String,Object> generateParameters(String userName,Integer menuId){

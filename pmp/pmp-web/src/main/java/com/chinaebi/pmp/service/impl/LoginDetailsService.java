@@ -2,6 +2,7 @@ package com.chinaebi.pmp.service.impl;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -10,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.chinaebi.pmp.common.constant.Annotations;
-import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.dao.IUsersDao;
 import com.chinaebi.pmp.database.entity.Users;
 
@@ -48,7 +49,10 @@ public class LoginDetailsService implements UserDetailsService{
 						existUser.getUserName()))) {
 			throw new BadCredentialsException("用户名或者密码错误!");
 		} else {
-			userDetails = new User(existUser.getUserName(),existUser.getUserPassword(),new ArrayList<GrantedAuthority>());
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
+			authorities.add(authority);
+			userDetails = new User(existUser.getUserName(),existUser.getUserPassword(),authorities);
 			return userDetails;
 		}
 	}

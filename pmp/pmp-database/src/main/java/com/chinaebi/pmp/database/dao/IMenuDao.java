@@ -2,7 +2,6 @@ package com.chinaebi.pmp.database.dao;
 
 import java.util.List;
 
-import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.Menu;
 
 /**
@@ -19,6 +18,8 @@ public interface IMenuDao{
 	 
 	 
 	 public List<Menu> selectThirdMenuList(String userName,Integer secondMenuId) throws Exception;
+	 
+	 public List<Menu> selectList(Menu param) ;
 }
 
 

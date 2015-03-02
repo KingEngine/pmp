@@ -51,6 +51,7 @@ $(function(){
 function showTab(url,tabName){
 	try{
 		var tabIsExist = parent.window.$('#rightMain').tabs('exists',tabName);
+		//如果菜单列表不存在则打开
 		if(!tabIsExist){
 			var content ="<iframe src="+url+" frameborder=\"0\" height=\"100%\" width=\"100%\" style=\"overflow:auto;\" />";
 			parent.window.$('#rightMain').tabs('add',{    
@@ -58,6 +59,8 @@ function showTab(url,tabName){
 			    content:content,    
 			    closable:true,    
 			});  
+		}else{//否则什么也不做
+		    parent.window.$('#rightMain').tabs('select',tabName);  
 		}
 	}catch(e){
 		$.messager.alert('警告',e);

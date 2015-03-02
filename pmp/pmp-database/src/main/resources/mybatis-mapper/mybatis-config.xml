@@ -12,6 +12,8 @@
 		<typeAlias alias="AcqBank" type="com.chinaebi.pmp.database.entity.AcqBank" />
 		<typeAlias alias="DeductChannel" type="com.chinaebi.pmp.database.entity.DeductChannel" />
 		<typeAlias alias="UnionpayAreaCode" type="com.chinaebi.pmp.database.entity.UnionpayAreaCode" />
+		<typeAlias alias="MerInfo" type="com.chinaebi.pmp.database.entity.MerInfo" />
+		<typeAlias alias="UsersAuthorities" type="com.chinaebi.pmp.database.entity.UsersAuthorities" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis-mapper/Tbl_UsersMapper.xml"/>
@@ -22,5 +24,7 @@
 		<mapper resource="mybatis-mapper/Tbl_AcqBankMapper.xml"/>
 		<mapper resource="mybatis-mapper/Tbl_DeductChannelMapper.xml"/>
 		<mapper resource="mybatis-mapper/Tbl_UnionpayAreaCodeMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_MerInfoMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_UsersAuthoritiesMapper.xml"/>
 	</mappers>
 </configuration>

@@ -27,9 +27,9 @@ public class LoginServiceFilter extends UsernamePasswordAuthenticationFilter {
 	public Authentication attemptAuthentication(HttpServletRequest request,
 			HttpServletResponse response) throws AuthenticationException {
 		//判断是否为post提交方式
-		if(!StringUtils.equalsIgnoreCase("post", request.getMethod())){
+		/*if(!StringUtils.equalsIgnoreCase("post", request.getMethod())){
 			throw new AuthenticationServiceException("方法不支持:"+request.getMethod()+"方式提交");
-		}
+		}*/
 		// 判断是否验证码验证开关是否开启
 		if (isCheckValidateCode) {
 			validateCode(request);

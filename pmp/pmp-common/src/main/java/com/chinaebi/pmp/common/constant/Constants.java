@@ -53,7 +53,14 @@ public class Constants {
 	 * 操作员角色类型
 	 */
 	public final static List<OperatorRoleType> OPERATOR_ROLE_TYPE = new ArrayList<OperatorRoleType>();
+	/**
+	 * 操作员状态
+	 */
 	public final static List<OperatorStatus> OPERATOR_STATUS = new ArrayList<OperatorStatus>();
+	/**
+	 * 工作流角色
+	 */
+	public final static List<String> ACTIVITI_ROLE = new ArrayList<String>();
 	
 	static{
 		//交易状态
@@ -117,6 +124,10 @@ public class Constants {
 		//状态类型
 		OPERATOR_STATUS.add(new OperatorStatus("0","正常"));
 		OPERATOR_STATUS.add(new OperatorStatus("1","关闭"));
+		//工作流角色
+		ACTIVITI_ROLE.add("RISK_DEPARTMENT");
+		ACTIVITI_ROLE.add("BUSINESS_DEAPARTMENT");
+		ACTIVITI_ROLE.add("OPERATION_DEPARTMENT");
 	}
 	
 	public final static String ADDMERCHANT_WORKFLOW_INSTANCE="addMerchant";//增机实例

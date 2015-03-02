@@ -104,7 +104,7 @@
       </table>
 	</form> 
 	</div>
-	<div class="easyui-panel" style="width:100%;" id="AAA">
+	<div class="easyui-panel" style="width:100%;" id="AAA" data-options="closed:true">
 		<table  class="easyui-datagrid" style="width: 100%;" title="查询列表" align="center" id="dataList" data-options="fitColumns:true,singleSelect:true,pagination:true,pageSize:50,showFooter:true">   
 		          <thead>   
 			        <tr>   

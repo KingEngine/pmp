@@ -1,3 +1,4 @@
+window.defaultStatus = "huanying"; 
 /**
  * ajax提交请求
  * @param formId
@@ -63,6 +64,7 @@ function ajaxFormQueryForPage(formId,requestURL,showDiv,tableList,errorDiv,pageN
 	    }
 	});
 }
+//显示遮罩
 function showLoading(){
 	if ($("#disabledImageZone").length > 0) {
 		$("#disabledImageZone").show();
@@ -71,6 +73,7 @@ function showLoading(){
 		$("body").append(loading);
 	}
 }
+//隐藏遮罩
 function closeLoading(){
 	 $("#disabledImageZone").hide();
 }
@@ -185,51 +188,24 @@ function showDialogWithOutParameter(url,title,width,dialogId){
 	    href:url,
 	    shadow:true,
 		modal: true,
+		border:false
 	}); 
 }
-function ajaxSubmitDialogForm(url,formId,dialogId){
-	$('#'+formId).form('submit', {
-		url:url,
-		//校验form表单数据
-		onSubmit: function(){ 
-			var isValid = $(this).form('validate');
- 			if (!isValid){
- 				return false;
- 			}
- 			showProcess(true,"进度","正在提交");
- 			return true;
-	    },  
-	    success: function(data){
-	    	showProcess(false);
-	    	try{
-		    	var data = eval("("+data+")");
-		    	$.messager.alert('消息',data.respCodeDesc,'info');
-		    	$('#'+dialogId).dialog("close");
-	    	}catch(e){
-	    		$.messager.alert('错误',data,'error');
-	    	}
-	    }
-	});
-	
-}
-
 /**
  * 提交表单
  * @param submitFormId
  * @param requestURL
  * @param isValidate
  */
-function ajaxSubmitForm(submitFormId,requestURL,isValidate){
+function ajaxSubmitForm(submitFormId,requestURL){
 	$('#'+submitFormId).form('submit', {
 		url:requestURL,
 		//校验form表单数据
 		onSubmit: function(){ 
-			//判断是否需要校验
-			if(isValidate){
-				var isValid = $(this).form('validate');
-	 			if (!isValid){
-	 				return false;
-	 			}
+			// 校验
+			var isValid = $(this).form('validate');
+			if (!isValid) {
+				return false;
 			}
  			showLoading();//显示遮罩
  			return true;

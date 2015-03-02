@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 users_authorities操作方法-->
+<mapper namespace="UsersAuthoritiesManager">
+	<resultMap type="UsersAuthorities" id="UsersAuthoritiesMap">
+		 	<id property="id" column="id" />
+		 	<result property="userId" column="user_id" />
+		 	<result property="menuId" column="menu_id" />
+	</resultMap>
+	<!--删除方法-->
+	<delete id="delete" parameterType="string">
+		delete from users_authorities where 
+		user_id= (select id from users where user_name=#{userName})
+	</delete>
+	
+	<!--删除方法-->
+	<insert id="insert" parameterType="list">
+		 insert into
+  		 users_authorities(user_id,menu_id)
+		 values
+		  <foreach collection="list" item="item" index="index"
+		   separator=",">
+		   (#{item.userId},#{item.menuId})
+		  </foreach>
+	</insert>
+</mapper>
+
+
+

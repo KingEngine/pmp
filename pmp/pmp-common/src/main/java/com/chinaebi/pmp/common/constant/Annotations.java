@@ -58,8 +58,10 @@ public class Annotations {
 	 * merInfo表操作
 	 */
 	public final static String DAO_MERINFO="merInfoDao";
-	
-	
+	/**
+	 * usersAuthoritiesDao
+	 */
+	public final static String DAO_USERSAUTHORITIES="usersAuthoritiesDao";
 	/**
 	 * loginService 管理员登录
 	 */

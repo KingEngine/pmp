@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.dao.IUsersDao;
+import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.database.entity.Users;
 
 /**
@@ -33,6 +34,19 @@ public class UsersDaoImpl extends CommonDaoImpl<Users> implements IUsersDao{
 			logger.error("UsersManager.select查询异常:",e);
 			throw new DaoException(e.getMessage());
 		}
+	}
+
+	public Page<Users> selectPage(Page<Users> page,Users param) {
+		
+		return super.selectPage(page, "UsersManager.queryPage", "UsersManager.queryPageCount",param);
+	}
+
+	public boolean insert(Users param) {
+		int counter = this.getSqlSession().insert("UsersManager.insert", param);
+		if(counter>0){
+			return true;
+		}
+		return false;
 	}
 }
 

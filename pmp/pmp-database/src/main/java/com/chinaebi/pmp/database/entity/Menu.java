@@ -15,6 +15,8 @@ public class Menu implements java.io.Serializable {
 	private int menuLevel;/* 对应表中menu_level */
 	private int parentMenuId;/* 对应表中parent_menu_id */
 	private int menuStatus;/* 对应表中menu_status */
+	private String menuType;/*对应表中menu_type*/
+	private String menuDepartment;/*对应表中menu_department*/
 
 	public int getId() {
 		return id;
@@ -70,5 +72,21 @@ public class Menu implements java.io.Serializable {
 
 	public void setMenuStatus(int menuStatus) {
 		this.menuStatus = menuStatus;
+	}
+
+	public String getMenuType() {
+		return menuType;
+	}
+
+	public void setMenuType(String menuType) {
+		this.menuType = menuType;
+	}
+
+	public String getMenuDepartment() {
+		return menuDepartment;
+	}
+
+	public void setMenuDepartment(String menuDepartment) {
+		this.menuDepartment = menuDepartment;
 	}
 }

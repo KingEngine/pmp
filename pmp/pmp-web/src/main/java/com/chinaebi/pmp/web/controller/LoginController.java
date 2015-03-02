@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,13 +55,24 @@ public class LoginController {
 	 * 获取主页面
 	 * @return
 	 */
+	@Autowired
+	@Qualifier("sessionRegistry")
+	private SessionRegistryImpl sessionRegistryImpl;
 	@RequestMapping(value="/getMainFrame.do",method={RequestMethod.GET,RequestMethod.POST})
 	public String getMainFrame(HttpSession session){
 		//查找用户的菜单权限
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		System.out.println(session.getId());
+		List<Object> principals = sessionRegistryImpl.getAllPrincipals();
+		for(Object principal:principals){
+			List<SessionInformation> infos = sessionRegistryImpl.getAllSessions(principal, true);
+			for(SessionInformation info:infos){
+				System.out.println(info.getSessionId());
+			}
+		}
 		try {
 			List<Menu> firstMenus = loginServie.getUsersFirstMenus(userName);
-			session.setAttribute(WebConstants.FIRST_MENUS, firstMenus);;
+			session.setAttribute(WebConstants.FIRST_MENUS, firstMenus);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}

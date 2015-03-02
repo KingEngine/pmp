@@ -1,17 +1,31 @@
 package com.chinaebi.pmp.pms.web.controller;
 
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.chinaebi.pmp.common.constant.WebConstants;
 import com.chinaebi.pmp.common.entity.Response;
+import com.chinaebi.pmp.database.entity.Menu;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.database.entity.Users;
 import com.chinaebi.pmp.pms.service.IOperatorManagerService;
@@ -56,4 +70,36 @@ public class OperatorManagerController {
 	public Response addOperator(Users user){
 		return operatorManagerService.addOperator(user);
 	}
+	@RequestMapping(value="/**/operatorAuthoritySettingPre.do",method={RequestMethod.GET,RequestMethod.POST})
+	public String operatorAuthoritySettingPre(@RequestParam("userId")BigInteger userId,Model model){
+		String userName = operatorManagerService.getUserNameByUserId(userId);
+		model.addAttribute("userName", userName);
+		return prefix+"operator_authority_setting";
+	}
+	/**
+	 * 查询工作流权限
+	 */
+	@RequestMapping(value="/**/getOperatorAuthorities.do",method={RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public List<Map<String, Object>> getOperatorAuthorities(
+			@RequestParam("userName") String userName,
+			@RequestParam("menuType") String menuType) {
+		return operatorManagerService.getOperatorAuthroities(userName,menuType);
+	}
+	/**
+	 * 查询工作流权限
+	 */
+	@RequestMapping(value="/**/addOperatorAuthorities.do",method={RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public Response addOperatorAuthorities(@RequestParam("workFlowMenuJson")String workFlowMenusJson,
+			@RequestParam("mmsMenuJson")String mmsMenusJson,
+			@RequestParam("userName")String userName) {
+		boolean result = operatorManagerService.modifyOperatorAuthorities(workFlowMenusJson, mmsMenusJson, userName);
+		if(result){
+			return new Response("00", "修改操作员权限成功!");
+		}else{
+			return new Response("E0", "修改操作员权限失败!");
+		}
+	}
+	
 }

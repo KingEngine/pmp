@@ -31,5 +31,7 @@ function restPwd(userId){
  * @param userId
  */
 function modifyAuthorities(userId){
+	//跳转到权限修改页面
+	window.location = "operatorAuthoritySettingPre.do?userId="+userId;
 	
 }
