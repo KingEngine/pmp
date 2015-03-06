@@ -14,7 +14,7 @@
 </head>
 <body style="overflow-x:hidden;">
 <div class="easyui-panel" style="width: 100%;" title="POS商户信息录入">
-   <form id="addForm" name="addForm" method="post"> 
+   <form id="addForm" name="addForm" method="post" enctype="multipart/form-data"> 
      <table width="100%" class="addTable">	
         <tr>
         	<td colspan="6" bgcolor="#C0C9E0" align="center">商户基本信息</td>
@@ -234,31 +234,57 @@
 		<tr>
 			<td class="title" align="right">商户拓展方</td>
 			<td align="left" colspan="5" >
+				<select id="merProlongation" name="merProlongation" class="easyui-combobox" 
+				        data-options="valueField:'id',textField:'organizationName',
+                        url:'getMerExpandOrganizationSelectList.do?parentId=0',
+                        onSelect: function(rec){    
+				        			 $('#merProlongationTwo').combobox('clear');
+				        			 $('#merProlongationThree').combobox('clear');
+            						 var url = 'getMerExpandOrganizationSelectList.do?parentId='+rec.id;    
+           							 $('#merProlongationTwo').combobox('reload', url);    
+        						},
+                        required:true">
+				</select>
+				<select id="merProlongationTwo" name="merProlongationTwo" class="easyui-combobox" 
+				        data-options="valueField:'id',textField:'organizationName',
+                        onSelect: function(rec){    
+				        			 $('#merProlongationThree').combobox('clear');
+            						 var url = 'getMerExpandOrganizationSelectList.do?parentId='+rec.areaCode;    
+           							 $('#merProlongationThree').combobox('reload', url);    
+        						}">
+				</select>
+				<select id="merProlongationThree" name="merProlongationThree" class="easyui-combobox" 
+				        data-options="valueField:'id',textField:'organizationName'">
+				</select>
 			</td>
 		</tr>
 	    <tr>
 		    <td colspan="6">
 		     <table class="addTable" width="100%" id="termList">
-			  <tr>
-				<td class="title" align="right" width="10%">申请终端地址</td>
-				<td align="left" width="18%">
-					<input type="text" id="term_add_address" name='term_add_address' maxlength="30" style="width: 95%;"/>
+			  <tr id="termListTr_0">
+				<td class="title" align="right" width="9%">申请终端地址</td>
+				<td align="left" width="17%">
+					<input type="text" name='termAddAddress'  class="easyui-validatebox" data-options="required:true"/>
 				</td>
 				<td class="title" align="right" width="7%">终端类型</td>
-				<td align="left" width="12%">
-					<select class="easyui-combobox" style="width: 100%;"></select>
+				<td align="left" width="20%">
+					<select name="termType" class="easyui-combobox easyui-validatebox" style="width: 100%;" 
+					data-options="valueField:'typeCode',textField:'typeDesc',
+                        url:'getTerminalTypeSelectList.do',required:true"></select>
 				</td>
-				<td class="title" align="right" width="10%">终端方式</td>
-				<td align="left" width="12%">
-					<select class="easyui-combobox" style="width: 100%;"></select>
+				<td class="title" align="right" width="8%">终端方式</td>
+				<td align="left" width="11%">
+					<select name="posType" class="easyui-combobox easyui-validatebox" style="width: 100%;" 
+					        data-options="valueField:'modeCode',textField:'modeDesc',url:'getTerminalModeSelectList.do',required:true">
+                     </select>
 				</td>
-				<td class="title" align="right" width="10%">申请终端数量</td>
-				<td align="left" width="10%">
-					<input type="text" class="easyui-numberbox easyui-validatebox" style="width: 95%;"/>
+				<td class="title" align="right" width="12%">申请终端数量</td>
+				<td align="left" width="4%">
+					<input type="text" name="askForNumber" class="easyui-numberbox easyui-validatebox" style="width: 100%;" data-options="required:true"/>
 				</td>
-				<td>
-					<a type="button" class="easyui-linkbutton easyui-tooltip"  data-options="iconCls:'icon-add'" title="添加新终端" onclick="cloneTr();">添加</a>
-					<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-cancel'" >删除</a>
+				<td width="12%"> 
+					<a type="button" class="easyui-linkbutton easyui-tooltip"  data-options="iconCls:'icon-add'" title="添加一行" onclick="cloneTr();">添加</a>
+					<!--<a href="#" class="easyui-linkbutton easyui-tooltip"  data-options="iconCls:'icon-cancel'" title="删除一行" onclick="deleteTr(this);">删除</a>-->
 				</td>
 		       </tr>
 	          </table>
@@ -270,12 +296,12 @@
 		<tr>
 			<td class="title" align="right" width="10%">商户资料 </td>
 			<td align="left"  colspan="5">
-				<input class="easyui-filebox" data-options="buttonText:'请选择文件',required:true"></input>
+				<input class="easyui-filebox" name="merchantAttachment" id="merchantAttachment" data-options="buttonText:'请选择文件',required:true"></input>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="6"  align="center">
-			    <a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-filesave'" onclick="ajaxSubmitForm('addForm','fillMerchantInfo.do')">保存</a>
+			    <a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-filesave'" onclick="saveMerInfo();">保存</a>
 			    &nbsp;&nbsp;
 			    <a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-ok'">保存并提交</a>
 			    &nbsp;&nbsp;

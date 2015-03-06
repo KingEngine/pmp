@@ -2,8 +2,8 @@ package com.chinaebi.pmp.database.dao;
 
 import java.util.Map;
 
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.Page;
-import com.chinaebi.pmp.database.entity.Tlog;
 /**
  * tlog表操作接口
  * 
@@ -16,7 +16,7 @@ public interface ITlogDao{
 	  * @return
 	  * @throws Exception
 	  */
-	 public Page<Map<String,Object>> selectPage(Page<Map<String,Object>> page,Map<String,Object> param) throws Exception;
+	 public Page<Map<String,Object>> selectPage(Page<Map<String,Object>> page,Map<String,Object> param) throws DaoException;
 	 
 }
 

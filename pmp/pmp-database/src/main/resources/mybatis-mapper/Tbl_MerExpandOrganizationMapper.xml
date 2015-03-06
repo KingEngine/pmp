@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 mer_expand_organization操作方法-->
+<mapper namespace="MerExpandOrganizationManager">
+	<resultMap type="MerExpandOrganization" id="MerExpandOrganizationMap">
+		 	<id property="id" column="id" />
+		 	<result property="organizationName" column="organization_name" />
+		 	<result property="organizationAddress" column="organization_address" />
+		 	<result property="abbreviation" column="abbreviation" />
+		 	<result property="linkman" column="linkman" />
+		 	<result property="address" column="address" />
+		 	<result property="phone" column="phone" />
+		 	<result property="createTime" column="create_time" />
+		 	<result property="state" column="state" />
+		 	<result property="remark" column="remark" />
+		 	<result property="parentId" column="parent_id" />
+		 	<result property="grade" column="grade" />
+		 	<result property="agentId" column="agent_id" />
+	</resultMap>
+	<!--查询方法-->
+	<select id="select" parameterType="MerExpandOrganization" resultMap="MerExpandOrganizationMap">
+		select * from mer_expand_organization t
+		where 1=1 
+    		<if test="id != null and id != ''">
+    			 and t.id = #{id}
+    		</if>
+    		<if test="organizationName != null and organizationName != ''">
+    			 and t.organization_name = #{organizationName}
+    		</if>
+    		<if test="organizationAddress != null and organizationAddress != ''">
+    			 and t.organization_address = #{organizationAddress}
+    		</if>
+    		<if test="abbreviation != null and abbreviation != ''">
+    			 and t.abbreviation = #{abbreviation}
+    		</if>
+    		<if test="linkman != null and linkman != ''">
+    			 and t.linkman = #{linkman}
+    		</if>
+    		<if test="address != null and address != ''">
+    			 and t.address = #{address}
+    		</if>
+    		<if test="phone != null and phone != ''">
+    			 and t.phone = #{phone}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			 and t.create_time = #{createTime}
+    		</if>
+    		<if test="state != null and state != ''">
+    			 and t.state = #{state}
+    		</if>
+    		<if test="remark != null and remark != ''">
+    			 and t.remark = #{remark}
+    		</if>
+    		<if test="parentId != null and parentId != ''">
+    			 and t.parent_id = #{parentId}
+    		</if>
+    		<if test="grade != null and grade != ''">
+    			 and t.grade = #{grade}
+    		</if>
+    		<if test="agentId != null and agentId != ''">
+    			 and t.agent_id = #{agentId}
+    		</if>
+	</select>
+</mapper>
+
+
+

@@ -20,11 +20,15 @@ import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
 import com.chinaebi.pmp.common.entity.OperatorRoleType;
 import com.chinaebi.pmp.common.entity.OperatorStatus;
+import com.chinaebi.pmp.common.entity.TerminalMode;
+import com.chinaebi.pmp.common.entity.TerminalType;
 import com.chinaebi.pmp.common.entity.TradeStatus;
 import com.chinaebi.pmp.common.exception.BusinessException;
+import com.chinaebi.pmp.common.exception.WebException;
 import com.chinaebi.pmp.database.entity.AcqBank;
 import com.chinaebi.pmp.database.entity.Channel;
 import com.chinaebi.pmp.database.entity.DeductChannel;
+import com.chinaebi.pmp.database.entity.MerExpandOrganization;
 import com.chinaebi.pmp.database.entity.TradeType;
 import com.chinaebi.pmp.database.entity.UnionpayAreaCode;
 import com.chinaebi.pmp.pms.service.ICommonService;
@@ -115,7 +119,7 @@ public class CommonServiceController {
 		return Constants.CERTIFICATE_TYPE;
 	}
 	/**
-	 * 查询证件类型
+	 * 查询区域代码
 	 */
 	@RequestMapping(value = "/**/getAreaSelectList.do", method = { RequestMethod.GET,RequestMethod.POST })
 	@ResponseBody
@@ -168,5 +172,37 @@ public class CommonServiceController {
 	@ResponseBody
 	public List<MerchantStatus> showMerchantStatus() throws BusinessException {
 		return Constants.MERCHANT_STATUS;
+	}
+	/**
+	 * 终端类型
+	 */
+	@RequestMapping(value = "/**/getTerminalTypeSelectList.do", method = { RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public List<TerminalType> getTerminalTypeSelectList() throws BusinessException {
+		return Constants.TERMINAL_TYPE;
+	}
+	/**
+	 * 终端方式
+	 */
+	@RequestMapping(value = "/**/getTerminalModeSelectList.do", method = { RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public List<TerminalMode> getTerminalModeSelectList() throws BusinessException {
+		return Constants.TERMINAL_MODE;
+	}
+	
+	/**
+	 * 终端方式
+	 * @throws WebException 
+	 */
+	@RequestMapping(value = "/**/getMerExpandOrganizationSelectList.do", method = { RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public List<MerExpandOrganization> getMerExpandOrganizationSelectList(@RequestParam("parentId") Integer parentId) throws WebException {
+		MerExpandOrganization param = new MerExpandOrganization();
+		param.setParentId(parentId);
+		try {
+			return commonService.getMerExpandOrganizations(param);
+		} catch (BusinessException e) {
+			throw new WebException();
+		}
 	}
 }

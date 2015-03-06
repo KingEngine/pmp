@@ -14,4 +14,7 @@
 	<bean id="unionpayAreaCodeDao" name="unionpayAreaCodeDao" class="com.chinaebi.pmp.database.dao.impl.UnionpayAreaCodeDaoImpl"/>
 	<bean id="merInfoDao" name="merInfoDao" class="com.chinaebi.pmp.database.dao.impl.MerInfoDaoImpl"/>
 	<bean id="usersAuthoritiesDao" name="usersAuthoritiesDao" class="com.chinaebi.pmp.database.dao.impl.UsersAuthoritiesDaoImpl"/>
+	<bean id="askForTermDao" name="askForTermDao" class="com.chinaebi.pmp.database.dao.impl.AskForTermDaoImpl"/>
+	<bean id="merPhotoInfoDao" name="merPhotoInfoDao" class="com.chinaebi.pmp.database.dao.impl.MerPhotoInfoDaoImpl"/>
+	<bean id="merExpandOrganizationDao" name="merExpandOrganizationDao" class="com.chinaebi.pmp.database.dao.impl.MerExpandOrganizationDaoImpl"/>
 </beans>

@@ -61,8 +61,6 @@
 		            <th data-options="field:'taskName',align:'center'">商户申请时间</th> 	
 		            <th data-options="field:'taskName',align:'center'">申请终端数</th> 	
 		            <th data-options="field:'taskName',align:'center'">备注</th> 	
-		           	
-	
 		        </tr>   
 	          </thead>   
 	     </table> 

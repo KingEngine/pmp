@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `users_authorities`;
 CREATE TABLE `users_authorities` (
   id  bigint(20) primary key AUTO_INCREMENT comment '主键',
   user_id bigint(20),
-  menu_id int,
+  menu_id varchar(10),
   unique KEY  (`user_id`,`menu_id`),
   constraint fk_user_id Foreign Key(user_id) 
   References users(id),

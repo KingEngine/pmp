@@ -14,6 +14,9 @@
 		<typeAlias alias="UnionpayAreaCode" type="com.chinaebi.pmp.database.entity.UnionpayAreaCode" />
 		<typeAlias alias="MerInfo" type="com.chinaebi.pmp.database.entity.MerInfo" />
 		<typeAlias alias="UsersAuthorities" type="com.chinaebi.pmp.database.entity.UsersAuthorities" />
+		<typeAlias alias="AskForTerm" type="com.chinaebi.pmp.database.entity.AskForTerm" />
+		<typeAlias alias="MerPhotoInfo" type="com.chinaebi.pmp.database.entity.MerPhotoInfo" />
+		<typeAlias alias="MerExpandOrganization" type="com.chinaebi.pmp.database.entity.MerExpandOrganization" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis-mapper/Tbl_UsersMapper.xml"/>
@@ -26,5 +29,8 @@
 		<mapper resource="mybatis-mapper/Tbl_UnionpayAreaCodeMapper.xml"/>
 		<mapper resource="mybatis-mapper/Tbl_MerInfoMapper.xml"/>
 		<mapper resource="mybatis-mapper/Tbl_UsersAuthoritiesMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_AskForTermMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_MerPhotoInfoMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_MerExpandOrganizationMapper.xml"/>
 	</mappers>
 </configuration>

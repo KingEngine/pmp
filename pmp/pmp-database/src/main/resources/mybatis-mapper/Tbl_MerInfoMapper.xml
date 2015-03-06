@@ -102,14 +102,15 @@
 		 	<result property="merManagerName" column="mer_manager_name" />
 	</resultMap>
 	<select id="queryPage" parameterType="map" resultType="map">
-		SELECT c.inner_mercode as inner_mercode,m.mid,m.name,m.mer_type,m.ask_type,m.ask_type_state,
+		SELECT c.inner_mercode,m.mid,m.name,m.mer_type,m.ask_type,
 		m.mer_prolongation,m.mer_maintenance,
-		m.channel_id,date_format(m.create_time,'%Y-%m-%d'),m.term_count,m.mstate,
+		m.channel_id,date_format(m.create_time,'%Y-%m-%d') as create_time,m.term_count,m.mstate,
 		c.id,m.identify,c.net_model 
 		from mer_info as m
 		LEFT JOIN mer_config as c on m.mid=c.mid
 		left join mer_expand_organization meo on m.mer_prolongation=meo.id
 		where 1=1
+		limit #{startRow},#{limit}
 	</select>
 	<select id="queryPageCount" parameterType="map" resultType="int">
 		SELECT count(*)
@@ -414,6 +415,7 @@
 	<!--添加方法-->
 	<insert id="insert" parameterType="MerInfo" useGeneratedKeys="true" keyProperty="mid">
 		insert into mer_info(
+				mid,
 				name,
 				abbrev,
 				prov_id,
@@ -510,6 +512,7 @@
 				ask_type_state,
 				mer_manager_name
 		) values(
+				#{mid},
 				#{name},
 				#{abbrev},
 				#{provId},
@@ -526,164 +529,89 @@
 				#{signagory},
 				#{corpCode},
 				#{codeExpDate},
-			
 				#{regCode},
-			
 				#{address},
-			
 				#{zip},
-			
 				#{mdesc},
-			
 				#{mstate},
-			
 				#{openDate},
-			
 				#{lastUpdate},
-			
 				#{bankName},
-			
 				#{bankAcct},
-			
 				#{bankProvId},
-			
 				#{bankBranch},
-			
 				#{bankAcctName},
-			
 				#{contact0},
-			
 				#{tel0},
-			
 				#{cell0},
-			
 				#{email0},
-			
 				#{contact1},
-			
 				#{tel1},
-			
 				#{cell1},
-			
 				#{email1},
-			
 				#{contact2},
-			
 				#{tel2},
-			
 				#{cell2},
-			
 				#{email2},
-			
 				#{contact3},
-			
 				#{tel3},
-			
 				#{cell3},
-			
 				#{email3},
-			
 				#{contact4},
-			
 				#{tel4},
-			
 				#{cell4},
-			
 				#{email4},
-			
 				#{contact5},
-			
 				#{tel5},
-			
 				#{cell5},
-			
 				#{email5},
-			
 				#{balance},
-			
 				#{lastBatch},
-			
 				#{lastLiqDate},
-			
 				#{category},
-			
 				#{merTradeType},
-			
 				#{idType},
-			
 				#{idNo},
-			
 				#{corpName},
-			
 				#{openBkNo},
-			
 				#{openTime},
-			
 				#{regAddress},
-			
 				#{regCapital},
-			
 				#{credentialsStartDate},
-			
 				#{credentialsEndDate},
-			
 				#{operateScope},
-			
 				#{companyTel},
-			
 				#{companyWeb},
-			
 				#{companyType},
-			
 				#{remark},
-			
 				#{terminalFactory},
-			
 				#{publicAccount},
-			
 				#{manufacturersModel},
-			
 				#{merProlongation},
-			
 				#{merMaintenance},
-			
 				#{rejectRemark},
-			
 				#{auditingState},
-			
 				#{termTypeNum},
-			
-				#{createTime},
-			
+				now(),
 				#{updateTime},
-			
 				#{identify},
-			
 				#{operId},
-			
 				#{updOperName},
-			
 				#{settlementBankCode},
-			
 				#{settlementBankName},
-			
 				#{withdrawalFee},
-			
 				#{workflowNode},
-			
 				#{businessLicense},
-			
 				#{busStartDate},
-			
 				#{busEndDate},
-			
 				#{merRiskType},
-			
 				#{askType},
-			
 				#{askTypeState},
 				#{merManagerName}
 			)
+		<selectKey resultType="int"  keyProperty="mid">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
 	</insert>
 	<select id="queryPageFuzzy" parameterType="MerInfo" resultType="map">
 		select mc.inner_mercode,t.name,t.abbrev from mer_info t

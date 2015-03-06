@@ -7,6 +7,7 @@
  *********************************************************************/
 package com.chinaebi.pmp.database.dao;
 
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.database.entity.Users;
 
@@ -22,12 +23,12 @@ public interface IUsersDao {
 	 * @return
 	 * @throws Exception
 	 */
-	 public Users selectOne(Users param) throws Exception;
+	 public Users selectOne(Users param) throws DaoException;
 	 
 	 
-	 public Page<Users> selectPage(Page<Users> page,Users param);
+	 public Page<Users> selectPage(Page<Users> page,Users param)throws DaoException;
 	 
-	 public boolean insert(Users param);
+	 public boolean insert(Users param)throws DaoException;
 }
     
 

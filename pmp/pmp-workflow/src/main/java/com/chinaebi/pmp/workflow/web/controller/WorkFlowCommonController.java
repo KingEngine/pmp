@@ -22,7 +22,7 @@ import com.chinaebi.pmp.common.constant.WebConstants;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.workflow.entity.MerInfoWorkFlowEntity;
 import com.chinaebi.pmp.workflow.entity.WorkFlowEntity;
-import com.chinaebi.pmp.workflow.service.impl.AddMerchantWorkFlowService;
+import com.chinaebi.pmp.workflow.service.impl.MerchantWorkFlowService;
 
 
 /**
@@ -37,7 +37,7 @@ public class WorkFlowCommonController {
 	private final static String prefix="workflow/";
 	
 	@Autowired
-	private AddMerchantWorkFlowService addMerchantWorkFlowService;
+	private MerchantWorkFlowService merchantWorkFlowService;
 	
 	
 	/**
@@ -71,19 +71,19 @@ public class WorkFlowCommonController {
 		else
 			page.setPageSize(10);
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		return addMerchantWorkFlowService.queryRunningInstancesForPage(page,userName);
+		return merchantWorkFlowService.queryRunningInstancesForPage(page,userName);
 	}
 	@RequestMapping(value = "/**/showProcessImage.do")
 	public String showProcessImage(@RequestParam("taskId")String taskId,Model model) {
 		model.addAttribute("taskId", taskId);
-		model.addAttribute("acs", addMerchantWorkFlowService.findCoordinateByTaskId(taskId));
+		model.addAttribute("acs", merchantWorkFlowService.findCoordinateByTaskId(taskId));
 		return prefix+"process_image";
 	}
 	@RequestMapping(value = "/**/showProcessDefintionImage.do")
 	public void showProcessDefintionImage(
 			@RequestParam("taskId") String taskId, Model model,
 			HttpServletResponse response) throws IOException {
-		InputStream resourceAsStream = addMerchantWorkFlowService.queryProcessDefinitionByTaskId(taskId);
+		InputStream resourceAsStream = merchantWorkFlowService.queryProcessDefinitionByTaskId(taskId);
 		ServletOutputStream responseOutputStream = response.getOutputStream();
 		byte[] b = new byte[1024];
 		int len = -1;
@@ -118,6 +118,30 @@ public class WorkFlowCommonController {
 		params.put("name",name);
 		params.put("innerMercode",innerMercode );
 		params.put("merType", merType);
-		return addMerchantWorkFlowService.queryMerInfoForPage(page,params);
+		return merchantWorkFlowService.queryMerInfoForPage(page,params);
 	}
+	
+	@RequestMapping(value = "/**/queryMerInfoWithWorkFlowForPage.do")
+	@ResponseBody
+	public Page<Map<String, Object>> queryMerInfoWithWorkFlowForPage(
+			HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value="name",required=false)String name,
+			@RequestParam(value="innerMercode",required=false)String innerMercode,
+			@RequestParam(value="merType",required=false)String merType) {
+		String curPage = request.getParameter(WebConstants.PAGE_NUMBER);
+		String pageSize = request.getParameter(WebConstants.ROWS);
+		Page<Map<String, Object>> page = new Page<Map<String, Object>>();
+		if (StringUtils.isNotBlank(curPage))
+			page.setPageNo(Integer.parseInt(curPage.trim()));
+		if (StringUtils.isNotBlank(pageSize))
+			page.setPageSize(Integer.parseInt(pageSize.trim()));
+		else
+			page.setPageSize(10);
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("name",name);
+		params.put("innerMercode",innerMercode );
+		params.put("merType", merType);
+		return merchantWorkFlowService.queryMerInfoWithFlowForPage(page, params);
+	}
+	
 }

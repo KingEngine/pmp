@@ -58,4 +58,8 @@
             <value>.jsp</value>  
         </property>  
     </bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 以字节为单位的最大上传文件的大小 -->
+		<property name="maxUploadSize" value="16108400" />
+	</bean>
 </beans>

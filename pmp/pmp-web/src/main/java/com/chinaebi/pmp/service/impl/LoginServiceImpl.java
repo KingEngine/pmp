@@ -27,7 +27,7 @@ public class LoginServiceImpl implements ILoginService{
 			return menuDao.selectFirstMenuList(userName);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusinessException();
+			throw new BusinessException("");
 		}
 	}
 	public List<Menu> getUsersChildMenus(String userName,Integer firstMenuId) throws BusinessException {

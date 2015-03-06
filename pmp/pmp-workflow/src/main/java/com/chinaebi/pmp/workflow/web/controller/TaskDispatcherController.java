@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chinaebi.pmp.common.entity.Response;
-import com.chinaebi.pmp.workflow.service.impl.AddMerchantWorkFlowService;
+import com.chinaebi.pmp.workflow.service.impl.MerchantWorkFlowService;
 
 
 /**
@@ -21,7 +21,7 @@ import com.chinaebi.pmp.workflow.service.impl.AddMerchantWorkFlowService;
 @Controller
 public class TaskDispatcherController {
 	@Autowired
-	private AddMerchantWorkFlowService addMerchantWorkFlowService;
+	private MerchantWorkFlowService addMerchantWorkFlowService;
 	
 	@RequestMapping(value = "dispatcherTask.do")
 	public String dispatcherTask(@RequestParam("taskId") String taskId,

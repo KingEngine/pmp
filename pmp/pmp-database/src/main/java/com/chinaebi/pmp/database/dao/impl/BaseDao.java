@@ -28,9 +28,9 @@ import com.chinaebi.pmp.database.entity.Page;
 @SuppressWarnings("unchecked")
 public class BaseDao extends SqlSessionDaoSupport {
 
-    public <T> Page<T> selectPage(Page<T> page, String statementName, Object parameter) {
+    public <T> Page<T> selectForPage(Page<T> page, String statementName, Object parameter) {
         String countStatementName = statementName + ".count";
-        return selectPage(page, statementName, countStatementName, parameter);
+        return selectForPage(page, statementName, countStatementName, parameter);
     }
 
     /**
@@ -42,7 +42,7 @@ public class BaseDao extends SqlSessionDaoSupport {
      * @return
      */
     @SuppressWarnings("rawtypes")
-    public <T> Page<T> selectPage(Page<T> page, String listStatementName, String countStatementName, Object parameter) {
+    public <T> Page<T> selectForPage(Page<T> page, String listStatementName, String countStatementName, Object parameter) {
 
         Number totalItems = (Number) getSqlSession().selectOne(countStatementName, toParameterMap(parameter));
 

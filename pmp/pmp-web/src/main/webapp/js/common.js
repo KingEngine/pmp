@@ -176,6 +176,34 @@ function formatterMerchantType(value,row,index){
 	return content;
 }
 /**
+ * 商户状态
+ * @param value
+ * @param row
+ * @param index
+ * @returns {String}
+ */
+function formatterMerchantStatus(value,row,index){
+	var content = '';
+	$.ajax({
+		 url:"getMerchantStatus.do",
+         type:'post',
+         async:false,
+         success: function(msg){
+        	 $.each(msg,function(i,n){
+        		 if(value == n.statusKey){
+        			 content = n.statusDesc;
+        			 return;
+        	     }
+        	 });
+         },
+		 error: function(){
+				$.messager.alert('错误','系统异常!','error');
+	     }
+		
+	});
+	return content;
+}
+/**
  * 显示dialog 不需要传入参数
  * @param url
  * @param title

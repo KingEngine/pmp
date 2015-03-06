@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!--表 mer_photo_info操作方法-->
+<mapper namespace="MerPhotoInfoManager">
+	<resultMap type="MerPhotoInfo" id="MerPhotoInfoMap">
+		 	<id property="id" column="id" />
+		 	<result property="mid" column="mid" />
+		 	<result property="photoUrl" column="photo_url" />
+		 	<result property="makeTime" column="make_time" />
+	</resultMap>
+	<!--添加方法-->
+	<insert id="insert" parameterType="MerPhotoInfo">
+		insert into mer_photo_info(
+				mid,
+				photo_url,
+				make_time
+		) values(
+				#{mid},
+				#{photoUrl},
+				#{makeTime}
+			)
+	</insert>
+</mapper>
+
+
+

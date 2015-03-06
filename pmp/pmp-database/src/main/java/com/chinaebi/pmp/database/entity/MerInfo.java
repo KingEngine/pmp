@@ -64,7 +64,7 @@ public class MerInfo implements java.io.Serializable {
 	private String cell5;/* 对应表中cell5 */
 	private String email5;/* 对应表中email5 */
 	private int balance;/* 对应表中balance */
-	private BigInteger lastBatch;/* 对应表中last_batch */
+	private long lastBatch;/* 对应表中last_batch */
 	private int lastLiqDate;/* 对应表中last_liq_date */
 	private int category;/* 对应表中category */
 	private int merTradeType;/* 对应表中mer_trade_type */
@@ -430,10 +430,10 @@ public class MerInfo implements java.io.Serializable {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-	public BigInteger getLastBatch() {
+	public long getLastBatch() {
 		return lastBatch;
 	}
-	public void setLastBatch(BigInteger lastBatch) {
+	public void setLastBatch(long lastBatch) {
 		this.lastBatch = lastBatch;
 	}
 	public int getLastLiqDate() {

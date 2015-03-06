@@ -9,6 +9,7 @@ package com.chinaebi.pmp.database.dao;
 
 import java.util.List;
 
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.UsersAuthorities;
 
 /**
@@ -18,9 +19,9 @@ import com.chinaebi.pmp.database.entity.UsersAuthorities;
  */
 public interface IUsersAuthoritiesDao{
 	
-	public boolean delete(String userName);
+	public boolean delete(String userName)throws DaoException;
 	
-	public boolean insert(List<UsersAuthorities> authorities);
+	public boolean insert(List<UsersAuthorities> authorities)throws DaoException;
     
 }
 

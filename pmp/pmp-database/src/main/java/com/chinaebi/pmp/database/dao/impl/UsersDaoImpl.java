@@ -7,46 +7,28 @@
  *********************************************************************/
 package com.chinaebi.pmp.database.dao.impl;
 
-import java.sql.SQLException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.dao.IUsersDao;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.database.entity.Users;
-
 /**
  * users表实现类
  *
  * @author king
  */
 public class UsersDaoImpl extends CommonDaoImpl<Users> implements IUsersDao{
-	
-	private Logger logger = LoggerFactory.getLogger(getClass());
-	
-	public Users selectOne(Users param) throws Exception {
-	
-		 try {
-			return super.selectOne("UsersManager.select", param);
-		} catch (SQLException e) {
-			logger.error("UsersManager.select查询异常:",e);
-			throw new DaoException(e.getMessage());
-		}
+
+	public Users selectOne(Users param) throws DaoException {
+		return super.selectOne("UsersManager.select", param);
 	}
 
-	public Page<Users> selectPage(Page<Users> page,Users param) {
+	public Page<Users> selectPage(Page<Users> page,Users param) throws DaoException {
 		
 		return super.selectPage(page, "UsersManager.queryPage", "UsersManager.queryPageCount",param);
 	}
 
-	public boolean insert(Users param) {
-		int counter = this.getSqlSession().insert("UsersManager.insert", param);
-		if(counter>0){
-			return true;
-		}
-		return false;
+	public boolean insert(Users param) throws DaoException {
+		return super.insert("UsersManager.insert", param);
 	}
 }
 

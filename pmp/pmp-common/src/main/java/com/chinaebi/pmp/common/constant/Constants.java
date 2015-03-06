@@ -18,6 +18,8 @@ import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
 import com.chinaebi.pmp.common.entity.OperatorRoleType;
 import com.chinaebi.pmp.common.entity.OperatorStatus;
+import com.chinaebi.pmp.common.entity.TerminalMode;
+import com.chinaebi.pmp.common.entity.TerminalType;
 import com.chinaebi.pmp.common.entity.TradeStatus;
 
 /**
@@ -66,6 +68,15 @@ public class Constants {
 	 * 商户状态
 	 */
 	public final static List<MerchantStatus> MERCHANT_STATUS = new ArrayList<MerchantStatus>();
+	/**
+	 * 终端类型
+	 */
+	public final static List<TerminalType> TERMINAL_TYPE = new ArrayList<TerminalType>();
+	/**
+	 * 终端方式
+	 */
+	public final static List<TerminalMode> TERMINAL_MODE = new ArrayList<TerminalMode>();
+	
 	
 	static{
 		//交易状态
@@ -136,6 +147,17 @@ public class Constants {
 		//商户状态
 		MERCHANT_STATUS.add(new MerchantStatus("5","开通"));
 		MERCHANT_STATUS.add(new MerchantStatus("6","关闭"));
+		//终端类型
+		TERMINAL_TYPE.add(new TerminalType("3", "传统POS终端-有线pos"));
+		TERMINAL_TYPE.add(new TerminalType("4", "传统POS终端-无线gprspos"));
+		TERMINAL_TYPE.add(new TerminalType("5", "传统POS终端-无线apn卡pos"));
+		TERMINAL_TYPE.add(new TerminalType("6", "SK项目POS"));
+		TERMINAL_TYPE.add(new TerminalType("7", "USB POS"));
+		TERMINAL_TYPE.add(new TerminalType("8", "盛京多媒体POS"));
+		//终端方式
+		TERMINAL_MODE.add(new TerminalMode("1", "销售"));
+		TERMINAL_MODE.add(new TerminalMode("2", "租赁"));
+		TERMINAL_MODE.add(new TerminalMode("3", "刷机"));
 	}
 	
 	public final static String ADDMERCHANT_WORKFLOW_INSTANCE="addMerchant";//增机实例

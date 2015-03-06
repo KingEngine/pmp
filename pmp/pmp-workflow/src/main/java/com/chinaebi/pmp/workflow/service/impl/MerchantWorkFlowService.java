@@ -1,10 +1,16 @@
 package com.chinaebi.pmp.workflow.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.activiti.engine.ActivitiObjectNotFoundException;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
@@ -16,22 +22,41 @@ import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.chinaebi.pmp.common.constant.Annotations;
 import com.chinaebi.pmp.common.constant.Constants;
 import com.chinaebi.pmp.common.entity.Response;
+import com.chinaebi.pmp.common.exception.BusinessException;
+import com.chinaebi.pmp.common.exception.DaoException;
+import com.chinaebi.pmp.common.utils.BusinessUtil;
+import com.chinaebi.pmp.database.dao.IAskForTermDao;
 import com.chinaebi.pmp.database.dao.IMerInfoDao;
+import com.chinaebi.pmp.database.dao.IMerPhotoInfoDao;
+import com.chinaebi.pmp.database.entity.AskForTerm;
 import com.chinaebi.pmp.database.entity.MerInfo;
+import com.chinaebi.pmp.database.entity.MerPhotoInfo;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.workflow.entity.MerInfoWorkFlowEntity;
 import com.chinaebi.pmp.workflow.entity.WorkFlowEntity;
 
-
+/**
+ * 商户开通工作流任务
+ * 
+ * @author king
+ * 2015年3月4日
+ */
 @Component
-public class AddMerchantWorkFlowService {
+public class MerchantWorkFlowService {
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private RuntimeService runtimeService;
 	@Autowired
@@ -60,31 +85,84 @@ public class AddMerchantWorkFlowService {
 	@Autowired
 	@Qualifier(Annotations.DAO_MERINFO)
 	private IMerInfoDao merInfoDao;
+	
+	@Autowired
+	@Qualifier(Annotations.DAO_ASKFORTERM)
+	private IAskForTermDao askForTermDao;
+	
+	@Autowired
+	@Qualifier(Annotations.DAO_MERPHOTOINFO)
+	private IMerPhotoInfoDao merPhotoInfoDao;
+	
+	private @Value(value = "${merchantAttachmentDir}")String merchantAttachmentDir;//商户资料保存地址
 	/**
 	 * 开始商户开通流程
 	 * @throws Exception 
 	 */
-	public void startWorkFlow(MerInfo merInfo) throws Exception{
-		//将数据保存到mer_info表中
-		int mid = merInfoDao.insert(merInfo);
-		Map<String,Object> variables = new HashMap<String,Object>();
-		variables.put("mid",mid);
+	public void startWorkFlow(MerInfo merInfo, String askForTermJson,MultipartFile merchantAttachment)
+			throws Exception {
+		// 将数据保存到mer_info表中
+		int mid = saveMerInfoAndAskForTerm(merInfo, askForTermJson,merchantAttachment);
+		Map<String, Object> variables = new HashMap<String, Object>();
+		variables.put("mid", mid);
 		runtimeService.startProcessInstanceByKey(Constants.ADDMERCHANT_WORKFLOW_INSTANCE, "1", variables);
-		//添加组任务
-		//风控
-		/*
-		identityService.saveGroup(new GroupEntity("RISK_DEPARTMENT"));
-		identityService.saveUser(new UserEntity("risk"));
-		identityService.createMembership("risk","RISK_DEPARTMENT");
-		//运行
-		identityService.saveGroup(new GroupEntity("OPERATION_DEPARTMENT"));
-		identityService.saveUser(new UserEntity("operation"));
-		identityService.createMembership("operation","OPERATION_DEPARTMENT");
-		//业管
-		identityService.saveGroup(new GroupEntity("BUSINESS_DEAPARTMENT"));
-		identityService.saveUser(new UserEntity("business"));
-		identityService.createMembership("business","BUSINESS_DEAPARTMENT");*/
 	}
+
+	private int saveMerInfoAndAskForTerm(MerInfo merInfo, String askForTermJson,MultipartFile merchantAttachment) throws BusinessException {
+		// TODO 校验商户信息
+		// 保存商户信息
+		int mid = 0;
+		try {
+			merInfo.setLastBatch(0L);// 最后批次号 //TODO
+			merInfo.setLastLiqDate(0);// 最后一次清算日期//TODO
+			mid = merInfoDao.insert(merInfo);
+			// 保存终端信息
+			List<AskForTerm> askForTermList = generateListFromJson(askForTermJson);
+			if (null != askForTermList && !askForTermList.isEmpty()) {
+				// 生成批次号
+				String batch = BusinessUtil.getTermBatchId(mid);
+				for (AskForTerm term : askForTermList) {
+					term.setMid(mid);
+					term.setChannelId(merInfo.getChannelId());
+					term.setBatch(batch);
+					askForTermDao.insert(term);
+				}
+			}
+			String[] fileNameWithSeparator = merchantAttachment.getOriginalFilename().split("/");
+			String fileName = fileNameWithSeparator[fileNameWithSeparator.length-1];
+			//TODO 文件名重命名
+			String filePath=merchantAttachmentDir+File.separator+fileName;
+			//保存资料地址
+			MerPhotoInfo merPhotoInfo = new MerPhotoInfo();
+			merPhotoInfo.setMid(mid);
+			//存储相对路径
+			merPhotoInfo.setPhotoUrl(fileName);
+			merPhotoInfoDao.insert(merPhotoInfo);
+			//保存商户资料
+			FileUtils.copyInputStreamToFile(merchantAttachment.getInputStream(),new File(filePath));
+		} catch (DaoException e) {
+			throw new BusinessException("");
+		} catch (IOException e) {
+			if(logger.isErrorEnabled()){
+				logger.error("商户资料上传失败",e);
+			}
+			throw new BusinessException("");
+		}
+		return mid;
+	}
+	private  List<AskForTerm> generateListFromJson(String json){
+		JSONArray jsonList = JSONArray.fromObject(json);
+		List<AskForTerm> list = new ArrayList<AskForTerm>();
+		for (int i = 0; i < jsonList.size(); i++) {
+			JSONObject object = (JSONObject) jsonList.get(i);
+			AskForTerm result = (AskForTerm) JSONObject.toBean(object,AskForTerm.class);
+			if(null!=result){
+				list.add(result);
+			}
+		}
+		return list;
+	}
+	
 	/**
 	 * 运行中的流程
 	 * @param page
@@ -164,7 +242,11 @@ public class AddMerchantWorkFlowService {
 		Page<Map<String,Object>> merInfoPage =  new Page<Map<String,Object>>();
 		merInfoPage.setPageNo(page.getPageNo());
 		merInfoPage.setPageSize(page.getPageSize());
-		merInfoPage = merInfoDao.selectPage(merInfoPage, params);
+		try {
+			merInfoPage = merInfoDao.selectPage(merInfoPage, params);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
 		List<Map<String,Object>> list = merInfoPage.getRows();
 		List<MerInfoWorkFlowEntity> entitys = new ArrayList<MerInfoWorkFlowEntity>();
 		//得到运行中的实例
@@ -203,5 +285,39 @@ public class AddMerchantWorkFlowService {
 			return new Response("01","任务"+taskId+"不存在!");
 		}
 		return new Response("00","任务处理成功");
+	}
+	
+	public Page<Map<String, Object>> queryMerInfoWithFlowForPage(
+			Page<Map<String, Object>> page, Map<String, Object> params) {
+		Page<Map<String, Object>> merInfoPage = new Page<Map<String, Object>>();
+		merInfoPage.setPageNo(page.getPageNo());
+		merInfoPage.setPageSize(page.getPageSize());
+		try {
+			merInfoPage = merInfoDao.selectPage(merInfoPage, params);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		List<Map<String, Object>> merInfoList = merInfoPage.getRows();
+		if(null!=merInfoList && merInfoList.size()>0){
+			// 得到运行中的实例
+			for (Map<String, Object> o : merInfoList) {
+				Integer mid = (Integer) o.get("mid");
+				//查询当前任务
+				List<Task> tasks = taskService.createTaskQuery().processDefinitionKey(Constants.ADDMERCHANT_WORKFLOW_INSTANCE).processVariableValueEquals("mid", mid).list();
+				if (null != tasks && tasks.size() > 0) {
+					String taskNames = "";
+					String processDefinitionNames="";
+					for(Task task:tasks){
+						taskNames+=(task.getName()+"|");
+						//得到流程定义名称
+						ProcessDefinition definition = repositoryService.createProcessDefinitionQuery().processDefinitionId(task.getProcessDefinitionId()).singleResult();
+						processDefinitionNames+=(definition.getName()+"|");
+					}
+					o.put("taskNames", taskNames);
+					o.put("processDefinitionNames", processDefinitionNames);
+				}
+			}
+		}
+		return merInfoPage;
 	}
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chinaebi.pmp.common.constant.WebConstants;
+import com.chinaebi.pmp.common.exception.BusinessException;
+import com.chinaebi.pmp.common.exception.WebException;
 import com.chinaebi.pmp.database.entity.MerInfo;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.pms.service.IMerchantManagerService;
@@ -37,7 +39,7 @@ public class MerchantManagerController {
 
 	@RequestMapping(value = "/**/getMerchantBaseInfoForPage.do", method = { RequestMethod.GET,RequestMethod.POST })
 	@ResponseBody
-	public Page<Map<String, Object>> getMerchantBaseInfoForPage(HttpServletRequest request,MerInfo merInfo) {
+	public Page<Map<String, Object>> getMerchantBaseInfoForPage(HttpServletRequest request,MerInfo merInfo) throws WebException {
 		String curPage = request.getParameter(WebConstants.PAGE_NUMBER);
 		String pageSize = request.getParameter(WebConstants.ROWS);
 		Page<Map<String, Object>> page = new Page<Map<String, Object>>();
@@ -47,7 +49,11 @@ public class MerchantManagerController {
 			page.setPageSize(Integer.parseInt(pageSize.trim()));
 		else 
 			page.setPageSize(10);
-		return merchantManagerService.queryMerInfoForPage(page, merInfo);
+		try {
+			return merchantManagerService.queryMerInfoForPage(page, merInfo);
+		} catch (BusinessException e) {
+			throw new WebException();
+		}
 	}
 
 }

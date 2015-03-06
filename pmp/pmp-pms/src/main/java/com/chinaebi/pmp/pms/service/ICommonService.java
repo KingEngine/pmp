@@ -6,6 +6,7 @@ import com.chinaebi.pmp.common.exception.BusinessException;
 import com.chinaebi.pmp.database.entity.AcqBank;
 import com.chinaebi.pmp.database.entity.Channel;
 import com.chinaebi.pmp.database.entity.DeductChannel;
+import com.chinaebi.pmp.database.entity.MerExpandOrganization;
 import com.chinaebi.pmp.database.entity.TradeType;
 import com.chinaebi.pmp.database.entity.UnionpayAreaCode;
 
@@ -23,5 +24,6 @@ public interface ICommonService {
 	public List<TradeType> getCacheTradeTypes()throws BusinessException;
 	
 	public List<UnionpayAreaCode> getUnionpayAreaCodes(int parentAreaCode)throws BusinessException;
-	
+
+	public List<MerExpandOrganization> getMerExpandOrganizations(MerExpandOrganization param)throws BusinessException;
 }

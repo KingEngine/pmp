@@ -20,6 +20,8 @@ import org.springframework.stereotype.Component;
 import com.chinaebi.pmp.common.constant.Annotations;
 import com.chinaebi.pmp.common.constant.Constants;
 import com.chinaebi.pmp.common.entity.Response;
+import com.chinaebi.pmp.common.exception.BusinessException;
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.dao.IMenuDao;
 import com.chinaebi.pmp.database.dao.IUsersAuthoritiesDao;
 import com.chinaebi.pmp.database.dao.IUsersDao;
@@ -48,26 +50,40 @@ public class OperatorManagerServiceImpl implements IOperatorManagerService{
 	@Qualifier(Annotations.DAO_USERSAUTHORITIES)
 	private IUsersAuthoritiesDao usersAuthoritiesDao;
 
-	public Page<Users> queryOperatorsForPage(Page<Users> page,Users param) {
+	public Page<Users> queryOperatorsForPage(Page<Users> page,Users param) throws BusinessException {
 		
-		return usersDao.selectPage(page, param);
+		try {
+			return usersDao.selectPage(page, param);
+		} catch (DaoException e) {
+			throw new BusinessException("");
+		}
 	}
 
-	public Response addOperator(Users user) {
+	public Response addOperator(Users user) throws BusinessException {
 		
-		boolean result =  usersDao.insert(user);
-		if(result){
-			return new Response("00","插入操作员成功");
+		boolean result;
+		try {
+			result = usersDao.insert(user);
+			if(result){
+				return new Response("00","插入操作员成功");
+			}
+			return new Response("01","插入操作员失败");
+		} catch (DaoException e) {
+			throw new BusinessException("");
 		}
-		return new Response("01","插入操作员失败");
 	}
 	
-	public List<Map<String, Object>> getOperatorAuthroities(String userName,String menuType) {
+	public List<Map<String, Object>> getOperatorAuthroities(String userName,String menuType) throws BusinessException {
 		//得到所有的一级菜单
 		Menu firstMenu = new Menu();
 		firstMenu.setMenuLevel(1);
 		firstMenu.setMenuType(menuType);
-		List<Menu> firstMenus = menuDao.selectList(firstMenu);
+		List<Menu> firstMenus = null;
+		try {
+			firstMenus = menuDao.selectList(firstMenu);
+		} catch (DaoException e) {
+			throw new BusinessException("");
+		}
 		List<Map<String, Object>> menuTree = new ArrayList<Map<String,Object>>();
 		List<Menu> userFirstMenus = null;//用户的所有一级菜单
 		try {
@@ -93,7 +109,13 @@ public class OperatorManagerServiceImpl implements IOperatorManagerService{
 			Menu secondMenuParam = new Menu();
 			secondMenuParam.setMenuLevel(2);
 			secondMenuParam.setParentMenuId(first.getMenuId());
-			List<Menu> secondMenus = menuDao.selectList(secondMenuParam);
+			List<Menu> secondMenus = null;
+			try {
+				secondMenus = menuDao.selectList(secondMenuParam);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			List<Map<String, Object>> secondMenuTree = new ArrayList<Map<String,Object>>();
 			for(Menu second : secondMenus){
 				Map<String, Object> secondTree = new HashMap<String, Object>();
@@ -115,7 +137,13 @@ public class OperatorManagerServiceImpl implements IOperatorManagerService{
 				Menu thirdMenuParam = new Menu();
 				thirdMenuParam.setMenuLevel(3);
 				thirdMenuParam.setParentMenuId(second.getMenuId());
-				List<Menu> thirdMenus = menuDao.selectList(thirdMenuParam);
+				List<Menu> thirdMenus = null;
+				try {
+					thirdMenus = menuDao.selectList(thirdMenuParam);
+				} catch (DaoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				List<Map<String, Object>> thirdMenuTree = new ArrayList<Map<String,Object>>();
 				for(Menu third : thirdMenus){
 					Map<String, Object> thirdTree = new HashMap<String, Object>();
@@ -172,11 +200,15 @@ public class OperatorManagerServiceImpl implements IOperatorManagerService{
 	
 	//TODO 需要添加事务
 	//@Transactional(rollbackFor=Exception.class)
-	public boolean modifyOperatorAuthorities(String workFlowMenusJson,String mmsMenusJson, String userName) {
+	public boolean modifyOperatorAuthorities(String workFlowMenusJson,String mmsMenusJson, String userName) throws BusinessException {
 		List<Menu> workFlowMenus = generateMenuListFromJson(workFlowMenusJson,"workFlowMenus");
 		List<Menu> mmsMenus = generateMenuListFromJson(mmsMenusJson, "mmsMenus");
 		// 删除平台所有权限
-		usersAuthoritiesDao.delete(userName);
+		try {
+			usersAuthoritiesDao.delete(userName);
+		} catch (DaoException e) {
+			throw new BusinessException("");
+		}
 		// 删除工作流权限
 		identityService.deleteUser(userName);;
 		// 判断是否有工作流权限
@@ -213,7 +245,11 @@ public class OperatorManagerServiceImpl implements IOperatorManagerService{
 			}
 		}
 		if(authorities.size()>0){
-			usersAuthoritiesDao.insert(authorities);
+			try {
+				usersAuthoritiesDao.insert(authorities);
+			} catch (DaoException e) {
+				throw new BusinessException("");
+			}
 		}
 		return true;
 	}

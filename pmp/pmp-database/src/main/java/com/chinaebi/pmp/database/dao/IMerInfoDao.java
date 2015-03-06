@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.MerInfo;
 import com.chinaebi.pmp.database.entity.Page;
 /**
@@ -19,7 +20,7 @@ public interface IMerInfoDao{
 	  * @return
 	  * @throws Exception
 	  */
-	 public int insert(MerInfo param) throws Exception;
+	 public int insert(MerInfo param) throws DaoException;
 	 
 	 /**
 	  * 分页查询
@@ -27,9 +28,9 @@ public interface IMerInfoDao{
 	  * @param param
 	  * @return
 	  */
-	 public Page<Map<String,Object>> selectPage(Page<Map<String,Object>> page,Map<String,Object> param);
+	 public Page<Map<String,Object>> selectPage(Page<Map<String,Object>> page,Map<String,Object> param) throws DaoException;
 	 
-	 public Page<Map<String, Object>> selectPage(Page<Map<String, Object>> page,MerInfo param);
+	 public Page<Map<String, Object>> selectPage(Page<Map<String, Object>> page,MerInfo param)throws DaoException;
 }
 
 

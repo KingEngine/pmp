@@ -43,7 +43,6 @@
         	<td align="center" style="height: 30px" colspan="6">
         		<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-search'" onclick="ajaxFormQueryForPage('searchForm','workFlowTaskQueryList.do','AAA','dataList','EEE',1);">查询</a>
 				<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-undo'" onclick="$('#searchForm').form('reset');">重置</a>
-				<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-undo'" onclick="$('#searchForm').form('reset');">新增</a>
         	</td>
         </tr>
       </table>

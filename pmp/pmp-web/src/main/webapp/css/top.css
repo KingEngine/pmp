@@ -7,25 +7,25 @@ a,li{list-style:none;text-decoration: none;}
 
 .nav {margin: 0px; padding: 0px;
     background: url("../images/top/nav_bj.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
-    height: 32px;
+    height: 45%;
     width: 100%;
 }
 .nav li {
     background: url("../images/top/nav_bj.gif") no-repeat scroll 0 -32px rgba(0, 0, 0, 0);
     float: left;
-    height: 32px;
+    height: 45%;
     padding-left: 4px;
-    width: 125px;
+    width: 10%;
 }
 .nav li a {
     color: rgb(255, 255, 255);
     display: block;
     font-size: 14px;
-    height: 29px;
+    height: 100%;
     line-height: 29px;
     margin: 1px auto 0;
     text-align: center;
-    width: 92px;
+    width: 50%;
 }
 .nav li a:hover {
     background: url("../images/top/ahover.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);

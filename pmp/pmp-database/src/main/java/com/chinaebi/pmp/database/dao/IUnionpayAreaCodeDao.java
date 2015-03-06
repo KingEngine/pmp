@@ -2,6 +2,7 @@ package com.chinaebi.pmp.database.dao;
 
 import java.util.List;
 
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.UnionpayAreaCode;
 /**
  * unionpay_area_code表操作接口
@@ -16,7 +17,7 @@ public interface IUnionpayAreaCodeDao{
 	  * @return
 	  * @throws Exception
 	  */
-	 public List<UnionpayAreaCode> selectList(UnionpayAreaCode param);
+	 public List<UnionpayAreaCode> selectList(UnionpayAreaCode param)throws DaoException;
 	 
 }
 

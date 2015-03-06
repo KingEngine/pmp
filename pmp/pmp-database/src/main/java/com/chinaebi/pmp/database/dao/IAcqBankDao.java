@@ -2,6 +2,7 @@ package com.chinaebi.pmp.database.dao;
 
 import java.util.List;
 
+import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.AcqBank;
 
 /**
@@ -11,7 +12,7 @@ import com.chinaebi.pmp.database.entity.AcqBank;
  */
 public interface IAcqBankDao{
  
-	public List<AcqBank> selectAllList();
+	public List<AcqBank> selectAllList() throws DaoException;
 }
 
 

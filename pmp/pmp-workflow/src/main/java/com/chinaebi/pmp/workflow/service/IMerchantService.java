@@ -7,11 +7,11 @@ package com.chinaebi.pmp.workflow.service;
  * @author king
  * 2015年2月16日
  */
-public interface AddMerchantService {
+public interface IMerchantService {
 	
 	/**
-	 * 录入商户信息
+	 * 检查商户名称唯一性
 	 */
-	public void fillMerchantInfo();
+	public void validateMerchantNameUnique();
 
 }
