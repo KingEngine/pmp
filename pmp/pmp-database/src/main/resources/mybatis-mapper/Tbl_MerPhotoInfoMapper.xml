@@ -9,6 +9,23 @@
 		 	<result property="photoUrl" column="photo_url" />
 		 	<result property="makeTime" column="make_time" />
 	</resultMap>
+	<!--查询方法-->
+	<select id="select" parameterType="MerPhotoInfo" resultMap="MerPhotoInfoMap">
+		select * from mer_photo_info t
+		where 1=1 
+    		<if test="id != null and id != ''">
+    			 and t.id = #{id}
+    		</if>
+    		<if test="mid != null and mid != ''">
+    			 and t.mid = #{mid}
+    		</if>
+    		<if test="photoUrl != null and photoUrl != ''">
+    			 and t.photo_url = #{photoUrl}
+    		</if>
+    		<if test="makeTime != null and makeTime != ''">
+    			 and t.make_time = #{makeTime}
+    		</if>
+	</select>
 	<!--添加方法-->
 	<insert id="insert" parameterType="MerPhotoInfo">
 		insert into mer_photo_info(

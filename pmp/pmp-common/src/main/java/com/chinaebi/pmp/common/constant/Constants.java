@@ -13,6 +13,7 @@ import java.util.List;
 import com.chinaebi.pmp.common.entity.BalanceAccountType;
 import com.chinaebi.pmp.common.entity.CertificateType;
 import com.chinaebi.pmp.common.entity.CompanyType;
+import com.chinaebi.pmp.common.entity.MerchantRiskLevel;
 import com.chinaebi.pmp.common.entity.MerchantStatus;
 import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
@@ -76,6 +77,10 @@ public class Constants {
 	 * 终端方式
 	 */
 	public final static List<TerminalMode> TERMINAL_MODE = new ArrayList<TerminalMode>();
+	/**
+	 * 风险级别
+	 */
+	public final static List<MerchantRiskLevel> MERCHANT_RISKLEVEL = new ArrayList<MerchantRiskLevel>();
 	
 	
 	static{
@@ -158,6 +163,12 @@ public class Constants {
 		TERMINAL_MODE.add(new TerminalMode("1", "销售"));
 		TERMINAL_MODE.add(new TerminalMode("2", "租赁"));
 		TERMINAL_MODE.add(new TerminalMode("3", "刷机"));
+		//风险级别
+		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("0","优质商户"));
+		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("1","一般商户"));
+		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("2","风险商户"));
+		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("3","高风险商户"));
+		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("4","其他"));
 	}
 	
 	public final static String ADDMERCHANT_WORKFLOW_INSTANCE="addMerchant";//增机实例

@@ -23,6 +23,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.chinaebi.pmp.common.constant.Annotations;
 import com.chinaebi.pmp.common.constant.Constants;
+import com.chinaebi.pmp.common.entity.CompanyType;
+import com.chinaebi.pmp.common.entity.MerchantType;
 import com.chinaebi.pmp.common.entity.Response;
 import com.chinaebi.pmp.common.exception.BusinessException;
 import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.common.utils.BusinessUtil;
+import com.chinaebi.pmp.common.utils.ObjectUtil;
 import com.chinaebi.pmp.database.dao.IAskForTermDao;
 import com.chinaebi.pmp.database.dao.IMerInfoDao;
 import com.chinaebi.pmp.database.dao.IMerPhotoInfoDao;
@@ -94,6 +98,7 @@ public class MerchantWorkFlowService {
 	@Qualifier(Annotations.DAO_MERPHOTOINFO)
 	private IMerPhotoInfoDao merPhotoInfoDao;
 	
+	
 	private @Value(value = "${merchantAttachmentDir}")String merchantAttachmentDir;//商户资料保存地址
 	/**
 	 * 开始商户开通流程
@@ -107,10 +112,7 @@ public class MerchantWorkFlowService {
 		variables.put("mid", mid);
 		runtimeService.startProcessInstanceByKey(Constants.ADDMERCHANT_WORKFLOW_INSTANCE, "1", variables);
 	}
-
 	private int saveMerInfoAndAskForTerm(MerInfo merInfo, String askForTermJson,MultipartFile merchantAttachment) throws BusinessException {
-		// TODO 校验商户信息
-		// 保存商户信息
 		int mid = 0;
 		try {
 			merInfo.setLastBatch(0L);// 最后批次号 //TODO
@@ -130,7 +132,6 @@ public class MerchantWorkFlowService {
 			}
 			String[] fileNameWithSeparator = merchantAttachment.getOriginalFilename().split("/");
 			String fileName = fileNameWithSeparator[fileNameWithSeparator.length-1];
-			//TODO 文件名重命名
 			String filePath=merchantAttachmentDir+File.separator+fileName;
 			//保存资料地址
 			MerPhotoInfo merPhotoInfo = new MerPhotoInfo();
@@ -273,6 +274,7 @@ public class MerchantWorkFlowService {
 	}
 	public String getTaskNameByTaskId(String taskId){
 		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		Integer mid = (Integer) taskService.getVariable(taskId, "mid");
 		return task.getName();
 	}
 	//完成任务
@@ -319,5 +321,55 @@ public class MerchantWorkFlowService {
 			}
 		}
 		return merInfoPage;
+	}
+	
+	public Map<String,Object> getMerInfoFromTaskId(String taskId) throws BusinessException{
+		Integer mid = (Integer) taskService.getVariable(taskId, "mid");
+		MerInfo merInfo = new MerInfo();
+		merInfo.setMid(mid);
+		try {
+			MerInfo returnValue =  merInfoDao.selectOne(merInfo);
+			Map<String,Object> map = ObjectUtil.beanToMap(returnValue);
+			//商户类别
+			Integer merType = (Integer) map.get("merType");
+			if(null!=merType){
+				List<MerchantType> merTypes = Constants.MERCHANT_TYPE;
+				for(MerchantType o:merTypes){
+					if(StringUtils.equals(o.getTypeCode(),merType+"")){
+						map.put("merTypeDesc",o.getTypeDesc());
+						break;
+					}
+				}
+			}
+			//公司类型
+			Integer companyType = (Integer) map.get("companyType");
+			if(null!=merType){
+				List<CompanyType> companyTypes = Constants.COMPANY_TYPE;
+				for(CompanyType o:companyTypes){
+					if(StringUtils.equals(o.getTypeCode(),companyType+"")){
+						map.put("companyTypeDesc",o.getTypeDesc());
+						break;
+					}
+				}
+			}
+			//加载终端信息
+			AskForTerm askForTermParam = new AskForTerm();
+			askForTermParam.setMid(mid);
+			List<AskForTerm> terms = askForTermDao.selectList(askForTermParam);
+			List<Map<String,Object>> termList = new ArrayList<Map<String,Object>>();
+			for(AskForTerm o:terms){
+				Map<String,Object> termMap = ObjectUtil.beanToMap(o);
+				termList.add(termMap);
+			}
+			map.put("termList",termList);
+			//查询附件上传地址
+			MerPhotoInfo merPhotoInfoParam = new MerPhotoInfo();
+			merPhotoInfoParam.setMid(mid);
+			List<MerPhotoInfo> merPhotoInfoList = merPhotoInfoDao.selectList(merPhotoInfoParam);
+			map.put("merPhotoInfoList", merPhotoInfoList);
+			return map;
+		} catch (DaoException e) {
+			throw new BusinessException("");
+		}
 	}
 }

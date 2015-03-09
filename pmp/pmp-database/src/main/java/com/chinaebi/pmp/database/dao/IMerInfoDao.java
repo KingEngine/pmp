@@ -21,7 +21,14 @@ public interface IMerInfoDao{
 	  * @throws Exception
 	  */
 	 public int insert(MerInfo param) throws DaoException;
-	 
+	 /**
+	  * 查询对象
+	  * @param querySQL
+	  * @param param
+	  * @return
+	  * @throws DaoException
+	  */
+	 public MerInfo selectOne(MerInfo param) throws DaoException;
 	 /**
 	  * 分页查询
 	  * @param page

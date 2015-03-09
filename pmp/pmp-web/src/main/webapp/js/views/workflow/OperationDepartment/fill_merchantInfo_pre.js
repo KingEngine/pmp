@@ -46,10 +46,10 @@ function deleteTr(obj){
 function saveMerInfo() {
 	try {
 
-		var validate = $('#addForm').form("validate");
+		/*var validate = $('#addForm').form("validate");
 		if (!validate) {
 			return;
-		}
+		}*/
 		var array = new Array();
 		// 申请终端地址
 		var termAddAddresses = document.getElementsByName("termAddAddress");

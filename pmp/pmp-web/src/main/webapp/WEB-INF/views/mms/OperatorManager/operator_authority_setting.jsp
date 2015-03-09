@@ -24,7 +24,7 @@
 	<div data-options="region:'south',split:true" style="height: 8%;">
 		<center>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="updateAuthorities('${userName}')">确定分配权限</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="history.back();">返回</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-back" onclick="history.back();">返回</a>
 		</center>
 	</div>  
 </body>

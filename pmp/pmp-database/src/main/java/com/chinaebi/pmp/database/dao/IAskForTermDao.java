@@ -1,5 +1,7 @@
 package com.chinaebi.pmp.database.dao;
 
+import java.util.List;
+
 import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.database.entity.AskForTerm;
 /**
@@ -15,6 +17,8 @@ public interface IAskForTermDao{
 	  * @throws Exception
 	  */
 	 public boolean insert(AskForTerm param) throws DaoException;
+	 
+	 public List<AskForTerm> selectList(AskForTerm param) throws DaoException;
 }
 
 

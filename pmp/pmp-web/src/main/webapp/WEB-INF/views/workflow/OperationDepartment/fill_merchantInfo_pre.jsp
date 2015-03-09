@@ -284,7 +284,6 @@
 				</td>
 				<td width="12%"> 
 					<a type="button" class="easyui-linkbutton easyui-tooltip"  data-options="iconCls:'icon-add'" title="添加一行" onclick="cloneTr();">添加</a>
-					<!--<a href="#" class="easyui-linkbutton easyui-tooltip"  data-options="iconCls:'icon-cancel'" title="删除一行" onclick="deleteTr(this);">删除</a>-->
 				</td>
 		       </tr>
 	          </table>

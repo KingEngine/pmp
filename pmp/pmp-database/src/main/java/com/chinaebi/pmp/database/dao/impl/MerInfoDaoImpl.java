@@ -25,6 +25,15 @@ public class MerInfoDaoImpl extends CommonDaoImpl<MerInfo> implements IMerInfoDa
 			throw new DaoException(e.getMessage());
 		}
 	}
+	/**
+	 * 查询对象
+	 * @param
+	 * @return
+	 * @throws Exception
+	 */
+	public MerInfo selectOne(MerInfo param) throws DaoException{
+		return super.selectOne("MerInfoManager.select", param);
+	}
 	public Page<Map<String, Object>> selectPage(Page<Map<String, Object>> page,
 			Map<String, Object> param) throws DaoException {
 		try {

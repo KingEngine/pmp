@@ -17,6 +17,14 @@ public interface IMerPhotoInfoDao{
 	  * @throws Exception
 	  */
 	 public boolean insert(MerPhotoInfo param) throws DaoException;
+	 
+	 /**
+	  * 查询列表
+	  * @param 
+	  * @return
+	  * @throws Exception
+	  */
+	 public List<MerPhotoInfo> selectList(MerPhotoInfo param)throws DaoException;
 }
 
 

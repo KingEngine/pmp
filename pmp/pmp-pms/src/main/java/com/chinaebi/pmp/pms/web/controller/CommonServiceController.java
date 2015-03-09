@@ -15,6 +15,7 @@ import com.chinaebi.pmp.common.constant.Constants;
 import com.chinaebi.pmp.common.entity.BalanceAccountType;
 import com.chinaebi.pmp.common.entity.CertificateType;
 import com.chinaebi.pmp.common.entity.CompanyType;
+import com.chinaebi.pmp.common.entity.MerchantRiskLevel;
 import com.chinaebi.pmp.common.entity.MerchantStatus;
 import com.chinaebi.pmp.common.entity.MerchantTradeType;
 import com.chinaebi.pmp.common.entity.MerchantType;
@@ -204,5 +205,13 @@ public class CommonServiceController {
 		} catch (BusinessException e) {
 			throw new WebException();
 		}
+	}
+	/**
+	 * 商户风险级别
+	 */
+	@RequestMapping(value = "/**/getMerchantRiskLevelSelectList.do", method = { RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public List<MerchantRiskLevel> getMerchantRiskLevelSelectList() throws BusinessException {
+		return Constants.MERCHANT_RISKLEVEL;
 	}
 }

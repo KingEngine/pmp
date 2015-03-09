@@ -45,6 +45,7 @@ values(40000,"终端部门","#",1,0,0,'work_flow','TERMMANAGER_DEPARTMENT');
 -- 工作流二级菜单(4位)
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(10100,"运行部门","#",2,10000,0);
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(20100,"风控部门","#",2,20000,0);
+insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)values(30100,"业管部门","#",2,30000,0);
 -- 工作流三级菜单(4位)
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)
 values(10101,"商户查询","operationMerInfoQueryPre.do",3,10100,0);
@@ -57,5 +58,11 @@ values(20101,"商户查询","riskMerInfoQueryPre.do",3,20100,0);
 
 insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)
 values(20102,"任务办理","riskTaskHandlePre.do",3,20100,0);
+
+insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)
+values(30101,"商户查询","businessMerInfoQueryPre.do",3,30100,0);
+
+insert into menu(menu_id,menu_name,menu_url,menu_level,parent_menu_id,menu_status)
+values(30102,"任务办理","businessTaskHandlePre.do",3,30100,0);
 
 

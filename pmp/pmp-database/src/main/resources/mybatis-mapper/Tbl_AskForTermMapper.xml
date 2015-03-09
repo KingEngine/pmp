@@ -22,6 +22,62 @@
 		 	<result property="termAddAddress" column="term_add_address" />
 		 	<result property="merInfoAddress" column="mer_info_address" />
 	</resultMap>
+	<!--查询方法-->
+	<select id="select" parameterType="AskForTerm" resultMap="AskForTermMap">
+		select * from ask_for_term t
+		where 1=1 
+    		<if test="id != null and id != ''">
+    			 and t.id = #{id}
+    		</if>
+    		<if test="mid != null and mid != ''">
+    			 and t.mid = #{mid}
+    		</if>
+    		<if test="channelId != null and channelId != ''">
+    			 and t.channel_id = #{channelId}
+    		</if>
+    		<if test="askForNumber != null and askForNumber != ''">
+    			 and t.ask_for_number = #{askForNumber}
+    		</if>
+    		<if test="isFirst != null and isFirst != ''">
+    			 and t.is_first = #{isFirst}
+    		</if>
+    		<if test="status != null and status != ''">
+    			 and t.status = #{status}
+    		</if>
+    		<if test="createTime != null and createTime != ''">
+    			 and t.create_time = #{createTime}
+    		</if>
+    		<if test="termType != null and termType != ''">
+    			 and t.term_type = #{termType}
+    		</if>
+    		<if test="manufacturers != null and manufacturers != ''">
+    			 and t.manufacturers = #{manufacturers}
+    		</if>
+    		<if test="manufacturersModel != null and manufacturersModel != ''">
+    			 and t.manufacturers_model = #{manufacturersModel}
+    		</if>
+    		<if test="merChannelId != null and merChannelId != ''">
+    			 and t.mer_channel_id = #{merChannelId}
+    		</if>
+    		<if test="tradeCode != null and tradeCode != ''">
+    			 and t.trade_code = #{tradeCode}
+    		</if>
+    		<if test="netModel != null and netModel != ''">
+    			 and t.net_model = #{netModel}
+    		</if>
+    		<if test="posType != null and posType != ''">
+    			 and t.pos_type = #{posType}
+    		</if>
+    		<if test="batch != null and batch != ''">
+    			 and t.batch = #{batch}
+    		</if>
+    		<if test="termAddAddress != null and termAddAddress != ''">
+    			 and t.term_add_address = #{termAddAddress}
+    		</if>
+    		<if test="merInfoAddress != null and merInfoAddress != ''">
+    			 and t.mer_info_address = #{merInfoAddress}
+    		</if>
+	</select>
 	<!--添加方法-->
 	<insert id="insert" parameterType="AskForTerm">
 		insert into ask_for_term(
