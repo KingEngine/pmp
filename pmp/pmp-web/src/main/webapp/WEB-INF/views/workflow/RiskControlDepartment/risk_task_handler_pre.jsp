@@ -17,9 +17,12 @@
    <form id="searchForm" name="searchForm" method="post"> 
      <table width="100%" class="searchTable">	
         <tr>
-     	 <td class="title" align="right">任务类型&nbsp;&nbsp;</td>
+     	 <td class="title" align="right">任务类型</td>
      	 <td align="center">
-           <input type="text" name="name" id="name"/>
+           		<select id="taskType" name="taskType" class="easyui-combobox" 
+				        data-options="valueField:'typeCode',textField:'typeDesc',
+                        url:'getWorkFlowTaskTypeSelectList.do'">
+				</select>
          </td>
          <td align="center" style="height: 30px" colspan="6">
         		<a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-search'" onclick="ajaxFormQueryForPage('searchForm','workFlowTaskQueryList.do','AAA','dataList','EEE',1);">查&nbsp;&nbsp;询</a>
@@ -34,10 +37,16 @@
 		<table  class="easyui-datagrid" title="查询列表" style="width:100%;" align="center" id="dataList" data-options="singleSelect:true,pagination:true,pageSize:10">   
 	          <thead>   
 		        <tr>   
-		            <th data-options="field:'processDefinitionName',align:'center'">任务名称</th> 	
-		            <th data-options="field:'taskName',align:'center'">当前节点</th> 
+		            <th data-options="field:'innerMercode',align:'center'">电银商户号</th> 	
+		            <th data-options="field:'merchantName',align:'center'">商户名称</th> 	
+		            <th data-options="field:'merType',align:'center',formatter:formatterMerchantType">商户类别</th> 	
+		            <th data-options="field:'processDefinitionName',align:'center'">任务类型</th> 	
+		            <th data-options="field:'taskName',align:'center'">当前节点</th> 	
+		            <th data-options="field:'innerMercode',align:'center'">商户拓展方</th> 	
+		            <th data-options="field:'createTime',align:'center'">商户申请时间</th> 
+		            <th data-options="field:'termNum',align:'center'">申请终端数</th> 
+		            <th data-options="field:'merchantState',align:'center',formatter:formatterMerchantStatus">商户状态</th> 
 		            <th data-options="field:'taskId',align:'center',formatter:formatterTaskId">操作</th> 
-	
 		        </tr>   
 	          </thead>   
 	     </table> 

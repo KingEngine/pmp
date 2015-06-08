@@ -9,31 +9,31 @@
 	<meta http-equiv="windows-target" content="_top" />
 	<title>电银信息支付管理平台登录</title>
 	<script type="text/javascript"  src="<%=request.getContextPath()%>/js/views/login.js" ></script>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
 </head>
 <body>
- <center>
-	<form action="login.do" method="post">
-		<table>
-		  <tr><td colspan="2" align="left"><h3>用户登录</h3></td></tr>
+ <div class="denglubody">
+	<form action="login.do" method="post" name="loginForm" id="loginForm">
+		<table style="margin-left: 280px;margin-top: 62px;">
 		  <tr>
-		  	<td><input type="text" class="easyui-textbox" data-options="buttonText:'用户名',buttonAlign:'left',buttonIcon:'icon-man',iconAlign:'left',width:300,height:30" name="j_username"/></td>
+		  	<td><input type="text" class="easyui-textbox" data-options="buttonText:'用户名',buttonAlign:'left',buttonIcon:'icon-man',iconAlign:'left',width:280,height:25" name="j_username"/></td>
 		  </tr>
 		  <tr>
-		  	<td><input type="password" class="easyui-textbox" data-options="buttonText:'密码',buttonAlign:'left',buttonIcon:'icon-lock',iconAlign:'left',width:300,height:30" name="j_password"/></td>
+		  	<td><input type="password" class="easyui-textbox" data-options="buttonText:'密 &nbsp;&nbsp;码',buttonAlign:'left',buttonIcon:'icon-lock',iconAlign:'left',width:280,height:25" name="j_password"/></td>
 		  </tr>
 		  <tr>
-		     <td><input type="text" id="j_randcode" name="j_randcode" class="easyui-textbox" data-options="buttonText:'验证码',buttonAlign:'left',height:30" maxlength="4"></input>
+		     <td><input type="text" id="j_randcode" name="j_randcode" class="easyui-textbox" data-options="buttonText:'验证码',buttonAlign:'left',buttonIcon:'icon-blank',height:25" maxlength="4"></input>
 			  	<img id="imgRandcode" name="imgRandcode" src="<%=request.getContextPath()%>/getRandCode" />
 			  	<a href="#" onclick="flushRandcode('<%=request.getContextPath()%>/getRandCode');">刷新</a>
 		  	</td>
 		  </tr>
 		  <tr>
-		    <td colspan="2" align="center"><input type="submit" value="登录"/></td>
-		  </tr>
+		     <td align="center">
+		     	<img  src="<%=request.getContextPath()%>/images/login/denglu_but.png" onclick="login();" style="cursor: pointer;"/>
+		     </td>
+			</tr>
 		</table>
-		
-		
 	</form>
-  </center>
+  </div>
 </body>
 </html>

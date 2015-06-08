@@ -17,4 +17,5 @@
 	<bean id="askForTermDao" name="askForTermDao" class="com.chinaebi.pmp.database.dao.impl.AskForTermDaoImpl"/>
 	<bean id="merPhotoInfoDao" name="merPhotoInfoDao" class="com.chinaebi.pmp.database.dao.impl.MerPhotoInfoDaoImpl"/>
 	<bean id="merExpandOrganizationDao" name="merExpandOrganizationDao" class="com.chinaebi.pmp.database.dao.impl.MerExpandOrganizationDaoImpl"/>
+	<bean id="merConfigDao" name="merConfigDao" class="com.chinaebi.pmp.database.dao.impl.MerConfigDaoImpl"/>
 </beans>

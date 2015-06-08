@@ -22,6 +22,7 @@ import com.chinaebi.pmp.common.entity.OperatorStatus;
 import com.chinaebi.pmp.common.entity.TerminalMode;
 import com.chinaebi.pmp.common.entity.TerminalType;
 import com.chinaebi.pmp.common.entity.TradeStatus;
+import com.chinaebi.pmp.common.entity.WorkFlowTaskType;
 
 /**
  * 全局字典说明
@@ -81,7 +82,14 @@ public class Constants {
 	 * 风险级别
 	 */
 	public final static List<MerchantRiskLevel> MERCHANT_RISKLEVEL = new ArrayList<MerchantRiskLevel>();
-	
+	/**
+	 * 工作流类型
+	 */
+	public final static List<WorkFlowTaskType> WORKFLOW_TASKTYPE = new ArrayList<WorkFlowTaskType>();
+	/**
+	 * 商户开通实例
+	 */
+	public final static String ADDMERCHANT_WORKFLOW_INSTANCE="addMerchant";
 	
 	static{
 		//交易状态
@@ -150,6 +158,7 @@ public class Constants {
 		ACTIVITI_ROLE.add("BUSINESS_DEAPARTMENT");
 		ACTIVITI_ROLE.add("OPERATION_DEPARTMENT");
 		//商户状态
+		MERCHANT_STATUS.add(new MerchantStatus("0","开通中"));
 		MERCHANT_STATUS.add(new MerchantStatus("5","开通"));
 		MERCHANT_STATUS.add(new MerchantStatus("6","关闭"));
 		//终端类型
@@ -169,7 +178,10 @@ public class Constants {
 		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("2","风险商户"));
 		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("3","高风险商户"));
 		MERCHANT_RISKLEVEL.add(new MerchantRiskLevel("4","其他"));
+		//工作流类型
+		WORKFLOW_TASKTYPE.add(new WorkFlowTaskType("", "全部"));
+		WORKFLOW_TASKTYPE.add(new WorkFlowTaskType(ADDMERCHANT_WORKFLOW_INSTANCE, "商户开通"));
 	}
 	
-	public final static String ADDMERCHANT_WORKFLOW_INSTANCE="addMerchant";//增机实例
+	
 }

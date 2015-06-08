@@ -75,6 +75,10 @@ public class Annotations {
 	 */
 	public final static String DAO_MEREXPANDORGANIZATION = "merExpandOrganizationDao";
 	/**
+	 * merConfigDao
+	 */
+	public final static String DAO_MERCONFIG = "merConfigDao";
+	/**
 	 * loginService 管理员登录
 	 */
 	public final static String SERVICE_LOGIN = "loginService";

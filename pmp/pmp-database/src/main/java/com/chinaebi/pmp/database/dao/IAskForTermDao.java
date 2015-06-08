@@ -18,7 +18,20 @@ public interface IAskForTermDao{
 	  */
 	 public boolean insert(AskForTerm param) throws DaoException;
 	 
+	 /**
+	  * 查询操作
+	  * @param param
+	  * @return
+	  * @throws DaoException
+	  */
 	 public List<AskForTerm> selectList(AskForTerm param) throws DaoException;
+	 /**
+	  * 商户下的终端数量
+	  * @param mid
+	  * @return
+	  * @throws DaoException
+	  */
+	 public int selectMerchantTermNum(int mid) throws DaoException;
 }
 
 

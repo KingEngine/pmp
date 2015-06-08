@@ -245,14 +245,36 @@
 		<tr>
 			<td class="title" align="right" colspan="2">初审意见</td>
 			<td>
-				<select id="suggestion" class="easyui-combobox">
-					<option value="agree">同意</option>
-					<option value="disagree">不同意</option>
+				<select id="suggestion" class="easyui-combobox" 
+				  data-options="
+					  valueField: 'value',textField: 'label',
+					  data: [{label: '同意',value: 'agree'},{label: '不同意',value: 'disagree'}],
+					  onSelect:function(rec){
+					  	  if(rec.value=='agree'){
+					  	  	  $('#rejectReasonTitle').hide();
+					  	  	  $('#rejectReasonChoose').hide();
+					  	  	  $('#merchantRiskLevelTitle').show();
+					  	  	  $('#merchantRiskLevelChoose').show();
+					  	  }else{
+					  	  	  $('#rejectReasonTitle').show();
+					  	  	  $('#rejectReasonChoose').show();
+					  	  	  $('#merchantRiskLevelTitle').hide();
+					  	  	  $('#merchantRiskLevelChoose').hide();
+					  	  }
+					  }
+				  ">
 				</select>
 			</td>
-			<td class="title" align="right" colspan="2">商户风险级别</td>
-			<td>
+			<td class="title" align="right" colspan="2" id="merchantRiskLevelTitle">商户风险级别</td>
+			<td id="merchantRiskLevelChoose">
 				<select id="merRiskType" name="merRiskType" class="easyui-combobox" 
+				        data-options="valueField:'levelCode',textField:'levelDesc',
+                        url:'getMerchantRiskLevelSelectList.do'">
+				</select>
+			</td>
+			<td class="title" align="right" colspan="2" style="display: none" id="rejectReasonTitle">驳回原因</td>
+			<td id="rejectReasonChoose" style="display: none">
+				<select id="rejectReason" name="rejectReason" class="easyui-combobox" 
 				        data-options="valueField:'levelCode',textField:'levelDesc',
                         url:'getMerchantRiskLevelSelectList.do'">
 				</select>
@@ -261,38 +283,38 @@
 		<tr>
 			<td class="title" align="right" colspan="2">商户交易卡种限制</td>
 			<td colspan="4" align="left">
-				<input type="checkbox" value="0" name="card" />
-				<input type="checkbox" value="1" name="card"/>
+				<label for="debitCard"><input type="checkbox" value="D" name="cardType" id="debitCard"/>借记卡</label>
+				<label for="creditCard"><input type="checkbox" value="C" name="cardType" id="creditCard"/>信用卡</label>
 			</td>
 		</tr>
 		<tr>
 			<td class="title" align="right" colspan="2">单笔交易限额(借记卡)(元)</td>
 			<td align="left">
-				<input class="easyui-numberbox"> 
+				<input class="easyui-numberbox" name="singleTradeDLimit"/> 
 			</td>
 			<td class="title" align="right" colspan="2">交易日限额(借记卡)(元)</td>
 			<td align="left">
-				<input class="easyui-numberbox"> 
+				<input class="easyui-numberbox" name="tradeDDayLimit"/> 
 			</td>
 		</tr>
 		<tr>
 			<td class="title" align="right" colspan="2">单笔交易限额(信用卡)(元)</td>
 			<td align="left">
-				<input class="easyui-numberbox"> 
+				<input class="easyui-numberbox" name="singleTradeCLimit"/> 
 			</td>
 			<td class="title" align="right" colspan="2">交易日限额(信用卡)(元)</td>
 			<td align="left">
-				<input class="easyui-numberbox"> 
+				<input class="easyui-numberbox" name="tradeCDayLimit"/> 
 			</td>
 		</tr>
 		<tr>
 			<td class="title" align="right" colspan="2">同卡号日交易次数限制(信用卡)(次)</td>
 			<td align="left">
-				<input class="easyui-numberbox"> 
+				<input class="easyui-numberbox" name="singleTradeDLimit"/> 
 			</td>
 			<td class="title" align="right" colspan="2">同卡号日交易次数限制(借记卡)(次)</td>
 			<td align="left">
-				<input class="easyui-numberbox"> 
+				<input class="easyui-numberbox" name="singleTradeCLimit"/> 
 			</td>
 		</tr>
 		<tr>
@@ -303,7 +325,7 @@
 		</tr>
 		<tr>
 			<td align="center" colspan="6">
-			    <a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-ok'">确定</a>
+			    <a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-ok'" onclick="ajaxSubmitForm('setMerchantRiskInfo.do','addForm');">确定</a>
 			    &nbsp;&nbsp;
 			    <a href="#" class="easyui-linkbutton"  data-options="iconCls:'icon-cancel'">取消</a>
 			</td>

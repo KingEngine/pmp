@@ -8,3 +8,8 @@ function flushRandcode(url){
 	url+=nowDate;
 	document.getElementById("imgRandcode").src=url;
 }
+
+function login(){
+	var form = document.getElementById("loginForm");
+	form.submit();
+}

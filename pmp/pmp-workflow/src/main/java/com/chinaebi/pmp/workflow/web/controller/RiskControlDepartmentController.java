@@ -1,6 +1,5 @@
 package com.chinaebi.pmp.workflow.web.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chinaebi.pmp.common.exception.BusinessException;
-import com.chinaebi.pmp.database.entity.MerInfo;
+import com.chinaebi.pmp.database.entity.MerRiskConfig;
 import com.chinaebi.pmp.workflow.service.impl.MerchantWorkFlowService;
 
 
@@ -40,11 +39,31 @@ public class RiskControlDepartmentController {
     public String riskTaskHandlePre(@RequestParam("taskId") String taskId,
     		Model model) {
 		try {
+			//通过taskId得到taskName
+			
+			//根据taksname决定需要的操作
+			
+			
 			Map<String,Object> attributes = addMerchantWorkFlowService.getMerInfoFromTaskId(taskId);
 			model.addAllAttributes(attributes);
 		} catch (BusinessException e) {
 			
 		}
+        return prefix+"risk_merchant_qualification_verify_pre";
+    }
+	/**
+	 * 设置商户风控信息
+	 * @param taskId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/**/setMerchantRiskInfo.do")
+    public String setMerchantRiskInfo(@RequestParam("taskId") String taskId,//任务id
+    		@RequestParam("suggestion")String suggestion,//审核意见
+    		@RequestParam("merRiskType") int merRiskType,//商户风险级别
+    		MerRiskConfig merRiskConfig,//商户风控信息
+    		Model model) {
+		System.out.println(merRiskConfig.getCardType());
         return prefix+"risk_merchant_qualification_verify_pre";
     }
 	

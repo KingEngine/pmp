@@ -12,8 +12,15 @@ public class AskForTermDaoImpl extends CommonDaoImpl<AskForTerm> implements IAsk
 		return super.insert("AskForTermManager.insert", param);
 	}
 	public List<AskForTerm> selectList(AskForTerm param) throws DaoException {
-		// TODO Auto-generated method stub
 		return super.selectList("AskForTermManager.select", param);
 	}
-
+	public int selectMerchantTermNum(int mid) throws DaoException {
+		int num = 0;
+		try {
+			num = super.getSqlSession().selectOne("AskForTermManager.selectMerchantTermNum", mid);
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+		return num;
+	}
 }

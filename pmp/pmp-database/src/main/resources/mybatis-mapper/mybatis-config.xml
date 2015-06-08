@@ -17,6 +17,7 @@
 		<typeAlias alias="AskForTerm" type="com.chinaebi.pmp.database.entity.AskForTerm" />
 		<typeAlias alias="MerPhotoInfo" type="com.chinaebi.pmp.database.entity.MerPhotoInfo" />
 		<typeAlias alias="MerExpandOrganization" type="com.chinaebi.pmp.database.entity.MerExpandOrganization" />
+		<typeAlias alias="MerConfig" type="com.chinaebi.pmp.database.entity.MerConfig" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis-mapper/Tbl_UsersMapper.xml"/>
@@ -32,5 +33,6 @@
 		<mapper resource="mybatis-mapper/Tbl_AskForTermMapper.xml"/>
 		<mapper resource="mybatis-mapper/Tbl_MerPhotoInfoMapper.xml"/>
 		<mapper resource="mybatis-mapper/Tbl_MerExpandOrganizationMapper.xml"/>
+		<mapper resource="mybatis-mapper/Tbl_MerConfigMapper.xml"/>
 	</mappers>
 </configuration>

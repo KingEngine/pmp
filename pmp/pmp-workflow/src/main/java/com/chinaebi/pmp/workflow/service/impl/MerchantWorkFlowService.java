@@ -12,15 +12,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.activiti.engine.ActivitiObjectNotFoundException;
-import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
-import org.activiti.engine.identity.Group;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -42,14 +36,17 @@ import com.chinaebi.pmp.common.exception.DaoException;
 import com.chinaebi.pmp.common.utils.BusinessUtil;
 import com.chinaebi.pmp.common.utils.ObjectUtil;
 import com.chinaebi.pmp.database.dao.IAskForTermDao;
+import com.chinaebi.pmp.database.dao.IMerConfigDao;
 import com.chinaebi.pmp.database.dao.IMerInfoDao;
 import com.chinaebi.pmp.database.dao.IMerPhotoInfoDao;
 import com.chinaebi.pmp.database.entity.AskForTerm;
+import com.chinaebi.pmp.database.entity.MerConfig;
 import com.chinaebi.pmp.database.entity.MerInfo;
 import com.chinaebi.pmp.database.entity.MerPhotoInfo;
 import com.chinaebi.pmp.database.entity.Page;
 import com.chinaebi.pmp.workflow.entity.MerInfoWorkFlowEntity;
 import com.chinaebi.pmp.workflow.entity.WorkFlowEntity;
+
 
 /**
  * 商户开通工作流任务
@@ -58,33 +55,24 @@ import com.chinaebi.pmp.workflow.entity.WorkFlowEntity;
  * 2015年3月4日
  */
 @Component
-public class MerchantWorkFlowService {
+public class MerchantWorkFlowService extends WorkFlowService{
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private RuntimeService runtimeService;
-	@Autowired
-	public void setRuntimeService(RuntimeService runtimeService) {
-		this.runtimeService = runtimeService;
-	}
-
 	private TaskService taskService;
 	@Autowired
 	public void setTaskService(TaskService taskService) {
 		this.taskService = taskService;
 	}
 
-	private IdentityService identityService;
-	@Autowired
-	public void setIdentityService(IdentityService identityService) {
-		this.identityService = identityService;
-	}
 	
 	private RepositoryService repositoryService;
 	@Autowired
 	public void setRepositoryService(RepositoryService repositoryService) {
 		this.repositoryService = repositoryService;
 	}
+	@Autowired
+	private WorkFlowService workFlowService;
 
 	@Autowired
 	@Qualifier(Annotations.DAO_MERINFO)
@@ -98,25 +86,31 @@ public class MerchantWorkFlowService {
 	@Qualifier(Annotations.DAO_MERPHOTOINFO)
 	private IMerPhotoInfoDao merPhotoInfoDao;
 	
+	@Autowired
+	@Qualifier(Annotations.DAO_MERCONFIG)
+	private IMerConfigDao merConfigDao;
+	
 	
 	private @Value(value = "${merchantAttachmentDir}")String merchantAttachmentDir;//商户资料保存地址
 	/**
 	 * 开始商户开通流程
 	 * @throws Exception 
 	 */
-	public void startWorkFlow(MerInfo merInfo, String askForTermJson,MultipartFile merchantAttachment)
+	public void startAddMerchantWorkFlow(MerInfo merInfo, String askForTermJson,MultipartFile merchantAttachment)
 			throws Exception {
 		// 将数据保存到mer_info表中
 		int mid = saveMerInfoAndAskForTerm(merInfo, askForTermJson,merchantAttachment);
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("mid", mid);
-		runtimeService.startProcessInstanceByKey(Constants.ADDMERCHANT_WORKFLOW_INSTANCE, "1", variables);
+		variables.put("remark","商户开通");
+		//启动流程
+		super.startWorkFlow(Constants.ADDMERCHANT_WORKFLOW_INSTANCE, variables);
 	}
 	private int saveMerInfoAndAskForTerm(MerInfo merInfo, String askForTermJson,MultipartFile merchantAttachment) throws BusinessException {
 		int mid = 0;
 		try {
-			merInfo.setLastBatch(0L);// 最后批次号 //TODO
-			merInfo.setLastLiqDate(0);// 最后一次清算日期//TODO
+			merInfo.setLastBatch(0L);// 最后批次号 //
+			merInfo.setLastLiqDate(0);// 最后一次清算日期//
 			mid = merInfoDao.insert(merInfo);
 			// 保存终端信息
 			List<AskForTerm> askForTermList = generateListFromJson(askForTermJson);
@@ -169,31 +163,63 @@ public class MerchantWorkFlowService {
 	 * @param page
 	 * @return
 	 */
-	public Page<WorkFlowEntity> queryRunningInstancesForPage(Page<WorkFlowEntity> page,String getName) {
-		List<Group> groups = identityService.createGroupQuery().groupMember(getName)
-				.list();
+	public Page<WorkFlowEntity> queryRunningInstancesForPage(
+			Page<WorkFlowEntity> page, String userName,
+			String processDefinitionKey) {
 		List<WorkFlowEntity> results = new ArrayList<WorkFlowEntity>();
-		int total = 0;
-		if (null != groups && groups.size() > 0) {
-			//分页查询
-			List<Task> tasks = taskService
-					.createTaskQuery()
-					.taskCandidateGroup(groups.get(0).getId())
-					.listPage((page.getPageNo() - 1) * page.getPageSize(),
-							page.getPageSize());
-			total = taskService
-					.createTaskQuery()
-					.taskCandidateGroup(groups.get(0).getId()).list().size();
-			for (Task task : tasks) {
-				WorkFlowEntity entity = new WorkFlowEntity();
-				ProcessDefinition definition = repositoryService.createProcessDefinitionQuery().processDefinitionId(task.getProcessDefinitionId()).singleResult();
-				entity.setTaskId(task.getId());
-				entity.setTaskName(task.getName());
-				entity.setProcessDefinitionName(definition.getName());
-				results.add(entity);
+		// 分页查询
+		List<Task> tasks = workFlowService
+				.getRunningInstances(userName, processDefinitionKey, (page.getPageNo() - 1)
+						* page.getPageSize(), page.getPageSize());
+		int total = workFlowService.getRunningInstancesTotal(userName, processDefinitionKey);
+		for (Task task : tasks) {
+			WorkFlowEntity entity = new WorkFlowEntity();
+			ProcessDefinition definition = workFlowService
+					.getProcessDefinitionByProcessDefinitionId(task
+							.getProcessDefinitionId());
+			entity.setTaskId(task.getId());
+			entity.setTaskName(task.getName());
+			entity.setProcessDefinitionName(definition.getName());
+			//得到流程中的变量
+			Map<String,Object> variables = workFlowService.getVariables(task.getId());
+			Integer mid = (Integer) variables.get("mid");
+			try {
+				// 根据mid查询商户配置信息
+				MerConfig merConfig = merConfigDao.selectOne(mid);
+				if (null != merConfig) {
+					entity.setInnerMercode(merConfig.getInnerMercode());
+				}
+			} catch (DaoException e) {
+				if (logger.isErrorEnabled()) {
+					logger.error(e + "");
+				}
 			}
-			page.setRows(results);
+			try {
+				// 根据mid查询商户基础信息
+				MerInfo merInfo = merInfoDao.selectOne(mid);
+				if(null!=merInfo){
+					entity.setMerchantName(merInfo.getName());//商户名称
+					entity.setMerType(merInfo.getMerType());//商户类别
+					entity.setCreateTime(merInfo.getCreateTime());//商户创建时间
+//					entity.setMerchantState(merInfo.getMstate());//商户状态
+				}
+			} catch (DaoException e) {
+				if (logger.isErrorEnabled()) {
+					logger.error(e + "");
+				}
+			}
+			//得到终端申请数量
+			try {
+				int termNum = askForTermDao.selectMerchantTermNum(mid);
+				entity.setTermNum(termNum);
+			} catch (DaoException e) {
+				if (logger.isErrorEnabled()) {
+					logger.error(e + "");
+				}
+			}
+			results.add(entity);
 		}
+		page.setRows(results);
 		page.setTotal(total);
 		return page;
 	}
@@ -204,39 +230,6 @@ public class MerchantWorkFlowService {
 		InputStream resourceAsStream = null;
         resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), processDefinition.getDiagramResourceName());
 		return resourceAsStream;
-	}
-	/**
-	 * 查询任务坐标
-	 * @param taskId
-	 * @return
-	 */
-	public Map<String, Object> findCoordinateByTaskId(String taskId) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		Task task = taskService.createTaskQuery()//
-				.taskId(taskId)// 使用任务ID查询
-				.singleResult();
-		// 获取流程定义的ID
-		String processDefinitionId = task.getProcessDefinitionId();
-		// 获取流程定义的实体对象（对应.bpmn文件中的数据）
-		ProcessDefinitionEntity processDefinitionEntity = (ProcessDefinitionEntity) repositoryService
-				.getProcessDefinition(processDefinitionId);
-		// 流程实例ID
-		String processInstanceId = task.getProcessInstanceId();
-		// 使用流程实例ID，查询正在执行的执行对象表，获取当前活动对应的流程实例对象
-		ProcessInstance pi = runtimeService.createProcessInstanceQuery()// 创建流程实例查询
-				.processInstanceId(processInstanceId)// 使用流程实例ID查询
-				.singleResult();
-		// 获取当前活动的ID
-		String activityId = pi.getActivityId();
-		// 获取当前活动对象
-		ActivityImpl activityImpl = processDefinitionEntity
-				.findActivity(activityId);// 活动ID
-		// 获取坐标
-		map.put("x", activityImpl.getX());
-		map.put("y", activityImpl.getY());
-		map.put("width", activityImpl.getWidth());
-		map.put("height", activityImpl.getHeight());
-		return map;
 	}
 	public Page<MerInfoWorkFlowEntity> queryMerInfoForPage(Page<MerInfoWorkFlowEntity> page,Map<String,Object> params){
 		//查询商户分页信息
@@ -274,7 +267,6 @@ public class MerchantWorkFlowService {
 	}
 	public String getTaskNameByTaskId(String taskId){
 		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
-		Integer mid = (Integer) taskService.getVariable(taskId, "mid");
 		return task.getName();
 	}
 	//完成任务

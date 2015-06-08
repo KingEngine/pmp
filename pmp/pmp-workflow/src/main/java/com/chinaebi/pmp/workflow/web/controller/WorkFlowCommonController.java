@@ -60,7 +60,9 @@ public class WorkFlowCommonController {
 	@RequestMapping(value = "/**/workFlowTaskQueryList.do")
 	@ResponseBody
 	public Page<WorkFlowEntity> workFlowTaskQueryList(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response,
+			@RequestParam(value="taskType",required=false)String processDefinitionKey
+			) {
 		String curPage = request.getParameter(WebConstants.PAGE_NUMBER);
 		String pageSize = request.getParameter(WebConstants.ROWS);
 		Page<WorkFlowEntity> page = new Page<WorkFlowEntity>();
@@ -70,13 +72,15 @@ public class WorkFlowCommonController {
 			page.setPageSize(Integer.parseInt(pageSize.trim()));
 		else
 			page.setPageSize(10);
+		//得到用户名
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		return merchantWorkFlowService.queryRunningInstancesForPage(page,userName);
+		//得到该用户下的所有任务列表
+		return merchantWorkFlowService.queryRunningInstancesForPage(page,userName,processDefinitionKey);
 	}
 	@RequestMapping(value = "/**/showProcessImage.do")
 	public String showProcessImage(@RequestParam("taskId")String taskId,Model model) {
 		model.addAttribute("taskId", taskId);
-		model.addAttribute("acs", merchantWorkFlowService.findCoordinateByTaskId(taskId));
+		model.addAttribute("acs", merchantWorkFlowService.getCoordinateByTaskId(taskId));
 		return prefix+"process_image";
 	}
 	@RequestMapping(value = "/**/showProcessDefintionImage.do")

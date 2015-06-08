@@ -78,6 +78,10 @@
     			 and t.mer_info_address = #{merInfoAddress}
     		</if>
 	</select>
+	<select id="selectMerchantTermNum" parameterType="int" resultType="int">
+		select count(*) from ask_for_term t
+		where t.mid = #{mid}
+	</select>
 	<!--添加方法-->
 	<insert id="insert" parameterType="AskForTerm">
 		insert into ask_for_term(

@@ -226,12 +226,15 @@ function showDialogWithOutParameter(url,title,width,dialogId){
  * @param isValidate
  */
 function ajaxSubmitForm(submitFormId,requestURL){
+	try{
+	alert(submitFormId);
 	$('#'+submitFormId).form('submit', {
 		url:requestURL,
 		//校验form表单数据
 		onSubmit: function(){ 
 			// 校验
 			var isValid = $(this).form('validate');
+			alert(isValid);
 			if (!isValid) {
 				return false;
 			}
@@ -247,7 +250,9 @@ function ajaxSubmitForm(submitFormId,requestURL){
 	    		$("#"+errorDiv).text(e);
 	    	}
 	    }
-	});
+	});}catch(e){
+		alert(e);
+	}
 }
 function ajaxSubmitFormWithParameter(submitFormId,requestURL,isValidate,paramter){
 	$('#'+submitFormId).form('submit', {

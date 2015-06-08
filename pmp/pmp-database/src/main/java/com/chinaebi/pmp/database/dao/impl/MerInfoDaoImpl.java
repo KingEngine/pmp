@@ -34,6 +34,11 @@ public class MerInfoDaoImpl extends CommonDaoImpl<MerInfo> implements IMerInfoDa
 	public MerInfo selectOne(MerInfo param) throws DaoException{
 		return super.selectOne("MerInfoManager.select", param);
 	}
+	public MerInfo selectOne(int mid) throws DaoException {
+		MerInfo param = new MerInfo();
+		param.setMid(mid);
+		return selectOne(param);
+	}
 	public Page<Map<String, Object>> selectPage(Page<Map<String, Object>> page,
 			Map<String, Object> param) throws DaoException {
 		try {

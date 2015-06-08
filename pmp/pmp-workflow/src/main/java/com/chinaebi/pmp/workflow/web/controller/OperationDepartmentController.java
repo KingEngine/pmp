@@ -63,7 +63,7 @@ public class OperationDepartmentController {
 			@RequestParam("askForTermJson") String askForTermJson,
 			@RequestParam(value = "merchantAttachment") MultipartFile merchantAttachment)
 			throws Exception {
-		addMerchantWorkFlowService.startWorkFlow(merInfo, askForTermJson,merchantAttachment);
+		addMerchantWorkFlowService.startAddMerchantWorkFlow(merInfo, askForTermJson,merchantAttachment);
 		return new Response("00", "商户信息提交成功");
 	}
 }
